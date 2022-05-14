@@ -7,21 +7,24 @@ using Gtk;
 
 public class GtkCairo
 {
-    static void Main ()
+    static void Main()
     {
-    Application.Init ();
-    Gtk.Window w = new Gtk.Window ("Mono-Cairo Rounded Rectangles");
+        Application.Init ();
+        Gtk.Window w = new Gtk.Window ("Mono-Cairo Rounded Rectangles");
 
-    DrawingArea a = new CairoGraphic ();
+        DrawingArea a = new CairoGraphic ();
 
-    Box box = new HBox (true, 0);
-    box.Add (a);
-    w.Add (box);
-    w.Resize (500, 500);
-    w.DeleteEvent += close_window;
-    w.ShowAll ();
+        Box box = new HBox (true, 0);
+        box.Add (a);
+        w.Add (box);
+        w.Resize (500, 500);
+        w.DeleteEvent += close_window;
+        w.ShowAll ();
 
-    Application.Run ();
+        Person john = new Susceptible(0.5f, 0.1f, new Vector(0,0));
+        Console.WriteLine(john);
+
+        Application.Run ();
     }
 
     static void close_window (object obj, DeleteEventArgs args)
