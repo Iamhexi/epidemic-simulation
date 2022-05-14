@@ -1,0 +1,4 @@
+class Dead: Removed
+{
+    
+}
