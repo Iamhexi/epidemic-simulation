@@ -1,4 +1,4 @@
-interface IMovement
+interface IMoveable
 {
     Vector getResultantVector();
 }
