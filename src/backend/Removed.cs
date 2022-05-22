@@ -1,6 +1,6 @@
 class Removed: Person
 {
-    public override bool isInfected()
+    public override bool IsInfected()
     {
         return false;
     }
