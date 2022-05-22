@@ -1,4 +1,4 @@
-class Child: Susceptible
+ class Child: Susceptible
 {
-    
+
 }
