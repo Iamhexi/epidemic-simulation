@@ -2,8 +2,8 @@ using EpidemicSimulation;
 
 namespace EpidemicSimulation
 {
-    class Child: Susceptible
+    class MultigroupCommunity : Simulation
     {
-        
+
     }
 }

@@ -1,7 +1,12 @@
-class Susceptible: Person
+using EpidemicSimulation;
+
+namespace EpidemicSimulation
 {
-    public override bool IsInfected()
+    class Susceptible: Person
     {
-        return false;
+        public override bool IsInfected()
+        {
+            return false;
+        }
     }
 }

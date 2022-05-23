@@ -1,7 +1,10 @@
-class Removed: Person
+namespace EpidemicSimulation
 {
-    public override bool IsInfected()
+    class Removed: Person
     {
-        return false;
+        public override bool IsInfected()
+        {
+            return false;
+        }
     }
 }

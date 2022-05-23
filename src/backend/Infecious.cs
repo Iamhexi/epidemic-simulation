@@ -1,7 +1,10 @@
-class Infecious: Person
+namespace EpidemicSimulation
 {
-    public override bool isInfected()
+    class Infecious: Person
     {
-        return true;
+        public override bool IsInfected()
+        {
+            return true;
+        }
     }
 }

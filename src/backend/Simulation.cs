@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace EpidemicSimulation
 {
-    public class Simulation : Game
+    class Simulation : Game
     {
         public static int s_simulationWidth = 800;
         public static int s_simulationHeight = 800;

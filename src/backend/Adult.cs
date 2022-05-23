@@ -1,4 +1,7 @@
-class Adult: Susceptible
+namespace EpidemicSimulation
 {
-    
+    class Adult: Susceptible
+    {
+
+    }
 }

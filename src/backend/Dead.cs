@@ -1,4 +1,7 @@
-class Dead: Removed
+namespace EpidemicSimulation
 {
-    
+    class Dead: Removed
+    {
+
+    }    
 }
