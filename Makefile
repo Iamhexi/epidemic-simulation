@@ -1,4 +1,4 @@
 compile:
-	mcs src/UI/main.cs src/backend/*.cs -out:main.exe -pkg:mono-cairo -pkg:gtk-sharp-2.0
+	mcs src/UI/main.cs src/backend/*.cs -r:bin/FNA.dll -r:System.Windows.Forms.dll && mv main.exe bin/
 run: main.exe
-	mono main.exe
+	mono bin/main.exe
