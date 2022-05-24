@@ -1,6 +1,6 @@
 namespace EpidemicSimulation
 {
-    class Removed: Person
+    abstract class Removed: Person
     {
         public override bool IsInfected()
         {

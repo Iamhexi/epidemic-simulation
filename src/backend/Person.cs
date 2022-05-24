@@ -6,12 +6,11 @@ namespace EpidemicSimulation
 {
     abstract class Person
     {
-        // TODO: Draw people as points or circles, NOT textured sprites.
-        // https://docs.microsoft.com/en-us/previous-versions/windows/xna/bb196414(v=xnagamestudio.10)
-
         public abstract bool IsInfected();
         public static float TravelRate {
-            get;
+            get {
+                return TravelRate;
+            }
             set {
                 if (InRange(value))
                     TravelRate = value;

@@ -34,11 +34,10 @@ namespace EpidemicSimulation
             _graphics.PreferredBackBufferHeight = s_simulationHeight;
             _graphics.ApplyChanges();
 
-            Person testPerson = new Person(400, 400);
-            people.Add(testPerson);
 
             for (int i = 0; i < _numberOfPeople; i++)
-                people.Add(new Person());
+                people.Add(new Adult());
+
 
             base.Initialize();
         }
@@ -50,28 +49,19 @@ namespace EpidemicSimulation
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
-            int i = 0;
-            foreach (Person person in people)
-            {
-                person.Update_Self(gameTime);
-               System.Diagnostics.Debug.WriteLine($"--> Person {i} pozycja: x: {person.Get_Poz().Item1} y: {person.Get_Poz().Item2}");
-                i += 1;
-            }
-
-
+            // TODO: rewrite the method using the clean code
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            _spriteBatch.Begin();
 
+            // TODO: Draw with simulated people with _spriteBatch.
+            //_spriteBatch.Begin();
             //foreach(Person person in people)
                 //_spriteBatch.Draw(texture2D, Rectangle, Color.White);
-
-            _spriteBatch.End();
+            //_spriteBatch.End();
 
             base.Draw(gameTime);
         }
