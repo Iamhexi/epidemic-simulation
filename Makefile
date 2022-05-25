@@ -1,4 +1,4 @@
 compile:
-	mcs src/UI/main.cs src/backend/*.cs -r:bin/FNA.dll -r:System.Windows.Forms.dll -o:main.exe && mv src/UI/main.exe bin/main.exe
+	mcs src/ui/Program.cs src/backend/*.cs -r:bin/FNA.dll -r:System.Windows.Forms.dll -o:Program.exe && mv src/ui/Program.exe bin/main.exe
 run: bin/main.exe
 	mono bin/main.exe

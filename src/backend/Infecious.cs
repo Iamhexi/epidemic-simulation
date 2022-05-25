@@ -8,10 +8,15 @@ namespace EpidemicSimulation.src.backend
         {
 
         }
+
         public override bool IsInfected()
         {
             return true;
         }
-        public override string Type() { return "Infecious"; }
-    } 
+
+        public override string Type()
+        {
+             return "Infecious";
+        }
+    }
 }
