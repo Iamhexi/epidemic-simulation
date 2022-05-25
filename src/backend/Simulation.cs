@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace EpidemicSimulation.classes
+namespace EpidemicSimulation.src.backend
 {
     public class Simulation : Game
     {
@@ -19,13 +19,16 @@ namespace EpidemicSimulation.classes
         //game class setup
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        
 
         // enviroment variables
         public static int simulation_width = 800;
         public static int simulation_height = 800;
+        private double simulation_speed = 16;
         private int people_amount;
         private List<Person> people = new List<Person>();
-        
+
+        //private enum: int gameSimulationSpeed { 480FPS = 2, 240FPS = 4, 120FPS = 8, 60FPS = 16 };
 
         public Simulation()
         {
@@ -35,7 +38,9 @@ namespace EpidemicSimulation.classes
             IsMouseVisible = true;
             
             // parametry nadawane z menu
-            people_amount = 0;
+            people_amount = 100;
+            Person.move_speed = 2;
+            this.simulation_speed = 4; // 16 miliseconds -> 60 FPS | 8 miliseconds -> 120 FPS
 
 
         }
@@ -45,12 +50,12 @@ namespace EpidemicSimulation.classes
             _graphics.PreferredBackBufferWidth = simulation_width;
             _graphics.PreferredBackBufferHeight = simulation_height;
             _graphics.ApplyChanges();
+            
+            this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this.simulation_speed); // time elapsed from last frame ( mili = 10^-3)
 
-            Person Testpwa = new Person(400, 400);
-            people.Add(Testpwa);
-            for (int i = 0; i<people_amount; i++) {
-                people.Add(new Person());
-            }
+            //Person Testowa = new Person(400, 400);people.Add(Testowa);
+
+            for (int i = 0; i<people_amount; i++) { people.Add(new Person()); }
             
             base.Initialize();
         }
@@ -67,13 +72,15 @@ namespace EpidemicSimulation.classes
 
         protected override void Update(GameTime gameTime)
         {
+            //System.Diagnostics.Debug.WriteLine($"time span {gameTime.ElapsedGameTime}");
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
             int i = 0;
             foreach (Person person in people)
             {
-                person.Update_Self(gameTime);
-               System.Diagnostics.Debug.WriteLine($"--> Person {i} pozycja: x: {person.Get_Poz().Item1} y: {person.Get_Poz().Item2}");
-                i += 1;
+               person.Update_Self(gameTime);
+               //System.Diagnostics.Debug.WriteLine($"--> Person {i} pozycja: x: {person.Get_Poz().X} y: {person.Get_Poz().Y} vector : {person.moveVector.ToString()}");
+               i += 1;
             }
             
 
@@ -86,10 +93,7 @@ namespace EpidemicSimulation.classes
 
             _spriteBatch.Begin();
             
-           foreach(Person person in people)
-            {
-                _spriteBatch.Draw(susceptible, person.Get_Rect(), Color.White);
-            }
+           foreach(Person person in people) { _spriteBatch.Draw(susceptible, person.Get_Rect(), Color.White); }
 
             _spriteBatch.End();
 
@@ -97,3 +101,12 @@ namespace EpidemicSimulation.classes
         }
     }
 }
+
+
+/* lista następnych: 
+ * pole osoby -> radius, osobna klasa? 
+ * kolizje z innymi ? 
+ * klasy dziedziczne -> zdrowy, chory, usuniety
+ * klasa choroby, interface ?
+ * 
+*/
