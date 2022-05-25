@@ -8,11 +8,11 @@ namespace EpidemicSimulation.src.backend
     public class Simulation : Game
     {
         //Textures 
-        Texture2D susceptible;
-        Texture2D suspectible_radius;
-        Texture2D infectious;
-        Texture2D infectious_radius;
-        Texture2D removed;
+        public Texture2D susceptible;
+        public Texture2D susceptible_radius;
+        public Texture2D infectious;
+        public Texture2D infectious_radius;
+        public Texture2D removed;
 
         //game class setup
         private GraphicsDeviceManager _graphics;
@@ -23,17 +23,9 @@ namespace EpidemicSimulation.src.backend
         public static int simulation_height = 800;
         private double simulationSpeed;
         private Dictionary<string, int> simulationSpeedList = new Dictionary<string, int>(){ {"0.5x", 32}, {"1x", 16}, {"2x", 8} ,{"4x", 4}, {"8x", 2} };
-        private int _peopleAmount;
+        private int _susceptibleAmount;
+        private int _infeciousAmount;
         private List<Person> _people = new List<Person>();
-        private List<Susceptible> _susceptibles = new List<Susceptible>();
-        private List<Infecious> _infecious = new List<Infecious>();
-        private List<Removed> _removed = new List<Removed>();
-        private List<Recovered> _recovered = new List<Recovered>();
-        private List<Dead> _dead = new List<Dead>();
-        
-
-        //private enum: int gameSimulationSpeed { 480FPS = 2, 240FPS = 4, 120FPS = 8, 60FPS = 16 };
-
         public Simulation()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -41,11 +33,10 @@ namespace EpidemicSimulation.src.backend
             IsMouseVisible = true;
             
             // parametry nadawane z menu
-            _peopleAmount = 5;
-            Person.moveSpeed = 3;
+            _susceptibleAmount = 3;
+            _infeciousAmount = 2;
+            Person.moveSpeed = 2;
             this.simulationSpeed = this.simulationSpeedList["2x"];
-
-
         }
 
         protected override void Initialize()
@@ -53,13 +44,10 @@ namespace EpidemicSimulation.src.backend
             _graphics.PreferredBackBufferWidth = simulation_width;
             _graphics.PreferredBackBufferHeight = simulation_height;
             _graphics.ApplyChanges();
-            
-            this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this.simulationSpeed); // time elapsed from last frame ( mili = 10^-3)
+            this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this.simulationSpeed);
 
-            // Person Testowa1 = new Person(new Point(200,400), new Vector2(1, 0));_people.Add(Testowa1);
-            // Person Testowa2 = new Person(new Point(600,400), new Vector2(-1, 0));_people.Add(Testowa2);
-
-            for (int i = 0; i<_peopleAmount; i++) { _people.Add(new Person()); }
+            for (int i = 0; i<_susceptibleAmount; i++) { this._people.Add(new Susceptible(0 , 30)); }
+            for (int i = 0; i<_infeciousAmount; i++) { this._people.Add(new Infecious(0 , 30)); }
             
             base.Initialize();
         }
@@ -68,7 +56,7 @@ namespace EpidemicSimulation.src.backend
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             susceptible = Content.Load<Texture2D>("suscetible");
-            suspectible_radius = Content.Load<Texture2D>("suscetible-radius");
+            susceptible_radius = Content.Load<Texture2D>("suscetible-radius");
             infectious = Content.Load<Texture2D>("infected");
             infectious_radius = Content.Load<Texture2D>("infected-radius");
             removed = Content.Load<Texture2D>("removed");
@@ -78,13 +66,12 @@ namespace EpidemicSimulation.src.backend
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
-            int i = 0;
-            foreach (Person person in _people)
+            foreach(Person person in this._people)
             {
-                foreach(Person secondPerson in _people) if (Person.s_CheckCollision(person.AnticipadedPositon, secondPerson.AnticipadedPositon)) person.IsColliding = true;
-                person.Update_Self();
-               //System.Diagnostics.Debug.WriteLine($"--> Person {i} pozycja: x: {person.Get_Poz().X} y: {person.Get_Poz().Y} vector : {person.moveVector.ToString()}");
-               i += 1;
+                foreach(Person secondPerson in this._people) 
+                if (Person.s_CheckCollision(person.AnticipadedPositon, secondPerson.AnticipadedPositon) || 
+                Person.s_CheckCollision(person.Rect, secondPerson.Rect)) person.IsColliding = true;
+                person.UpdateSelf();
             }
             base.Update(gameTime);
         }
@@ -93,21 +80,59 @@ namespace EpidemicSimulation.src.backend
             GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
-            
-           foreach(Person person in _people) { _spriteBatch.Draw(susceptible, person.Rect, Color.White); }
+           foreach(Person person in this._people) 
+            {
+                switch (person.GetType().ToString().Split(".").GetValue(3).ToString())
+                {
+                    case "Susceptible": 
+                        _spriteBatch.Draw(susceptible_radius, person.RadiusRect, Color.White);
+                        _spriteBatch.Draw(susceptible, person.Rect, Color.White); 
+                        break;
 
+                    case "Infecious": 
+                        _spriteBatch.Draw(infectious_radius, person.RadiusRect, Color.White);
+                        _spriteBatch.Draw(infectious, person.Rect, Color.White); 
+                        break;
+                    case "Removed": 
+                        _spriteBatch.Draw(removed, person.RadiusRect, Color.White);
+                        break;
+                    case "Recovered": 
+                        _spriteBatch.Draw(removed, person.RadiusRect, Color.White);
+                        break;
+                    case "Dead": 
+                        _spriteBatch.Draw(removed, person.RadiusRect, Color.White);
+                        break;
+                    default: System.Console.WriteLine($" unknown type found, { person.GetType().ToString().Split(".").GetValue(3) }"); break;
+                }
+
+                //System.Console.WriteLine($" {person.GetHashCode()} rect : {person.RadiusRect}");
+            }
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
+
+        }
+        public Dictionary<string, int> GenerateOutputLists() {
+            Dictionary<string, int> result_dict = new Dictionary<string, int>();
+            result_dict.Add("susceptible", 0);
+            result_dict.Add("infecious", 0);
+            result_dict.Add("removed", 0);
+            result_dict.Add("recovered", 0);
+            result_dict.Add("dead", 0);
+            foreach (object person in this._people) {
+                if (person.GetType().ToString() == "Susceptible") 
+                switch (person.GetType().ToString())
+                {
+                    case "Susceptible": result_dict["susceptible"] += 1; break;
+                    case "Infecious": result_dict["infecious"] += 1; break;
+                    case "Removed": result_dict["removed"] += 1; break;
+                    case "Recovered": result_dict["recovered"] += 1; break;
+                    case "Dead": result_dict["dead"] += 1; break;
+                    default: System.Console.WriteLine(" unknown type found "); break;
+                }
+            }
+            return result_dict;
         }
     }
 }
-
-
-/* lista następnych: 
- * pole osoby -> radius, osobna klasa? 
- * kolizje z innymi ? 
- * klasy dziedziczne -> zdrowy, chory, usuniety
- * klasa choroby, interface ?
- * 
-*/
