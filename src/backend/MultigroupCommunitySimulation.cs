@@ -1,6 +1,4 @@
-using EpidemicSimulation;
-
-namespace EpidemicSimulation
+namespace EpidemicSimulation.src.backend
 {
     class MultigroupCommunity : Simulation
     {

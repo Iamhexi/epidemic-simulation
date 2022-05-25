@@ -1,15 +1,11 @@
-using EpidemicSimulation;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace EpidemicSimulation
+namespace EpidemicSimulation.src.backend
 {
     class Adult: Susceptible
     {
-        public Adult(float? immunity = null, float? repulsionRate = null)
-            : base(immunity, repulsionRate)
-        {
+        // public Adult(float? immunity = null, float? repulsionRate = null): base(immunity, repulsionRate)
+        // {
 
-        }
+        // }
         
     }
 }
