@@ -6,66 +6,68 @@ namespace EpidemicSimulation.src.backend
     class Person
     {
         // variables to set
-        private int position_x;
-        private int position_y;
-        private static int size = 10;
+        private Point _position;
+        public Point Position { get { return _position; } set { this.Position = this._position; } }
+        private static int _size = 10;
         public Vector2 moveVector;
-        public static float BaseMoveSpeed = 4;
-        private float actualMoveSpeed;
-        private int border_margin = 100;
-        //float repultion_rate;
+        public static float moveSpeed { get; set; }
+        private int _borderMargin = 100;
     
- 
         // additional variables
         private const float PI = MathHelper.Pi;
         private static Random s_randomizer = new Random();
-        private int choice = 0;
+        private int _choice = 0;
+        private float _directionChange = 0f;
+        public Rectangle Rect { get; set; }
+        private Point _middlePoint;
+        public bool IsColliding = false;
+        public Rectangle AnticipadedPositon;
 
         public Person()
         {
-            this.position_x = s_randomizer.Next(100, 700);
-            this.position_y = s_randomizer.Next(100, 700);
+            this._position = new Point(s_randomizer.Next(_borderMargin, Simulation.simulation_width-_borderMargin), 
+                                        s_randomizer.Next(_borderMargin, Simulation.simulation_width-_borderMargin));
             this.moveVector = new Vector2((float)System.Math.Sin(s_randomizer.NextDouble())*2*PI,
-                                          (float)System.Math.Sin(s_randomizer.NextDouble())*2*PI );
+                                        (float)System.Math.Sin(s_randomizer.NextDouble())*2*PI );
             this.moveVector.Normalize();
-            //this.repultion_rate = 0.44f ;
         }
         
-        public Person(int starting_pos_x, int starting_pos_y)
+        public Person(Point startPosition, Vector2 moveVector)
         {
-            this.position_x = starting_pos_x;
-            this.position_y = starting_pos_y;
-            this.moveVector = new Vector2(0,1f);
+            this._position = startPosition;
+            this.moveVector = moveVector;
         }
 
         public void Update_Self()
         {
-            Move();
-            //System.Diagnostics.Debug.WriteLine($"pos: {this.position_x} {this.position_y} | wektor ruchu: {this.moveVector.ToString()}");
+            Move(); MoveRadiusField();
+            this.Rect = new Rectangle((int)this._position.X, (int)this._position.Y, Person._size, Person._size);
+            this.AnticipadedPositon = new Rectangle((int)this.Rect.X + 3*(int)System.Math.Round(this.moveVector.X * moveSpeed, MidpointRounding.AwayFromZero),
+                                                    (int)this.Rect.Y + 3*(int)System.Math.Round(this.moveVector.Y * moveSpeed, MidpointRounding.AwayFromZero),
+                                                    Person._size, Person._size);
+            this._middlePoint = this.Rect.Center;
         }
 
         private void Move()
         {
-        
-            //System.Diagnostics.Debug.WriteLine($"time since last frame : {elapsed}");
-
-            // check borders
-            if (this.position_y < this.border_margin || Simulation.simulation_height - this.position_y < this.border_margin  || this.position_x < this.border_margin || Simulation.simulation_width - this.position_x < this.border_margin)
+            if (this._position.X < this._borderMargin || Simulation.simulation_height - this._position.Y < this._borderMargin  || this._position.Y < this._borderMargin || Simulation.simulation_width - this._position.X < this._borderMargin)
             {
-                if (this.choice == 0) this.choice = Draw_Direction();
-                Chage_moveVector(this.choice);
+                if (this._choice == 0 ) this._choice = Draw_Direction();
+                if (this._directionChange < 3.6f) Chage_moveVector(this._choice);
             }
-            else { this.choice = 0; }
-            
-            //check others - collisions TO DO
-            //fix endless tourning
+            else if(this.IsColliding)
+            {
+                Console.WriteLine("collision");
+                if (this._choice == 0 ) this._choice = Draw_Direction();
+                if (this._directionChange < 2f) Chage_moveVector(this._choice, 0.15f);
+            }
+            else { this._choice = 0; this._directionChange = 0; }
 
-            // make a step
-            this.position_x += (int)System.Math.Round(this.moveVector.X * this.actualMoveSpeed, MidpointRounding.AwayFromZero);
-            this.position_y += (int)System.Math.Round(this.moveVector.Y * this.actualMoveSpeed, MidpointRounding.AwayFromZero);
+            this._position.X += (int)System.Math.Round(this.moveVector.X * moveSpeed, MidpointRounding.AwayFromZero);
+            this._position.Y += (int)System.Math.Round(this.moveVector.Y * moveSpeed, MidpointRounding.AwayFromZero);
+            this.IsColliding = false;
         }
-        public Rectangle Get_Rect() { return new Rectangle(this.position_x, this.position_y, Person.size, Person.size); }
-        public Vector2 Get_Poz() { return new Vector2(this.position_x, this.position_y);  }
+        private void MoveRadiusField() {}
         private void Chage_moveVector(int direction, float amount = 0.05f) {
             if (direction == 1)
             { // to right
@@ -81,8 +83,10 @@ namespace EpidemicSimulation.src.backend
                 if (this.moveVector.Y >= 0 && this.moveVector.X >= 0) { this.moveVector.Y -= amount; this.moveVector.X += amount; } // bottom right 
                 if (this.moveVector.Y >= 0 && this.moveVector.X < 0) { this.moveVector.Y += amount; this.moveVector.X += amount; } // bottom left
             }
+            this._directionChange += amount;
             this.moveVector.Normalize();
         }
+        public static bool s_CheckCollision(Rectangle obj1, Rectangle obj2) { if (!Rectangle.Intersect(obj1, obj2).IsEmpty && !Rectangle.Equals(obj1, obj2)) return true; return false; }
         private int Draw_Direction() { if (s_randomizer.Next(0, 100) >= 50) return 1; return -1; } 
      }
 }
