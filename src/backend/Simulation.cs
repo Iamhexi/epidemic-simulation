@@ -22,7 +22,6 @@ namespace EpidemicSimulation
             Content.RootDirectory = "content";
             IsMouseVisible = true;
 
-            // parametry nadawane z menu
             _numberOfPeople = 0;
 
 
@@ -44,7 +43,9 @@ namespace EpidemicSimulation
 
         protected override void LoadContent()
         {
-
+            Infecious.s_Texture = Content.Load<Texture2D>("infecious");
+            Removed.s_Texture = Content.Load<Texture2D>("removed");
+            Susceptible.s_Texture = Content.Load<Texture2D>("susceptible");
         }
 
         protected override void Update(GameTime gameTime)

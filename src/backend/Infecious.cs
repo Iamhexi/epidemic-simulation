@@ -7,7 +7,7 @@ namespace EpidemicSimulation
         public Infecious(float? immunity = null, float? repulsionRate = null)
             : base(immunity, repulsionRate)
         {
-            
+
         }
 
         public override bool IsInfected()

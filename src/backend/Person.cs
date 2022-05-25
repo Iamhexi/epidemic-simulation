@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace EpidemicSimulation
 {
     abstract class Person
     {
         public abstract bool IsInfected();
+
         public static float TravelRate {
             get {
                 return TravelRate;
@@ -23,6 +25,7 @@ namespace EpidemicSimulation
         public float ImmunityRate { get; private set; }
         public float RepulsionRate { get; private set; }
 
+        public static Texture2D s_Texture;
 
         public Person(float? immunity = null, float? repulsionRate = null)
         {
@@ -31,12 +34,14 @@ namespace EpidemicSimulation
             this.RepulsionRate = repulsionRate ?? (float) random.NextDouble();
         }
 
+
         protected static bool InRange(float value)
         {
             float min = 0.0f;
             float max = 1.0f;
             return value >= min && value <= max;
         }
+
     }
 
 }

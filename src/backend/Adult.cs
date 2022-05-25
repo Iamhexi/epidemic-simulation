@@ -1,4 +1,5 @@
 using EpidemicSimulation;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace EpidemicSimulation
 {
@@ -7,7 +8,8 @@ namespace EpidemicSimulation
         public Adult(float? immunity = null, float? repulsionRate = null)
             : base(immunity, repulsionRate)
         {
-            
+
         }
+        
     }
 }

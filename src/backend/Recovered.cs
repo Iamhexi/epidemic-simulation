@@ -4,6 +4,6 @@ namespace EpidemicSimulation
 {
     class Recovered: Removed
     {
-
+        
     }
 }
