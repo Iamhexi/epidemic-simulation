@@ -7,6 +7,11 @@ namespace EpidemicSimulation.src.backend
         {
             return false;
         }
-        public override string Type() { return "Recovered"; }
+
+        public override string Type()
+        {
+            return "Recovered";
+        }
+        
     }
 }
