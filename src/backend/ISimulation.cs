@@ -1,8 +1,8 @@
+
 namespace EpidemicSimulation.src.backend
 {
-    abstract class Removed: Person
+    interface ISimulation
     {
-
-        
+        void Start();
     }
 }

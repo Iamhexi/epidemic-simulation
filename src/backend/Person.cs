@@ -9,8 +9,8 @@ namespace EpidemicSimulation.src.backend
         public Point Position { get; private set; }
         public static int _size { get; private set; }
         public Vector2 MovementVector;
-        public static float moveSpeed { get; set; }
-        private int _borderMargin = 100;
+        public static float s_MovementSpeed { get; set; }
+        private int _borderMargin = 40;
 
         // additional variables
         private const float PI = MathHelper.Pi;
@@ -25,6 +25,7 @@ namespace EpidemicSimulation.src.backend
         public bool RepulsionExpand { get; private set; }
         public Rectangle RadiusRect { get; private set; }
         private float precentegeOfRepulsion = 0;
+        public float InfectionDuration;
 
         public abstract bool IsInfected();
         public abstract string Type();
@@ -57,14 +58,18 @@ namespace EpidemicSimulation.src.backend
         {
             Move(); MoveRadiusField();
             this.Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
-            this.AnticipadedPositon = new Rectangle((int)this.Rect.X + 3*(int)System.Math.Round(this.MovementVector.X * moveSpeed, MidpointRounding.AwayFromZero),
-                                                    (int)this.Rect.Y + 3*(int)System.Math.Round(this.MovementVector.Y * moveSpeed, MidpointRounding.AwayFromZero),
+            this.AnticipadedPositon = new Rectangle((int)this.Rect.X + 3*(int)System.Math.Round(this.MovementVector.X * s_MovementSpeed, MidpointRounding.AwayFromZero),
+                                                    (int)this.Rect.Y + 3*(int)System.Math.Round(this.MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero),
                                                     Person._size, Person._size);
         }
 
         protected virtual void Move()
         {
-            if (this.Position.X < 0 || this.Position.X > Simulation.s_SimulationWidth || this.Position.Y < 0 || this.Position.X > Simulation.s_SimulationHeight) { this.Position = new Point(400,400); return; }
+            if (this.Position.X < this._borderMargin-30 || this.Position.X > Simulation.s_SimulationWidth-this._borderMargin+30 || this.Position.Y < this._borderMargin-30 || this.Position.Y > Simulation.s_SimulationHeight-this._borderMargin+30) 
+            { 
+                this.Position = new Point(this._borderMargin+1, this._borderMargin+1);
+                System.Console.WriteLine(" Respawned! ");
+            }
             if (this.Position.X < this._borderMargin || Simulation.s_SimulationHeight - this.Position.Y < this._borderMargin  || this.Position.Y < this._borderMargin || Simulation.s_SimulationWidth - this.Position.X < this._borderMargin)
             {
                 if (this._choice == 0 ) this._choice = DrawDirection();
@@ -72,15 +77,15 @@ namespace EpidemicSimulation.src.backend
             }
             else if(this.IsColliding)
             {
-                //System.Console.WriteLine($" I collided! {this.GetHashCode()}");
+                
                 if (this._choice == 0 ) this._choice = DrawDirection();
                 if (this._directionChange < 3f) ChangeVector(this._choice, 0.15f);
             }
             else { this._choice = 0; this._directionChange = 0; }
 
             Point temporaryPosition = new Point(
-                Position.X + (int) System.Math.Round(MovementVector.X * moveSpeed, MidpointRounding.AwayFromZero),
-                Position.Y + (int) System.Math.Round(MovementVector.Y * moveSpeed, MidpointRounding.AwayFromZero)
+                Position.X + (int) System.Math.Round(MovementVector.X * s_MovementSpeed, MidpointRounding.AwayFromZero),
+                Position.Y + (int) System.Math.Round(MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero)
             );
             Position = temporaryPosition;
             this.IsColliding = false;
@@ -113,7 +118,7 @@ namespace EpidemicSimulation.src.backend
             }
 
         }
-        private void ChangeVector(int direction, float amount = 0.05f) {
+        private void ChangeVector(int direction, float amount = 0.11f) {
             if (direction == 1)
             { // to right
                 if (this.MovementVector.Y < 0 && this.MovementVector.X >= 0) { this.MovementVector.Y += amount; this.MovementVector.X += amount; }// top right

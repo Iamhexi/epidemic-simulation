@@ -4,6 +4,8 @@ namespace EpidemicSimulation.src.backend
 {
     class Infecious: Person
     {
+        public new float InfectionDuration = 0;
+
         public Infecious(float? immunity = null, int? repulsionRate = null) :base(immunity, repulsionRate)
         {
 
@@ -13,6 +15,17 @@ namespace EpidemicSimulation.src.backend
         {
 
         }
+
+        public void Infect(Susceptible susceptible) 
+        {
+            //float precentegeOfContact = this.FieldIntersectionPrecentege();
+
+
+
+        }
+
+
+
 
         public override bool IsInfected()
         {
