@@ -8,6 +8,11 @@ namespace EpidemicSimulation.src.backend
         {
 
         }
+        public Infecious(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+            : base(startPosition, MovementVector, immunity, repulsionRate)
+        {
+
+        }
 
         public override bool IsInfected()
         {
@@ -20,3 +25,4 @@ namespace EpidemicSimulation.src.backend
         }
     }
 }
+// wykrywanie susceptible i prawdopobienstwo zarazenia

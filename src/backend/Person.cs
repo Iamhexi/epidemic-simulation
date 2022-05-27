@@ -42,12 +42,18 @@ namespace EpidemicSimulation.src.backend
             RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 2*Person._size);
             RepulsionExpand = true;
         }
-        public Person(Point startPosition, Vector2 MovementVector)
+        public Person(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
         {
             this.Position = startPosition;
             this.MovementVector = MovementVector;
+            MovementVector.Normalize();
+            Person._size = 10;
+            Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
+            ImmunityRate = immunity ?? (float) s_randomizer.NextDouble();
+            RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 2*Person._size);
+            RepulsionExpand = true;
         }
-        public void UpdateSelf()
+        public virtual void UpdateSelf()
         {
             Move(); MoveRadiusField();
             this.Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
@@ -56,7 +62,7 @@ namespace EpidemicSimulation.src.backend
                                                     Person._size, Person._size);
         }
 
-        private void Move()
+        protected virtual void Move()
         {
             if (this.Position.X < 0 || this.Position.X > Simulation.s_SimulationWidth || this.Position.Y < 0 || this.Position.X > Simulation.s_SimulationHeight) { this.Position = new Point(400,400); return; }
             if (this.Position.X < this._borderMargin || Simulation.s_SimulationHeight - this.Position.Y < this._borderMargin  || this.Position.Y < this._borderMargin || Simulation.s_SimulationWidth - this.Position.X < this._borderMargin)
@@ -66,6 +72,7 @@ namespace EpidemicSimulation.src.backend
             }
             else if(this.IsColliding)
             {
+                //System.Console.WriteLine($" I collided! {this.GetHashCode()}");
                 if (this._choice == 0 ) this._choice = DrawDirection();
                 if (this._directionChange < 3f) ChangeVector(this._choice, 0.15f);
             }
@@ -125,6 +132,9 @@ namespace EpidemicSimulation.src.backend
             this.MovementVector.Normalize();
         }
         public static bool s_CheckCollision(Rectangle obj1, Rectangle obj2) { if (!Rectangle.Intersect(obj1, obj2).IsEmpty && !Rectangle.Equals(obj1, obj2)) return true; return false; }
-        private int DrawDirection() { if (s_randomizer.Next(0, 100) >= 50) return 1; return -1; }
+        public static float s_FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }
+        public float FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }
+        protected static float RectSurface(Rectangle obj) { return obj.Height * obj.Width; }
+        protected int DrawDirection() { if (s_randomizer.Next(0, 100) >= 50) return 1; return -1; }
      }
 }

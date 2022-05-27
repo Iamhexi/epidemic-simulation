@@ -33,10 +33,10 @@ namespace EpidemicSimulation.src.backend
             IsMouseVisible = true;
 
             // the parameters set from menu
-            _susceptibleAmount = 10;
-            _infeciousAmount = 10;
+            _susceptibleAmount = 1;
+            _infeciousAmount = 1;
             Person.moveSpeed = 1;
-            this.simulationSpeed = this.simulationSpeedList["8x"];
+            this.simulationSpeed = this.simulationSpeedList["1x"];
         }
 
         protected override void Initialize()
@@ -46,8 +46,8 @@ namespace EpidemicSimulation.src.backend
             _graphics.ApplyChanges();
             this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this.simulationSpeed);
 
-            for (int i = 0; i<_susceptibleAmount; i++) { this._people.Add(new Susceptible(0 , 30)); }
-            for (int i = 0; i<_infeciousAmount; i++) { this._people.Add(new Infecious(0 , 30)); }
+            for (int i = 0; i<_susceptibleAmount; i++) { this._people.Add(new Susceptible(new Point(390,699), new Vector2(0,-1), 0, 30)); }
+            for (int i = 0; i<_infeciousAmount; i++) { this._people.Add(new Infecious(new Point(400,699), new Vector2(0,-1), 0 ,30)); }
 
             base.Initialize();
         }
@@ -68,9 +68,24 @@ namespace EpidemicSimulation.src.backend
 
             foreach(Person person in this._people)
             {
-                foreach(Person secondPerson in this._people)
-                if (Person.s_CheckCollision(person.AnticipadedPositon, secondPerson.AnticipadedPositon) ||
-                Person.s_CheckCollision(person.Rect, secondPerson.Rect)) person.IsColliding = true;
+                foreach(Person secondPerson in this._people) {
+
+                    if (person.Type() == "Infecious" ^ secondPerson.Type() == "Infecious") // xor gate
+                    { 
+                        //System.Console.WriteLine("Checing overlapping ...");
+                        if (Person.s_CheckCollision(person.RadiusRect, secondPerson.RadiusRect)) 
+                        {
+                            System.Console.WriteLine($" overlapping area : {Person.s_FieldIntersectionPrecentege(person.RadiusRect, secondPerson.RadiusRect)}");
+                        }
+                    } // susceptible i infecious bezposrednio z instancji sie musza odwolywac + zapytanie pojedyncze + ustalic prawdopobienstwo 
+                    
+
+                    if (Person.s_CheckCollision(person.AnticipadedPositon, secondPerson.AnticipadedPositon) || Person.s_CheckCollision(person.Rect, secondPerson.Rect)) 
+                    { 
+                        person.IsColliding = true; 
+                    }
+
+                }
                 person.UpdateSelf();
             }
             base.Update(gameTime);
@@ -122,7 +137,7 @@ namespace EpidemicSimulation.src.backend
             result_dict.Add("dead", 0);
             foreach (object person in this._people) {
                 if (person.GetType().ToString() == "Susceptible")
-                switch (person.GetType().ToString())
+                switch (person.GetType().ToString().Split(".").GetValue(3).ToString())
                 {
                     case "Susceptible": result_dict["susceptible"] += 1; break;
                     case "Infecious": result_dict["infecious"] += 1; break;
