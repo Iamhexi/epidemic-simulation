@@ -11,19 +11,20 @@ namespace EpidemicSimulation.src.backend
         public Vector2 MovementVector;
         public static float s_MovementSpeed { get; set; }
         private int _borderMargin = 100;
+        public static Disease s_Disease;
 
-        // additional variables
+        // the rest of variables
         private const float PI = MathHelper.Pi;
         private static Random s_randomizer = new Random();
         private int _choice = 0;
         private float _directionChange = 0f;
+        private float _percentageOfRepulsion = 0.0f;
         public Rectangle Rect { get; set; }
         public bool IsColliding = false;
         public Rectangle AnticipadedPositon;
         public float ImmunityRate { get; private set; }
         public int RepulsionRate { get; private set; }
         public Rectangle RadiusRect { get; private set; }
-        private float _percentageOfRepulsion = 0.0f;
 
         public abstract bool IsInfected();
         public abstract string Type();
@@ -52,7 +53,14 @@ namespace EpidemicSimulation.src.backend
 
             ImmunityRate = immunity ?? (float) s_randomizer.NextDouble();
             RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 2*Person._size);
+
+            s_Disease = new Disease();
+            s_Disease.Lethality = 0.03f;
+            s_Disease.Duration = 0.05f; // what does it mean 0.05? miliseconds? ticks? seconds? simulated days?
+            s_Disease.InfectionRadius = 10; // keep it consistent with the infecion texture' size
+            s_Disease.InfectionProbabilty = 0.25f;
         }
+
         public Person(Point startPosition, Vector2 MovementVector)
         {
             this.Position = startPosition;
@@ -93,7 +101,13 @@ namespace EpidemicSimulation.src.backend
 
         protected void MoveRadiusField()
         {
-            this.RadiusRect = new Rectangle(Position.X, Position.Y, Person._size, Person._size);
+            this.RadiusRect = new Rectangle(
+                Position.X,
+                Position.Y,
+                s_Disease.InfectionRadius,
+                s_Disease.InfectionRadius
+            );
+
             if (_percentageOfRepulsion >= 0 && _percentageOfRepulsion <= 1)
             {
                 this.RadiusRect = new Rectangle(
