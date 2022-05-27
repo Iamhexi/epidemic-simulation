@@ -4,7 +4,8 @@ namespace EpidemicSimulation.src.backend
 {
     class Infecious: Person
     {
-        public Infecious(float? immunity = null, int? repulsionRate = null) :base(immunity, repulsionRate)
+        public Infecious(float? immunity = null, int? repulsionRate = null)
+            : base(immunity, repulsionRate)
         {
 
         }

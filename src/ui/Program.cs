@@ -7,8 +7,8 @@ namespace EpidemicSimulation.src.backend
         [STAThread]
         static void Main()
         {
-            var game = new Simulation();
-            game.Run();
+            ISimulation simulation = new SingleCommunitySimulation(50);
+            simulation.Start();
         }
     }
 }
