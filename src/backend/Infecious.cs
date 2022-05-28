@@ -22,11 +22,9 @@ namespace EpidemicSimulation.src.backend
         {
             return true;
         }
-
         public override string Type()
         {
              return "Infecious";
         }
     }
 }
-// wykrywanie susceptible i prawdopobienstwo zarazenia
