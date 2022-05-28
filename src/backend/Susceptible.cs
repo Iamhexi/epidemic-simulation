@@ -13,7 +13,6 @@ namespace EpidemicSimulation.src.backend
         {
 
         }
-
         protected override void Move() {
             base.Move();
 
@@ -22,7 +21,6 @@ namespace EpidemicSimulation.src.backend
         {
             return false;
         }
-
         public override string Type()
         {
             return "Susceptible";

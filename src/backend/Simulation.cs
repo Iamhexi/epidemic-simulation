@@ -13,7 +13,8 @@ namespace EpidemicSimulation.src.backend
         public Texture2D SusceptibleRadius;
         public Texture2D Infecious;
         public Texture2D InfeciousRadius;
-        public Texture2D Removed;
+        public Texture2D Recovered;
+        public Texture2D Dead;
 
         //game class setup
         protected GraphicsDeviceManager _graphics;
@@ -23,7 +24,6 @@ namespace EpidemicSimulation.src.backend
         // enviroment variables
         public static int s_SimulationWidth = 800;
         public static int s_SimulationHeight = 800;
-
         protected enum SimulationSpeedValues: ushort {
             half = 32,
             x1 = 16,
@@ -70,7 +70,8 @@ namespace EpidemicSimulation.src.backend
             SusceptibleRadius = Content.Load<Texture2D>("suscetible-radius");
             Infecious = Content.Load<Texture2D>("infected");
             InfeciousRadius = Content.Load<Texture2D>("infected-radius");
-            Removed = Content.Load<Texture2D>("Removed");
+            Recovered = Content.Load<Texture2D>("recovered");
+            Dead = Content.Load<Texture2D>("dead");
         }
 
         protected override void Update(GameTime gameTime)
@@ -135,14 +136,11 @@ namespace EpidemicSimulation.src.backend
                         _spriteBatch.Draw(InfeciousRadius, person.RadiusRect, Color.White);
                         _spriteBatch.Draw(Infecious, person.Rect, Color.White);
                         break;
-                    case "Removed":
-                        _spriteBatch.Draw(Removed, person.Rect, Color.White);
-                        break;
                     case "Recovered":
-                        _spriteBatch.Draw(Removed, person.Rect, Color.White);
+                        _spriteBatch.Draw(Recovered, person.Rect, Color.White);
                         break;
                     case "Dead":
-                        _spriteBatch.Draw(Removed, person.Rect, Color.White);
+                        _spriteBatch.Draw(Dead, person.Rect, Color.White);
                         break;
                     default: System.Console.WriteLine($" unknown type found, { person.GetType().ToString().Split(".").GetValue(3) }"); break;
                 }

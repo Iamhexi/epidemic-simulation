@@ -40,7 +40,7 @@ namespace EpidemicSimulation.src.backend
             MovementVector.Normalize();
             Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
             ImmunityRate = immunity ?? (float) s_randomizer.NextDouble();
-            RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 2*Person._size);
+            RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 3*Person._size);
             RepulsionExpand = true;
         }
         public Person(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
