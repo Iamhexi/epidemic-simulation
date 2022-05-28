@@ -1,8 +1,8 @@
 using EpidemicSimulation;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
-    class SingleCommunitySimulation : ISimulation
+    public class SingleCommunitySimulation : ISimulation
     {
         private Simulation _simulation;
 

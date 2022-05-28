@@ -1,4 +1,4 @@
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
     abstract class Removed: Person
     {

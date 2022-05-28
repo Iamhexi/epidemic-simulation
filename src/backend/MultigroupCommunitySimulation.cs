@@ -1,7 +1,8 @@
+using System;
 using EpidemicSimulation;
 using System.Collections.Generic;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
     class MultigroupCommunity : ISimulation
     {

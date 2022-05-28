@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
     class Infecious: Person
     {

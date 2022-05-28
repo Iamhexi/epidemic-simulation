@@ -1,9 +1,10 @@
+using System;
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
     public class Simulation : Game
     {
@@ -46,7 +47,6 @@ namespace EpidemicSimulation.src.backend
             _infeciousAmount = 1; // always start from 1 ill person
             Person.s_MovementSpeed = 2;
 
-
             SimulationSpeed = SimulationSpeedValues.x2;
         }
 
@@ -75,7 +75,8 @@ namespace EpidemicSimulation.src.backend
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape)) Exit();
 
             foreach(Person person in this._people)
             {
@@ -89,32 +90,32 @@ namespace EpidemicSimulation.src.backend
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Black);
 
             _spriteBatch.Begin();
            foreach(Person person in this._people)
             {
-                switch (person.GetType().ToString().Split(".").GetValue(3).ToString())
+                switch (person.Type())
                 {
                     case "Susceptible":
-                        _spriteBatch.Draw(SusceptibleRadius, person.RadiusRect, Color.White);
-                        _spriteBatch.Draw(Susceptible, person.Rect, Color.White);
+                        _spriteBatch.Draw(SusceptibleRadius, person.RadiusRect, Microsoft.Xna.Framework.Color.White);
+                        _spriteBatch.Draw(Susceptible, person.Rect, Microsoft.Xna.Framework.Color.White);
                         break;
 
                     case "Infecious":
-                        _spriteBatch.Draw(InfectiousRadius, person.RadiusRect, Color.White);
-                        _spriteBatch.Draw(Infectious, person.Rect, Color.White);
+                        _spriteBatch.Draw(InfectiousRadius, person.RadiusRect, Microsoft.Xna.Framework.Color.White);
+                        _spriteBatch.Draw(Infectious, person.Rect, Microsoft.Xna.Framework.Color.White);
                         break;
                     case "Removed":
-                        _spriteBatch.Draw(Removed, person.RadiusRect, Color.White);
+                        _spriteBatch.Draw(Removed, person.RadiusRect, Microsoft.Xna.Framework.Color.White);
                         break;
                     case "Recovered":
-                        _spriteBatch.Draw(Removed, person.RadiusRect, Color.White);
+                        _spriteBatch.Draw(Removed, person.RadiusRect, Microsoft.Xna.Framework.Color.White);
                         break;
                     case "Dead":
-                        _spriteBatch.Draw(Removed, person.RadiusRect, Color.White);
+                        _spriteBatch.Draw(Removed, person.RadiusRect, Microsoft.Xna.Framework.Color.White);
                         break;
-                    default: System.Console.WriteLine($" unknown type found, { person.GetType().ToString().Split(".").GetValue(3) }"); break;
+                    default: System.Console.WriteLine($" unknown type found, { person.Type() }"); break;
                 }
 
                 //System.Console.WriteLine($" {person.GetHashCode()} rect : {person.RadiusRect}");
@@ -132,9 +133,9 @@ namespace EpidemicSimulation.src.backend
             result_dict.Add("removed", 0);
             result_dict.Add("recovered", 0);
             result_dict.Add("dead", 0);
-            foreach (object person in this._people) {
-                if (person.GetType().ToString() == "Susceptible")
-                switch (person.GetType().ToString())
+            foreach (Person person in _people) {
+                if (person.Type() == "Susceptible")
+                switch (person.Type())
                 {
                     case "Susceptible": result_dict["susceptible"]++; break;
                     case "Infecious": result_dict["infecious"]++; break;

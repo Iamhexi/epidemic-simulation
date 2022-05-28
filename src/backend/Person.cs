@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
     public abstract class Person
     {
