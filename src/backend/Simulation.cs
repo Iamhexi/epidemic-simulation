@@ -94,9 +94,9 @@ namespace EpidemicSimulation
                             //System.Console.WriteLine(" overlapping area : " + overlappingArea);
                             if (overlappingArea > Disease.RequiredFieldIntersetion)
                             {
-                                if (overlappingArea * Disease.InfectionProbability > temp_random)
+                                if (overlappingArea * Disease.Communicability > temp_random)
                                 {
-                                    System.Console.WriteLine($" Infected! : {overlappingArea * Disease.InfectionProbability} < {temp_random}" );
+                                    System.Console.WriteLine($" Infected! : {overlappingArea * Disease.Communicability} < {temp_random}" );
                                     if (person.Type() == "Susceptible") { this.SusceptibleToInfecious(person); return; }
                                     else { this.SusceptibleToInfecious(secondPerson); return; }
                                 }
