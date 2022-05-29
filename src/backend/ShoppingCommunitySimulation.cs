@@ -13,5 +13,15 @@ namespace EpidemicSimulation
          {
              _simulation.Run();
          }
+
+         public void Pause()
+         {
+             _simulation.Pause();
+         }
+
+         public void Close()
+         {
+             _simulation.Exit();
+         }
      }
  }

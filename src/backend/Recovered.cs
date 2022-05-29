@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
     class Recovered: Person
     {
@@ -18,6 +18,6 @@ namespace EpidemicSimulation.src.backend
         {
             return "Recovered";
         }
-        
+
     }
 }

@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-{
+namespace EpidemicSimulation {
     class Dead: Person
     {
         public Dead(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)

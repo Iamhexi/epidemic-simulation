@@ -37,15 +37,15 @@ namespace EpidemicSimulation
         protected uint _infeciousAmount;
         private List<Person> _people = new List<Person>();
 
-        public Simulation(uint susceptible = 10, uint infecious = 5) 
+        public Simulation(uint susceptible = 10, uint infecious = 5)
         {
             _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "../content";
             IsMouseVisible = true;
 
             // the parameters set from menu
             _susceptibleAmount = susceptible;
-            _infeciousAmount = infecious; 
+            _infeciousAmount = infecious;
             Person.s_MovementSpeed = 2;
             Disease.s_SetUpParams();
             SimulationSpeed = SimulationSpeedValues.x2;
@@ -82,17 +82,17 @@ namespace EpidemicSimulation
 
             foreach(Person person in this._people)
             {
-                foreach(Person secondPerson in this._people) 
+                foreach(Person secondPerson in this._people)
                 {
 
                     if (person.Type() == "Infecious" ^ secondPerson.Type() == "Infecious") // xor gate
-                    { 
-                        if (Person.s_CheckCollision(person.RadiusRect, secondPerson.RadiusRect)) 
+                    {
+                        if (Person.s_CheckCollision(person.RadiusRect, secondPerson.RadiusRect))
                         {
                             float overlappingArea = Person.s_FieldIntersectionPrecentege(person.RadiusRect, secondPerson.RadiusRect);
                             double temp_random = s_randomizer.NextDouble();
                             //System.Console.WriteLine(" overlapping area : " + overlappingArea);
-                            if (overlappingArea > Disease.RequiredFieldIntersetion) 
+                            if (overlappingArea > Disease.RequiredFieldIntersetion)
                             {
                                 if (overlappingArea * Disease.InfectionProbability > temp_random)
                                 {
@@ -101,18 +101,18 @@ namespace EpidemicSimulation
                                     else { this.SusceptibleToInfecious(secondPerson); return; }
                                 }
                             }
-                            
+
                         }
                     }
-                    
-                    if (Person.s_CheckCollision(person.AnticipadedPositon, secondPerson.AnticipadedPositon) || Person.s_CheckCollision(person.Rect, secondPerson.Rect)) 
-                    { 
-                        person.IsColliding = true; 
+
+                    if (Person.s_CheckCollision(person.AnticipadedPositon, secondPerson.AnticipadedPositon) || Person.s_CheckCollision(person.Rect, secondPerson.Rect))
+                    {
+                        person.IsColliding = true;
                     }
                 }
-                if (person.Type() == "Infecious") 
-                { 
-                    person.InfectionDuration += 1; 
+                if (person.Type() == "Infecious")
+                {
+                    person.InfectionDuration += 1;
                     //System.Console.WriteLine($"duration {person.GetHashCode()} -> { person.InfectionDuration }");
                     if (person.InfectionDuration > Disease.Duration) { this.InfeciousToRecovered(person); return; }
                 }
@@ -120,6 +120,7 @@ namespace EpidemicSimulation
             }
             base.Update(gameTime);
         }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Black);
@@ -153,36 +154,37 @@ namespace EpidemicSimulation
             _spriteBatch.End();
 
             base.Draw(gameTime);
-
         }
 
-        private void SusceptibleToInfecious(Person susceptible) 
+        private void SusceptibleToInfecious(Person susceptible)
         {
-            for (int i = 0; i < this._people.Count; i++) 
+            for (int i = 0; i < this._people.Count; i++)
             {
-                if (this._people[i].GetHashCode() == susceptible.GetHashCode()) 
+                if (this._people[i].GetHashCode() == susceptible.GetHashCode())
                 {
                 this._people[i] = new Infecious(susceptible.Position, susceptible.MovementVector, 0, 30);
                 return;
                 }
             }
         }
-        private void InfeciousToRecovered(Person infecious) 
+
+        private void InfeciousToRecovered(Person infecious)
         {
-            for (int i = 0; i < this._people.Count; i++) 
+            for (int i = 0; i < this._people.Count; i++)
             {
-                if (this._people[i].GetHashCode() == infecious.GetHashCode()) 
+                if (this._people[i].GetHashCode() == infecious.GetHashCode())
                 {
                 this._people[i] = new Recovered(infecious.Position, infecious.MovementVector, 0, 30);
                 return;
                 }
             }
         }
-        private void InfeciousToDead(Person infecious) 
+
+        private void InfeciousToDead(Person infecious)
         {
-            for (int i = 0; i < this._people.Count; i++) 
+            for (int i = 0; i < this._people.Count; i++)
             {
-                if (this._people[i].GetHashCode() == infecious.GetHashCode()) 
+                if (this._people[i].GetHashCode() == infecious.GetHashCode())
                 {
                 this._people[i] = new Dead(infecious.Position, infecious.MovementVector, 0, 30);
                 return;
@@ -190,7 +192,8 @@ namespace EpidemicSimulation
             }
         }
 
-        public Dictionary<string, int> GenerateOutputLists() {
+        public Dictionary<string, int> GenerateOutputLists()
+        {
             Dictionary<string, int> result_dict = new Dictionary<string, int>();
             result_dict.Add("susceptible", 0);
             result_dict.Add("infecious", 0);
@@ -199,7 +202,7 @@ namespace EpidemicSimulation
             result_dict.Add("dead", 0);
             foreach (Person person in _people) {
                 if (person.Type() == "Susceptible")
-                switch (person.GetType().ToString().Split(".").GetValue(3).ToString())
+                switch (person.Type())
                 {
                     case "Susceptible": result_dict["susceptible"] += 1; break;
                     case "Infecious": result_dict["infecious"] += 1; break;
@@ -211,5 +214,11 @@ namespace EpidemicSimulation
             }
             return result_dict;
         }
+
+        public void Pause()
+        {
+            // TODO: Implement (un)pausing a simulation.
+        }
+
     }
 }

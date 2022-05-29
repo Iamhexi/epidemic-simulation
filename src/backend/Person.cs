@@ -56,7 +56,8 @@ namespace EpidemicSimulation
         }
         public virtual void UpdateSelf()
         {
-            Move(); MoveRadiusField();
+            Move();
+            MoveRadiusField();
             this.Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
             this.AnticipadedPositon = new Rectangle((int)this.Rect.X + 3*(int)System.Math.Round(this.MovementVector.X * s_MovementSpeed, MidpointRounding.AwayFromZero),
                                                     (int)this.Rect.Y + 3*(int)System.Math.Round(this.MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero),
@@ -65,8 +66,8 @@ namespace EpidemicSimulation
 
         protected virtual void Move()
         {
-            if (this.Position.X < this._borderMargin-30 || this.Position.X > Simulation.s_SimulationWidth-this._borderMargin+30 || this.Position.Y < this._borderMargin-30 || this.Position.Y > Simulation.s_SimulationHeight-this._borderMargin+30) 
-            { 
+            if (this.Position.X < this._borderMargin-30 || this.Position.X > Simulation.s_SimulationWidth-this._borderMargin+30 || this.Position.Y < this._borderMargin-30 || this.Position.Y > Simulation.s_SimulationHeight-this._borderMargin+30)
+            {
                 this.Position = new Point(this._borderMargin+1, this._borderMargin+1);
                 System.Console.WriteLine(" Respawned! ");
             }
@@ -77,7 +78,7 @@ namespace EpidemicSimulation
             }
             else if(this.IsColliding)
             {
-                
+
                 if (this._choice == 0 ) this._choice = DrawDirection();
                 if (this._directionChange < 3f) ChangeVector(this._choice, 0.15f);
             }
