@@ -3,28 +3,27 @@ using EpidemicSimulation;
 using System.Collections.Generic;
 
 namespace EpidemicSimulation
-{
-    class MultigroupCommunity : ISimulation
     {
-        private List<Simulation> communities = new List<Simulation>();
+     class MultigroupCommunity : ISimulation
+     {
+         private List<Simulation> communities = new List<Simulation>();
 
-        public MultigroupCommunity(uint numberOfCommuntiesToSimulate, uint peoplePerSimulation)
-        {
-            for (int i = 0; i < numberOfCommuntiesToSimulate; i++)
-                GenerateCommunitiy(peoplePerSimulation);
-        }
+         public MultigroupCommunity(uint numberOfCommuntiesToSimulate, uint peoplePerSimulation)
+         {
+             for (int i = 0; i < numberOfCommuntiesToSimulate; i++)
+                 GenerateCommunitiy(peoplePerSimulation);
+         }
 
-        public void Start()
-        {
-            foreach (Simulation simulation in communities)
-                simulation.Run();
-        }
+         public void Start()
+         {
+             foreach (Simulation simulation in communities)
+                 simulation.Run();
+         }
 
-        private void GenerateCommunitiy(uint sizeOfCommunity)
-        {
-            communities.Add( new Simulation(sizeOfCommunity) );
-        }
+         private void GenerateCommunitiy(uint sizeOfCommunity)
+         {
+             communities.Add( new Simulation(sizeOfCommunity) );
+         }
 
-
+     }
     }
-}

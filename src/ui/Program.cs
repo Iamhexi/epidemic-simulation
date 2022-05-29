@@ -17,6 +17,8 @@ public class Program : Form
 
     public Program()
     {
+            var game = new Simulation();
+            game.Run();
         Size = new Size(500, 500);
 
         _slider = new TrackBar();
