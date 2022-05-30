@@ -40,107 +40,46 @@ public class Program : Form
         Size = new Size(500, 800);
 
         SetUpSimulationStartingButton();
-        SetUpPopulationAdjustingComponents();
-        SetUpLethalityAdjustingComponents();
-        SetUpDiseaseDurationAdjustingComponents();
-        SetUpCommunicabilityAdjustingComponents();
+        SetUpAdjustmentComponents(ref _lethalitySlider, ref _lethalityLabel, 2, 1, 100, 100, _lethalitySlider_Scroll);
+        SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 4, 3, 30, 100, _dieseaseDurationSlider_Scroll);
+        SetUpAdjustmentComponents(ref _communicabilitySlider, ref _communicabilityLabel, 6, 1, 100, 135, _communicabilitySlider_Scroll);
+        SetUpAdjustmentComponents(ref _populationSlider, ref _populationLabel, 8, 1, 50, 150, _populationSlider_Scroll);
     }
 
+    private delegate void ScrollMethod(object sender, EventArgs e);
 
-    private void SetUpLethalityAdjustingComponents()
+    private void SetUpAdjustmentComponents(
+        ref TrackBar slider,
+        ref Label textLabel,
+        ushort order,
+        int sliderMinValue,
+        int sliderMaxValue,
+        int textLabelWidth,
+        ScrollMethod sliderScrollMethod)
     {
-        _lethalitySlider = new TrackBar();
-        _lethalityLabel = new Label();
+        int elementHeight = 50;
+        int posY = order * elementHeight;
 
-        _lethalityLabel.Height = 50;
-        _lethalityLabel.Width = 80;
-        _lethalityLabel.Location = new Point(200, 250);
+        slider = new TrackBar();
+        textLabel = new Label();
 
-        _lethalitySlider.Value = 3;
-        _lethalitySlider.Minimum = 1;
-        _lethalitySlider.Maximum = 100;
-        _lethalitySlider.Height = 50;
-        _lethalitySlider.Width = 400;
-        _lethalitySlider.Location = new Point(50, 200);
+        textLabel.Height = elementHeight;
+        textLabel.Width = textLabelWidth;
+        textLabel.Location = new Point(200, posY + elementHeight);
 
-        _lethalitySlider.Scroll += new System.EventHandler(_lethalitySlider_Scroll);
+        slider.Minimum = sliderMinValue;
+        slider.Maximum = sliderMaxValue;
+        slider.Value = (sliderMaxValue + sliderMinValue) / 2;
+        slider.Height = elementHeight;
+        slider.Width = 400;
+        slider.Location = new Point(50, posY);
 
-        Controls.Add(_lethalitySlider);
-        Controls.Add(_lethalityLabel);
+        slider.Scroll += new System.EventHandler(sliderScrollMethod);
 
-        _lethalitySlider_Scroll(null, null);
-    }
+        Controls.Add(slider);
+        Controls.Add(textLabel);
 
-    private void SetUpCommunicabilityAdjustingComponents()
-    {
-        _communicabilitySlider = new TrackBar();
-        _communicabilityLabel = new Label();
-
-        _communicabilityLabel.Height = 50;
-        _communicabilityLabel.Width = 120;
-        _communicabilityLabel.Location = new Point(200, 350);
-
-        _communicabilitySlider.Value = 5;
-        _communicabilitySlider.Minimum = 1;
-        _communicabilitySlider.Maximum = 100;
-        _communicabilitySlider.Height = 50;
-        _communicabilitySlider.Width = 400;
-        _communicabilitySlider.Location = new Point(50, 300);
-
-        _communicabilitySlider.Scroll += new System.EventHandler(_communicabilitySlider_Scroll);
-
-        Controls.Add(_communicabilitySlider);
-        Controls.Add(_communicabilityLabel);
-
-        _communicabilitySlider_Scroll(null, null);
-    }
-
-    private void SetUpPopulationAdjustingComponents()
-    {
-        _populationSlider = new TrackBar();
-        _populationLabel = new Label();
-
-        _populationLabel.Height = 50;
-        _populationLabel.Width = 150;
-        _populationLabel.Location = new Point(200, 150);
-
-        _populationSlider.Minimum = 10;
-        _populationSlider.Maximum = 50;
-        _populationSlider.Value = 35;
-        _populationSlider.Height = 50;
-        _populationSlider.Width = 400;
-        _populationSlider.Location = new Point(50, 100);
-
-        _populationSlider.Scroll += new System.EventHandler(_populationSlider_Scroll);
-
-        Controls.Add(_populationSlider);
-        Controls.Add(_populationLabel);
-
-        _populationSlider_Scroll(null, null);
-    }
-
-    private void SetUpDiseaseDurationAdjustingComponents()
-    {
-        _diseaseDurationSlider = new TrackBar();
-        _diseaseDurationLabel = new Label();
-
-        _diseaseDurationLabel.Height = 50;
-        _diseaseDurationLabel.Width = 100;
-        _diseaseDurationLabel.Location = new Point(200, 450);
-
-        _diseaseDurationSlider.Minimum = 3;
-        _diseaseDurationSlider.Maximum = 30;
-        _diseaseDurationSlider.Value = 17;
-        _diseaseDurationSlider.Height = 50;
-        _diseaseDurationSlider.Width = 400;
-        _diseaseDurationSlider.Location = new Point(50, 400);
-
-        _diseaseDurationSlider.Scroll += new System.EventHandler(_dieseaseDurationSlider_Scroll);
-
-        Controls.Add(_diseaseDurationSlider);
-        Controls.Add(_diseaseDurationLabel);
-
-        _dieseaseDurationSlider_Scroll(null, null);
+        sliderScrollMethod(null, null);
     }
 
     private void SetUpSimulationStartingButton()
@@ -186,7 +125,7 @@ public class Program : Form
 
     private void _communicabilitySlider_Scroll(object sender, EventArgs e)
     {
-        _communicabilityLabel.Text = "Communicability: " + _communicabilitySlider.Value.ToString() + " %";
+        _communicabilityLabel.Text = "Communicability: " + _communicabilitySlider.Value.ToString() + "%";
     }
 
     private void Program_FormClosing(Object sender, FormClosingEventArgs e)
