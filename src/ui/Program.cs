@@ -1,15 +1,17 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using EpidemicSimulation;
 using System.Threading;
-using System.Windows.Controls.DataVisualization;
+using EpidemicSimulation;
 
 public class Program : Form
 {
     private Thread _simulationThread;
     private ISimulation _simulation;
     private Button _simulationStartingButton;
+
+    private Thread _chartThread;
+    private ChartManager _chart;
 
     private TrackBar _populationSlider;
     private TrackBar _lethalitySlider;
@@ -35,12 +37,6 @@ public class Program : Form
         SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 4, 3, 30, 100, _dieseaseDurationSlider_Scroll);
         SetUpAdjustmentComponents(ref _communicabilitySlider, ref _communicabilityLabel, 6, 1, 100, 135, _communicabilitySlider_Scroll);
         SetUpAdjustmentComponents(ref _populationSlider, ref _populationLabel, 8, 1, 50, 150, _populationSlider_Scroll);
-        setUpChart();
-    }
-
-    private void setUpChart()
-    {
-
     }
 
     private delegate void ScrollMethod(object sender, EventArgs e);
@@ -103,6 +99,13 @@ public class Program : Form
         _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
+
+        // FIXME: two XNA's games cannot run at the sime time!
+
+        _chart = new ChartManager(_simulation);
+        _chartThread = new Thread(_chart.Run);
+        _chartThread.Start();
+
     }
 
     private void _populationSlider_Scroll(object sender, EventArgs e)
@@ -129,5 +132,6 @@ public class Program : Form
     {
         //Close();
         _simulationThread.Abort();
+        _chartThread.Abort();
     }
 }

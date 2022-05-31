@@ -14,6 +14,12 @@ namespace EpidemicSimulation
                 GenerateCommunitiy(peoplePerSimulation);
         }
 
+        public Dictionary<string, int> GetSimulationData()
+        {
+            // TODO: write the code compounding the data and returning it
+            return new Dictionary<string, int>();
+        }
+
         public void Start()
         {
             foreach (Simulation simulation in communities)
