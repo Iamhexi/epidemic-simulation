@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using Microsoft.Xna.Framework;
 
 namespace EpidemicSimulation.src.backend
 {
@@ -7,8 +8,8 @@ namespace EpidemicSimulation.src.backend
         [STAThread]
         static void Main()
         {
-            var game = new Simulation();
-            game.Run();
+            var game = new ShoppingCommunitySimulation(new Point(400,400), 20, 3);
+            game.Start();
         }
     }
 }

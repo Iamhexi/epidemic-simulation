@@ -1,8 +1,10 @@
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
-    interface ISimulation
+    public interface ISimulation
     {
         void Start();
+        void Close();
+        void Pause();
     }
 }

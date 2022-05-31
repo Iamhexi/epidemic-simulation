@@ -1,28 +1,41 @@
+using System;
 using EpidemicSimulation;
 using System.Collections.Generic;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
+{
+    class MultigroupCommunity : ISimulation
     {
-     class MultigroupCommunity : ISimulation
-     {
-         private List<Simulation> communities = new List<Simulation>();
+        private List<Simulation> communities = new List<Simulation>();
 
-         public MultigroupCommunity(uint numberOfCommuntiesToSimulate, uint peoplePerSimulation)
-         {
-             for (int i = 0; i < numberOfCommuntiesToSimulate; i++)
-                 GenerateCommunitiy(peoplePerSimulation);
-         }
+        public MultigroupCommunity(uint numberOfCommuntiesToSimulate, uint peoplePerSimulation)
+        {
+            for (int i = 0; i < numberOfCommuntiesToSimulate; i++)
+                GenerateCommunitiy(peoplePerSimulation);
+        }
 
-         public void Start()
-         {
-             foreach (Simulation simulation in communities)
-                 simulation.Run();
-         }
+        public void Start()
+        {
+            foreach (Simulation simulation in communities)
+                simulation.Run();
+        }
 
-         private void GenerateCommunitiy(uint sizeOfCommunity)
-         {
-             communities.Add( new Simulation(sizeOfCommunity) );
-         }
+        public void Pause()
+        {
+            foreach (Simulation simulation in communities)
+                simulation.Pause();
+        }
+
+        public void Close()
+        {
+            foreach (Simulation simulation in communities)
+                simulation.Exit();
+        }
+
+        private void GenerateCommunitiy(uint sizeOfCommunity)
+        {
+            communities.Add( new Simulation(sizeOfCommunity) );
+        }
 
      }
     }

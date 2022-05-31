@@ -1,7 +1,7 @@
 namespace EpidemicSimulation
 {
-    class Child: Susceptible
+    abstract class Removed: Person
     {
-        
+
     }
 }
