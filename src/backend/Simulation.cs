@@ -97,10 +97,10 @@ namespace EpidemicSimulation
                                 {
                                     if (overlappingArea * Disease.Communicability > temp_random)
                                     {
-                                        //logInfection(person, secondPerson);
-                                        if (person.Type() == "Susceptible" && overlappingArea * Disease.Communicability - 5*person.ImmunityRate > temp_random) 
+                                        logInfection(person, secondPerson);
+                                        if (person.Type() == "Susceptible" && overlappingArea * Disease.Communicability - 5*person.ImmunityRate > temp_random)
                                         { this.SusceptibleToInfecious(person); return; }
-                                        else if (secondPerson.Type() == "Susceptible" && overlappingArea * Disease.Communicability - 5*secondPerson.ImmunityRate > temp_random) 
+                                        else if (secondPerson.Type() == "Susceptible" && overlappingArea * Disease.Communicability - 5*secondPerson.ImmunityRate > temp_random)
                                         { this.SusceptibleToInfecious(secondPerson); return; }
                                     }
                                 }
@@ -155,8 +155,8 @@ namespace EpidemicSimulation
 
             base.Draw(gameTime);
         }
-        private void ActivateCenterPoint(Person person, float visitingProbability = 0.0008f) 
-        { 
+        private void ActivateCenterPoint(Person person, float visitingProbability = 0.0008f)
+        {
             if (CenterPoint.HasValue) { person.GoToPoint(CenterPoint, visitingProbability); }
         }
         private void SusceptibleToInfecious(Person susceptible)
@@ -165,8 +165,8 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == susceptible.GetHashCode())
                 {
-                this._people[i] = new Infecious(susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 30);
-                return;
+                    this._people[i] = new Infecious(susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 30);
+                    return;
                 }
             }
         }
@@ -177,8 +177,8 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == infecious.GetHashCode())
                 {
-                this._people[i] = new Recovered(infecious.Position, infecious.MovementVector, infecious.ImmunityRate*10, 30); // * <5-20>
-                return;
+                    this._people[i] = new Recovered(infecious.Position, infecious.MovementVector, infecious.ImmunityRate*10, 30); // * <5-20>
+                    return;
                 }
             }
         }
@@ -189,8 +189,8 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == infecious.GetHashCode())
                 {
-                this._people[i] = new Dead(infecious.Position, new Vector2(0,0), 0, 30);
-                return;
+                    this._people[i] = new Dead(infecious.Position, new Vector2(0,0), 0, 30);
+                    return;
                 }
             }
         }
@@ -218,7 +218,7 @@ namespace EpidemicSimulation
             return result_dict;
         }
         public void Pause() { this._Pause = !this._Pause; }
-        private void logInfection(Person person, Person secondPerson) 
+        private void logInfection(Person person, Person secondPerson)
         {
             System.Console.WriteLine($"\n\nInfected!\n\nPerson1 : {person.Type()}\tHashCode : {person.GetHashCode()}\n\nPerson2 : {secondPerson.Type()}\t{secondPerson.GetHashCode()}");
         }

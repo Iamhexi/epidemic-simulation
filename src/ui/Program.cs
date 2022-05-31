@@ -97,8 +97,9 @@ public class Program : Form
         );
 
         _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
-        _simulationThread = new Thread(_simulation.Start);
-        _simulationThread.Start();
+        _simulation.Start();
+        //_simulationThread = new Thread(_simulation.Start);
+        //_simulationThread.Start();
 
         // FIXME: two XNA's games cannot run at the sime time!
 

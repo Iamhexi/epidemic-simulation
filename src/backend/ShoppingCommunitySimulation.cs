@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace EpidemicSimulation
  {
@@ -6,10 +7,11 @@ namespace EpidemicSimulation
      {
          private Simulation _simulation;
 
-         public ShoppingCommunitySimulation(Point? centerPoint = null, uint population = 20, uint infected = 2)
+         public ShoppingCommunitySimulation(uint population, Point? centerPoint = null)
          {
-            _simulation = new Simulation(population, infected);
-            if (centerPoint.HasValue) _simulation.CenterPoint = centerPoint; 
+            _simulation = new Simulation(population - 1, 1);
+            if (centerPoint.HasValue)
+                _simulation.CenterPoint = centerPoint;
          }
 
          public Dictionary<string, int> GetSimulationData()

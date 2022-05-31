@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+
 namespace EpidemicSimulation
 {
     class Susceptible: Person
@@ -27,4 +28,4 @@ namespace EpidemicSimulation
         }
     }
 }
-// immunity parametr + func get infected 
+// immunity parameter + func get infected
