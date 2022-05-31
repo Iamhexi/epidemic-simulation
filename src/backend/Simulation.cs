@@ -197,7 +197,7 @@ namespace EpidemicSimulation
             Dictionary<string, int> result_dict = new Dictionary<string, int>();
             result_dict.Add("susceptible", 0);
             result_dict.Add("infecious", 0);
-            result_dict.Add("Removed", 0);
+            result_dict.Add("removed", 0);
             result_dict.Add("recovered", 0);
             result_dict.Add("dead", 0);
             foreach (Person person in _people) {
@@ -206,7 +206,7 @@ namespace EpidemicSimulation
                 {
                     case "Susceptible": result_dict["susceptible"] += 1; break;
                     case "Infecious": result_dict["infecious"] += 1; break;
-                    case "Removed": result_dict["Removed"] += 1; break;
+                    case "Removed": result_dict["removed"] += 1; break;
                     case "Recovered": result_dict["recovered"] += 1; break;
                     case "Dead": result_dict["dead"] += 1; break;
                     default: System.Console.WriteLine(" unknown type found "); break;

@@ -3,20 +3,13 @@ using System.Drawing;
 using System.Windows.Forms;
 using EpidemicSimulation;
 using System.Threading;
-
-/*
-
-Population
-Lethality
-Duration
-Communicability
-
-*/
+using System.Windows.Controls.DataVisualization;
 
 public class Program : Form
 {
     private Thread _simulationThread;
     private ISimulation _simulation;
+    private Button _simulationStartingButton;
 
     private TrackBar _populationSlider;
     private TrackBar _lethalitySlider;
@@ -28,8 +21,6 @@ public class Program : Form
     private Label _diseaseDurationLabel;
     private Label _communicabilityLabel;
 
-    private Button _simulationStartingButton;
-
     static public void Main()
     {
         Application.Run( new Program() );
@@ -37,13 +28,19 @@ public class Program : Form
 
     public Program()
     {
-        Size = new Size(500, 800);
+        Size = new Size(500, 1000);
 
         SetUpSimulationStartingButton();
         SetUpAdjustmentComponents(ref _lethalitySlider, ref _lethalityLabel, 2, 1, 100, 100, _lethalitySlider_Scroll);
         SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 4, 3, 30, 100, _dieseaseDurationSlider_Scroll);
         SetUpAdjustmentComponents(ref _communicabilitySlider, ref _communicabilityLabel, 6, 1, 100, 135, _communicabilitySlider_Scroll);
         SetUpAdjustmentComponents(ref _populationSlider, ref _populationLabel, 8, 1, 50, 150, _populationSlider_Scroll);
+        setUpChart();
+    }
+
+    private void setUpChart()
+    {
+
     }
 
     private delegate void ScrollMethod(object sender, EventArgs e);

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 
 namespace EpidemicSimulation
 {
@@ -6,5 +7,6 @@ namespace EpidemicSimulation
         void Start();
         void Close();
         void Pause();
+        Dictionary<string, int> GetSimulationData();
     }
 }
