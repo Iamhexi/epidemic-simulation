@@ -6,9 +6,10 @@ namespace EpidemicSimulation
      {
          private Simulation _simulation;
 
-         public ShoppingCommunitySimulation(uint population)
+         public ShoppingCommunitySimulation(Point? centerPoint = null, uint population = 20, uint infected = 2)
          {
-             _simulation = new Simulation(population);
+            _simulation = new Simulation(population, infected);
+            if (centerPoint.HasValue) _simulation.CenterPoint = centerPoint; 
          }
 
          public Dictionary<string, int> GetSimulationData()
