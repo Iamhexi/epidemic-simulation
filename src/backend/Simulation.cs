@@ -18,11 +18,12 @@ namespace EpidemicSimulation
         public Texture2D Dead;
 
         //game class setup
+        public Point? CenterPoint;
         protected GraphicsDeviceManager _graphics;
         protected SpriteBatch _spriteBatch;
         private static System.Random s_randomizer = new System.Random();
         private bool _Pause = false;
-        public Point? CenterPoint;
+        private ChartManager _chartManager;
 
         // enviroment variables
         public static int s_SimulationWidth = 800;
@@ -49,7 +50,6 @@ namespace EpidemicSimulation
             _susceptibleAmount = susceptible;
             _infeciousAmount = infecious;
             Person.s_MovementSpeed = 2;
-            Disease.s_SetUpParams();
             SimulationSpeed = SimulationSpeedValues.x2;
         }
 
@@ -75,6 +75,14 @@ namespace EpidemicSimulation
             InfeciousRadius = Content.Load<Texture2D>("infected-radius");
             Recovered = Content.Load<Texture2D>("recovered");
             Dead = Content.Load<Texture2D>("dead");
+
+            _chartManager = new ChartManager(
+                new Vector2(10f, 400f),
+                new Point(200, 200),
+                this,
+                GraphicsDevice
+            );
+            _chartManager.LoadContent();
         }
 
        protected override void Update(GameTime gameTime)
@@ -83,6 +91,7 @@ namespace EpidemicSimulation
                     || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape)) Exit();
             if (!this._Pause)
             {
+                _chartManager.Update();
                 foreach(Person person in this._people)
                 {
                     foreach(Person secondPerson in this._people)
@@ -151,6 +160,7 @@ namespace EpidemicSimulation
                 }
             }
 
+            _chartManager.Draw();
             _spriteBatch.End();
 
             base.Draw(gameTime);

@@ -10,9 +10,6 @@ public class Program : Form
     private ISimulation _simulation;
     private Button _simulationStartingButton;
 
-    private Thread _chartThread;
-    private ChartManager _chart;
-
     private TrackBar _populationSlider;
     private TrackBar _lethalitySlider;
     private TrackBar _diseaseDurationSlider;
@@ -98,15 +95,8 @@ public class Program : Form
 
         _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
         _simulation.Start();
-        //_simulationThread = new Thread(_simulation.Start);
-        //_simulationThread.Start();
-
-        // FIXME: two XNA's games cannot run at the sime time!
-
-        _chart = new ChartManager(_simulation);
-        _chartThread = new Thread(_chart.Run);
-        _chartThread.Start();
-
+        _simulationThread = new Thread(_simulation.Start);
+        _simulationThread.Start();
     }
 
     private void _populationSlider_Scroll(object sender, EventArgs e)
@@ -133,6 +123,5 @@ public class Program : Form
     {
         //Close();
         _simulationThread.Abort();
-        _chartThread.Abort();
     }
 }
