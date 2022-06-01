@@ -87,16 +87,18 @@ public class Program : Form
     {
         int dieaseDurationMultipier = 160;
 
+
         Disease.s_SetUpParams(
-            _lethalitySlider.Value / 100f,
-            _diseaseDurationSlider.Value * dieaseDurationMultipier,
-            _communicabilitySlider.Value / 100f
+        _lethalitySlider.Value / 100f,
+        _diseaseDurationSlider.Value * dieaseDurationMultipier,
+        (float) communicabilitySlider.Value
         );
 
         _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
-        _simulation.Start();
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
+
+        Console.WriteLine(Disease.Communicability);
     }
 
     private void _populationSlider_Scroll(object sender, EventArgs e)

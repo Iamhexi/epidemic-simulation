@@ -173,8 +173,9 @@ namespace EpidemicSimulation
         {
             for (int i = 0; i < this._people.Count; i++)
             {
-                if (this._people[i].GetHashCode() == susceptible.GetHashCode())
+                if (this._people[i].Equals(susceptible))
                 {
+                    Console.WriteLine("Found susceptible! Replacing with infected...");
                     this._people[i] = new Infecious(susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 30);
                     return;
                 }
@@ -207,6 +208,9 @@ namespace EpidemicSimulation
 
         public Dictionary<string, int> GenerateOutputLists()
         {
+            // FIXME: Retured number of infecious people is always 0
+            // FIXME: Retured number of recovered people is always 0
+
             Dictionary<string, int> result_dict = new Dictionary<string, int>();
             result_dict.Add("susceptible", 0);
             result_dict.Add("infecious", 0);
