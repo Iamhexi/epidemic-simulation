@@ -85,13 +85,12 @@ namespace EpidemicSimulation
             _chartManager.LoadContent();
         }
 
-       protected override void Update(GameTime gameTime)
+        protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                     || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape)) Exit();
             if (!this._Pause)
             {
-                _chartManager.Update();
                 foreach(Person person in this._people)
                 {
                     foreach(Person secondPerson in this._people)
@@ -104,14 +103,10 @@ namespace EpidemicSimulation
                                 double temp_random = s_randomizer.NextDouble();
                                 if (overlappingArea > Disease.RequiredFieldIntersetion)
                                 {
-                                    if (overlappingArea * Disease.Communicability > temp_random)
-                                    {
-                                        logInfection(person, secondPerson);
-                                        if (person.Type() == "Susceptible" && overlappingArea * Disease.Communicability - 5*person.ImmunityRate > temp_random)
+                                        if (person.Type() == "Susceptible" || person.Type() == "Recovered" && overlappingArea * Disease.Communicability - 3*person.ImmunityRate > temp_random) 
                                         { this.SusceptibleToInfecious(person); return; }
-                                        else if (secondPerson.Type() == "Susceptible" && overlappingArea * Disease.Communicability - 5*secondPerson.ImmunityRate > temp_random)
+                                        else if (secondPerson.Type() == "Susceptible" || person.Type() == "Recovered" && overlappingArea * Disease.Communicability - 3*secondPerson.ImmunityRate > temp_random) 
                                         { this.SusceptibleToInfecious(secondPerson); return; }
-                                    }
                                 }
                             }
                         }
@@ -165,10 +160,12 @@ namespace EpidemicSimulation
 
             base.Draw(gameTime);
         }
+
         private void ActivateCenterPoint(Person person, float visitingProbability = 0.0008f)
         {
             if (CenterPoint.HasValue) { person.GoToPoint(CenterPoint, visitingProbability); }
         }
+
         private void SusceptibleToInfecious(Person susceptible)
         {
             for (int i = 0; i < this._people.Count; i++)
@@ -176,7 +173,7 @@ namespace EpidemicSimulation
                 if (this._people[i].Equals(susceptible))
                 {
                     Console.WriteLine("Found susceptible! Replacing with infected...");
-                    this._people[i] = new Infecious(susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 30);
+                    this._people[i] = new Infecious(susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 35);
                     return;
                 }
             }
@@ -188,7 +185,7 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == infecious.GetHashCode())
                 {
-                    this._people[i] = new Recovered(infecious.Position, infecious.MovementVector, infecious.ImmunityRate*10, 30); // * <5-20>
+                    this._people[i] = new Recovered(infecious.Position, infecious.MovementVector, infecious.ImmunityRate*20, 35);
                     return;
                 }
             }
@@ -200,38 +197,34 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == infecious.GetHashCode())
                 {
-                    this._people[i] = new Dead(infecious.Position, new Vector2(0,0), 0, 30);
+                    this._people[i] = new Dead(infecious.Position, new Vector2(0,0), 0, 0);
                     return;
                 }
             }
         }
 
-        public Dictionary<string, int> GenerateOutputLists()
+       public Dictionary<string, int> GenerateOutputLists()
         {
-            // FIXME: Retured number of infecious people is always 0
-            // FIXME: Retured number of recovered people is always 0
-
             Dictionary<string, int> result_dict = new Dictionary<string, int>();
-            result_dict.Add("susceptible", 0);
-            result_dict.Add("infecious", 0);
-            result_dict.Add("removed", 0);
-            result_dict.Add("recovered", 0);
-            result_dict.Add("dead", 0);
+            result_dict.Add("Susceptible", 0);
+            result_dict.Add("Infecious", 0);
+            result_dict.Add("Recovered", 0);
+            result_dict.Add("Dead", 0);
             foreach (Person person in _people) {
-                if (person.Type() == "Susceptible")
                 switch (person.Type())
                 {
-                    case "Susceptible": result_dict["susceptible"] += 1; break;
-                    case "Infecious": result_dict["infecious"] += 1; break;
-                    case "Removed": result_dict["removed"] += 1; break;
-                    case "Recovered": result_dict["recovered"] += 1; break;
-                    case "Dead": result_dict["dead"] += 1; break;
+                    case "Susceptible": result_dict["Susceptible"] += 1; break;
+                    case "Infecious": result_dict["Infecious"] += 1; break;
+                    case "Recovered": result_dict["Recovered"] += 1; break;
+                    case "Dead": result_dict["Dead"] += 1; break;
                     default: System.Console.WriteLine(" unknown type found "); break;
                 }
             }
             return result_dict;
         }
+
         public void Pause() { this._Pause = !this._Pause; }
+
         private void logInfection(Person person, Person secondPerson)
         {
             System.Console.WriteLine($"\n\nInfected!\n\nPerson1 : {person.Type()}\tHashCode : {person.GetHashCode()}\n\nPerson2 : {secondPerson.Type()}\t{secondPerson.GetHashCode()}");

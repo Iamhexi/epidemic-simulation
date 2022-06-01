@@ -14,10 +14,6 @@ namespace EpidemicSimulation
         {
 
         }
-        protected override void Move() {
-            base.Move();
-
-        }
         public override bool IsInfected()
         {
             return false;
@@ -28,4 +24,3 @@ namespace EpidemicSimulation
         }
     }
 }
-// immunity parameter + func get infected

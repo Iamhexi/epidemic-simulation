@@ -2,15 +2,13 @@ namespace EpidemicSimulation
 {
     public class Disease
     {
-        public static float Lethality = 0.2f; //  Lethality - immunity < random.NextDouble()
+        public static float Lethality = 0.2f; //  <0.0001 - 0.1>
 
-        // Let's assume that 1 second of the simulation equals one day in the simulated enviroment.
-        public static float Duration = 1000f;// time after person gets recovered 1000 = +- 6.25 seconds (simulation speed x1)
+        public static float Duration = 1000f;// <1500 - 2500>
 
-        public static float Communicability = 0.03f; // fieldIntersetion * Communicability < random.NextDouble()
+        public static float Communicability = 0.03f; // <0.001 - 0.1>
 
-        // FIXME: Is this really a feature of ilness? In fact, any contact between people make chance for infection.
-        public static float RequiredFieldIntersetion = 0.2f; // threshold of getting infected
+        public static float RequiredFieldIntersetion = 0.2f; // <0.05 - 0.5>
 
         public static void s_SetUpParams(
             float? lethality = null,

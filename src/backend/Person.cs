@@ -73,7 +73,6 @@ namespace EpidemicSimulation
             if (this.Position.X < this._borderMargin-30 || this.Position.X > Simulation.s_SimulationWidth-this._borderMargin+30 || this.Position.Y < this._borderMargin-30 || this.Position.Y > Simulation.s_SimulationHeight-this._borderMargin+30)
             {
                 this.Position = new Point(s_randomizer.Next(this._borderMargin+1, Simulation.s_SimulationWidth-this._borderMargin-1), s_randomizer.Next(this._borderMargin+1, Simulation.s_SimulationHeight-this._borderMargin-1));
-                //System.Console.WriteLine(" Respawned! ");
             }
             if (this.Position.X < this._borderMargin || Simulation.s_SimulationHeight - this.Position.Y < this._borderMargin  || this.Position.Y < this._borderMargin || Simulation.s_SimulationWidth - this.Position.X < this._borderMargin)
             {
