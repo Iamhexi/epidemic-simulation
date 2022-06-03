@@ -34,10 +34,10 @@ namespace EpidemicSimulation
 
         public void Update()
         {
-            updateInfectedPopulation();
-            updateSusceptiblePopulation();
-            updateRecoveredPopulation();
-            updateDeadPopulation();
+            UpdateInfectedPopulation();
+            UpdateSusceptiblePopulation();
+            UpdateRecoveredPopulation();
+            UpdateDeadPopulation();
         }
 
         public void Draw()
@@ -57,27 +57,27 @@ namespace EpidemicSimulation
             _graph.Type = Charting.Graph.GraphType.Line;
         }
 
-        private void updateInfectedPopulation()
+        private void UpdateInfectedPopulation()
         {
-            int currentNum = _simulation.GenerateOutputLists()["infecious"];
+            int currentNum = _simulation.GenerateOutputLists()["Infecious"];
             _infectedTimeSeries.Add( (float) currentNum );
         }
 
-        private void updateSusceptiblePopulation()
+        private void UpdateSusceptiblePopulation()
         {
-            int currentNum = _simulation.GenerateOutputLists()["susceptible"];
+            int currentNum = _simulation.GenerateOutputLists()["Susceptible"];
             _susceptibleTimeSeries.Add( (float) currentNum );
         }
 
-        private void updateRecoveredPopulation()
+        private void UpdateRecoveredPopulation()
         {
-            int currentNum = _simulation.GenerateOutputLists()["recovered"];
+            int currentNum = _simulation.GenerateOutputLists()["Recovered"];
             _recoveredTimeSeries.Add( (float) currentNum );
         }
 
-        private void updateDeadPopulation()
+        private void UpdateDeadPopulation()
         {
-            int currentNum = _simulation.GenerateOutputLists()["dead"];
+            int currentNum = _simulation.GenerateOutputLists()["Dead"];
             _deadTimeSeries.Add( (float) currentNum );
         }
     }

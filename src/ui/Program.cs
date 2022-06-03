@@ -31,7 +31,7 @@ public class Program : Form
 
         SetUpSimulationStartingButton();
         SetUpAdjustmentComponents(ref _lethalitySlider, ref _lethalityLabel, 2, 1, 100, 100, _lethalitySlider_Scroll);
-        SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 4, 3, 30, 100, _dieseaseDurationSlider_Scroll);
+        SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 4, 3, 30, 100, _diseaseDurationSlider_Scroll);
         SetUpAdjustmentComponents(ref _communicabilitySlider, ref _communicabilityLabel, 6, 1, 100, 135, _communicabilitySlider_Scroll);
         SetUpAdjustmentComponents(ref _populationSlider, ref _populationLabel, 8, 1, 50, 150, _populationSlider_Scroll);
     }
@@ -85,20 +85,15 @@ public class Program : Form
 
     private void Button_Click(object sender, EventArgs e)
     {
-        int dieaseDurationMultipier = 160;
-
-
         Disease.s_SetUpParams(
-        _lethalitySlider.Value / 100f,
-        _diseaseDurationSlider.Value * dieaseDurationMultipier,
-        (float) communicabilitySlider.Value
+            _lethalitySlider.Value / 1000f,
+            10f * _diseaseDurationSlider.Value + 1500f,
+            _communicabilitySlider.Value / (4f * 4f)
         );
 
         _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
-
-        Console.WriteLine(Disease.Communicability);
     }
 
     private void _populationSlider_Scroll(object sender, EventArgs e)
@@ -111,19 +106,19 @@ public class Program : Form
         _lethalityLabel.Text = "Lethality: " + _lethalitySlider.Value.ToString() + "%";
     }
 
-    private void _dieseaseDurationSlider_Scroll(object sender, EventArgs e)
+    private void _diseaseDurationSlider_Scroll(object sender, EventArgs e)
     {
         _diseaseDurationLabel.Text = "Duration: " + _diseaseDurationSlider.Value.ToString() + " days";
     }
 
     private void _communicabilitySlider_Scroll(object sender, EventArgs e)
     {
-        _communicabilityLabel.Text = "Communicability: " + _communicabilitySlider.Value.ToString() + "%";
+        _communicabilityLabel.Text = "Communicability: " + (float) _communicabilitySlider.Value / 4 + "%";
     }
 
     private void Program_FormClosing(Object sender, FormClosingEventArgs e)
     {
-        //Close();
         _simulationThread.Abort();
+        Close();
     }
 }

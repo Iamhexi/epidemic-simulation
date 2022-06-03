@@ -22,7 +22,7 @@ namespace EpidemicSimulation
         protected GraphicsDeviceManager _graphics;
         protected SpriteBatch _spriteBatch;
         private static System.Random s_randomizer = new System.Random();
-        private bool _Pause = false;
+        private bool _pause = false;
         private ChartManager _chartManager;
 
         // enviroment variables
@@ -77,7 +77,7 @@ namespace EpidemicSimulation
             Dead = Content.Load<Texture2D>("dead");
 
             _chartManager = new ChartManager(
-                new Vector2(10f, 400f),
+                new Vector2(10f, 100f),
                 new Point(200, 200),
                 this,
                 GraphicsDevice
@@ -89,7 +89,7 @@ namespace EpidemicSimulation
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                     || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape)) Exit();
-            if (!this._Pause)
+            if (!this._pause)
             {
                 foreach(Person person in this._people)
                 {
@@ -103,10 +103,13 @@ namespace EpidemicSimulation
                                 double temp_random = s_randomizer.NextDouble();
                                 if (overlappingArea > Disease.RequiredFieldIntersetion)
                                 {
-                                        if (person.Type() == "Susceptible" || person.Type() == "Recovered" && overlappingArea * Disease.Communicability - 3*person.ImmunityRate > temp_random) 
-                                        { this.SusceptibleToInfecious(person); return; }
-                                        else if (secondPerson.Type() == "Susceptible" || person.Type() == "Recovered" && overlappingArea * Disease.Communicability - 3*secondPerson.ImmunityRate > temp_random) 
-                                        { this.SusceptibleToInfecious(secondPerson); return; }
+                                    if ( (person.Type() == "Susceptible" || person.Type() == "Recovered") &&
+                                        overlappingArea * Disease.Communicability - 3*person.ImmunityRate > temp_random)
+                                    {
+                                        this.SusceptibleToInfecious(person);
+                                        return;
+                                    }
+
                                 }
                             }
                         }
@@ -123,8 +126,12 @@ namespace EpidemicSimulation
                     ActivateCenterPoint(person);
                     person.UpdateSelf();
                 }
+                _chartManager.Update();
             }
             base.Update(gameTime);
+
+            if (GenerateOutputLists()["Infecious"] == 0)
+                Pause();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -132,7 +139,7 @@ namespace EpidemicSimulation
             GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Black);
 
             _spriteBatch.Begin();
-           foreach(Person person in this._people)
+            foreach(Person person in this._people)
             {
                 switch (person.Type())
                 {
@@ -172,7 +179,6 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].Equals(susceptible))
                 {
-                    Console.WriteLine("Found susceptible! Replacing with infected...");
                     this._people[i] = new Infecious(susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 35);
                     return;
                 }
@@ -223,7 +229,7 @@ namespace EpidemicSimulation
             return result_dict;
         }
 
-        public void Pause() { this._Pause = !this._Pause; }
+        public void Pause() { this._pause = !this._pause; }
 
         private void logInfection(Person person, Person secondPerson)
         {
