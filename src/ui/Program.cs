@@ -10,6 +10,11 @@ public class Program : Form
     private ISimulation _simulation;
     private Button _simulationStartingButton;
 
+    private RadioButton _singleCommunitySimulationButton;
+    private RadioButton _multiCommunitySimulationButton;
+    private RadioButton _shoppingCommunitySimulationButton;
+    // TODO: set up and make possible chosing a scenario
+
     private TrackBar _populationSlider;
     private TrackBar _lethalitySlider;
     private TrackBar _diseaseDurationSlider;
@@ -28,6 +33,7 @@ public class Program : Form
     public Program()
     {
         Size = new Size(500, 1000);
+        this.FormClosing += new FormClosingEventHandler(Program_FormClosing);
 
         SetUpSimulationStartingButton();
         SetUpAdjustmentComponents(ref _lethalitySlider, ref _lethalityLabel, 2, 1, 100, 100, _lethalitySlider_Scroll);
@@ -95,7 +101,6 @@ public class Program : Form
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
     }
-
     private void _populationSlider_Scroll(object sender, EventArgs e)
     {
         _populationLabel.Text = "Population: " + _populationSlider.Value.ToString() + " people";
@@ -118,6 +123,11 @@ public class Program : Form
 
     private void Program_FormClosing(Object sender, FormClosingEventArgs e)
     {
+        if (_simulation != null)
+        {
+            StatisticsPrinter printer = new StatisticsPrinter(_simulation);
+            printer.Print();
+        }
         _simulationThread.Abort();
         Close();
     }

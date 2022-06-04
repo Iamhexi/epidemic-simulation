@@ -16,8 +16,22 @@ namespace EpidemicSimulation
 
         public Dictionary<string, int> GetSimulationData()
         {
-            // TODO: write the code compounding the data and returning it
-            return new Dictionary<string, int>();
+            Dictionary<string, int> compoundedData = new Dictionary<string, int>();
+            compoundedData.Add("Susceptible", 0);
+            compoundedData.Add("Infectious", 0);
+            compoundedData.Add("Recovered", 0);
+            compoundedData.Add("Dead", 0);
+
+            foreach (var c in communities)
+            {
+                var dictionary = c.GenerateOutputLists();
+                compoundedData["Susceptible"] += dictionary["Susceptible"];
+                compoundedData["Infectious"] += dictionary["Infectious"];
+                compoundedData["Recovered"] += dictionary["Recovered"];
+                compoundedData["Dead"] += dictionary["Dead"];
+            }
+
+            return compoundedData;
         }
 
         public void Start()

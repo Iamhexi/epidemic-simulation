@@ -59,7 +59,7 @@ namespace EpidemicSimulation
 
         private void UpdateInfectedPopulation()
         {
-            int currentNum = _simulation.GenerateOutputLists()["Infecious"];
+            int currentNum = _simulation.GenerateOutputLists()["Infectious"];
             _infectedTimeSeries.Add( (float) currentNum );
         }
 
