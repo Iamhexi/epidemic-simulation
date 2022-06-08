@@ -10,9 +10,10 @@ public class Program : Form
     private ISimulation _simulation;
     private Button _simulationStartingButton;
 
-    private RadioButton _singleCommunitySimulationButton;
-    private RadioButton _multiCommunitySimulationButton;
-    private RadioButton _shoppingCommunitySimulationButton;
+    private GroupBox _radioButtons;
+    private RadioButton _singleCommunitySimulationButton = new RadioButton();
+    private RadioButton _multiCommunitySimulationButton = new RadioButton();
+    private RadioButton _shoppingCommunitySimulationButton = new RadioButton();
     // TODO: set up and make possible chosing a scenario
 
     private TrackBar _populationSlider;
@@ -35,6 +36,13 @@ public class Program : Form
         Size = new Size(500, 1000);
         this.FormClosing += new FormClosingEventHandler(Program_FormClosing);
 
+        _radioButtons = new GroupBox();
+        _radioButtons.Width = 500;
+        setUpRadioBox(ref _singleCommunitySimulationButton, "Single Community", 0);
+        setUpRadioBox(ref _shoppingCommunitySimulationButton, "Shopping Community", 1);
+        setUpRadioBox(ref _multiCommunitySimulationButton, "Multi Community", 2);
+        Controls.Add(_radioButtons);
+
         SetUpSimulationStartingButton();
         SetUpAdjustmentComponents(ref _lethalitySlider, ref _lethalityLabel, 2, 1, 100, 100, _lethalitySlider_Scroll);
         SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 4, 3, 30, 100, _diseaseDurationSlider_Scroll);
@@ -43,6 +51,19 @@ public class Program : Form
     }
 
     private delegate void ScrollMethod(object sender, EventArgs e);
+
+    private void setUpRadioBox(ref RadioButton radioButton, string label, ushort order)
+    {
+        radioButton = new RadioButton();
+        radioButton.Text = label;
+        radioButton.Height = 50;
+        radioButton.Width = 100;
+        radioButton.Location = new Point(order*radioButton.Width, 10);
+
+        // TODO: Implement handling chosing a radio button event.
+
+        _radioButtons.Controls.Add(radioButton);
+    }
 
     private void SetUpAdjustmentComponents(
         ref TrackBar slider,
@@ -81,7 +102,7 @@ public class Program : Form
     private void SetUpSimulationStartingButton()
     {
         _simulationStartingButton = new Button();
-        _simulationStartingButton.Location = new Point(200, 25);
+        _simulationStartingButton.Location = new Point(200, 500);
         _simulationStartingButton.Text = "Run simulation";
 
         _simulationStartingButton.Click += new EventHandler (Button_Click);
@@ -128,7 +149,10 @@ public class Program : Form
             StatisticsPrinter printer = new StatisticsPrinter(_simulation);
             printer.Print();
         }
-        _simulationThread.Abort();
+
+        if (_simulationThread != null)
+            _simulationThread.Abort();
+
         Close();
     }
 }
