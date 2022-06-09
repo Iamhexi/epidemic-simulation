@@ -38,9 +38,9 @@ public class Program : Form
 
         _radioButtons = new GroupBox();
         _radioButtons.Width = 500;
-        setUpRadioBox(ref _singleCommunitySimulationButton, "Single Community", 0);
-        setUpRadioBox(ref _shoppingCommunitySimulationButton, "Shopping Community", 1);
-        setUpRadioBox(ref _multiCommunitySimulationButton, "Multi Community", 2);
+        setUpRadioBox(ref _singleCommunitySimulationButton, "Single Community", 0, _singleCommunitySimulationButton_Click);
+        setUpRadioBox(ref _shoppingCommunitySimulationButton, "Shopping Community", 1, _shoppingCommunitySimulationButton_Click);
+        setUpRadioBox(ref _multiCommunitySimulationButton, "Multi Community", 2, _multiCommunitySimulationButton_Click);
         Controls.Add(_radioButtons);
 
         SetUpSimulationStartingButton();
@@ -52,15 +52,26 @@ public class Program : Form
 
     private delegate void ScrollMethod(object sender, EventArgs e);
 
-    private void setUpRadioBox(ref RadioButton radioButton, string label, ushort order)
+    private delegate void RadioButtonClickMethod(object sender, EventArgs e);
+
+    private void setUpRadioBox(
+        ref RadioButton radioButton,
+        string label,
+        ushort order,
+        RadioButtonClickMethod clickEvent
+        )
     {
         radioButton = new RadioButton();
+        radioButton.AutoCheck = true;
         radioButton.Text = label;
         radioButton.Height = 50;
         radioButton.Width = 100;
         radioButton.Location = new Point(order*radioButton.Width, 10);
 
-        // TODO: Implement handling chosing a radio button event.
+        if (order == 0u)
+            radioButton.Checked = true;
+
+        radioButton.Click += new System.EventHandler(clickEvent);
 
         _radioButtons.Controls.Add(radioButton);
     }
@@ -105,7 +116,7 @@ public class Program : Form
         _simulationStartingButton.Location = new Point(200, 500);
         _simulationStartingButton.Text = "Run simulation";
 
-        _simulationStartingButton.Click += new EventHandler (Button_Click);
+        _simulationStartingButton.Click += new EventHandler(Button_Click);
 
         Controls.Add(_simulationStartingButton);
     }
@@ -118,7 +129,11 @@ public class Program : Form
             _communicabilitySlider.Value / (4f * 4f)
         );
 
-        _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
+        if (_simulation == null)
+            this._singleCommunitySimulationButton_Click(null, null);
+
+        Console.WriteLine(_simulation);
+
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
     }
@@ -140,6 +155,25 @@ public class Program : Form
     private void _communicabilitySlider_Scroll(object sender, EventArgs e)
     {
         _communicabilityLabel.Text = "Communicability: " + (float) _communicabilitySlider.Value / 4 + "%";
+    }
+
+    private void _singleCommunitySimulationButton_Click(object sender, EventArgs e)
+    {
+        if (_simulationThread == null)
+            _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
+    }
+
+    private void _multiCommunitySimulationButton_Click(object sender, EventArgs e)
+    {
+        Console.WriteLine("MultigroupCommunitySimulation has been chosen.");
+            _simulation = new MultigroupCommunitySimulation( 4, (uint) _populationSlider.Value);
+        Console.WriteLine(_simulation);
+    }
+
+    private void _shoppingCommunitySimulationButton_Click(object sender, EventArgs e)
+    {
+        Microsoft.Xna.Framework.Point centerPoint = new Microsoft.Xna.Framework.Point(Simulation.s_SimulationWidth/2, Simulation.s_SimulationWidth/2);
+        _simulation = new ShoppingCommunitySimulation( (uint) _populationSlider.Value, centerPoint);
     }
 
     private void Program_FormClosing(Object sender, FormClosingEventArgs e)

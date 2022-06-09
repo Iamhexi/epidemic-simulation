@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace EpidemicSimulation
 {
-    class MultigroupCommunity : ISimulation
+    class MultigroupCommunitySimulation : ISimulation
     {
         private List<Simulation> communities = new List<Simulation>();
 
-        public MultigroupCommunity(uint numberOfCommuntiesToSimulate, uint peoplePerSimulation)
+        public MultigroupCommunitySimulation(uint numberOfCommuntiesToSimulate, uint peoplePerSimulation)
         {
             for (int i = 0; i < numberOfCommuntiesToSimulate; i++)
                 GenerateCommunitiy(peoplePerSimulation);
