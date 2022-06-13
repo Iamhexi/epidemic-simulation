@@ -6,7 +6,7 @@ namespace EpidemicSimulation
 {
     class StatisticsPrinter
     {
-        private const string OUTPUT_FILENAME_PATH = "log/statistics.csv";
+        private const string OUTPUT_FILENAME_PATH = "log/statistics.txt";
         private ISimulation _simulation;
 
         public StatisticsPrinter(ISimulation simulation)
@@ -16,7 +16,8 @@ namespace EpidemicSimulation
 
         public void Print()
         {
-            StreamWriter writer = new StreamWriter(OUTPUT_FILENAME_PATH, true);
+            FileStream fileStream = new FileStream(OUTPUT_FILENAME_PATH, FileMode.OpenOrCreate);
+            StreamWriter writer = new StreamWriter(fileStream);
             var data = _simulation.GetSimulationData();
 
             writer.WriteLine(DateTime.Now.ToString("hh:mm:ss dd-MM-yyyy"));

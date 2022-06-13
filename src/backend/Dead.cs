@@ -8,10 +8,7 @@ namespace EpidemicSimulation {
         {
 
         }
-        public override bool IsInfected()
-        {
-            return false;
-        }
+        
         public override string Type()
         {
             return "Dead";

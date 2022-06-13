@@ -22,11 +22,6 @@ namespace EpidemicSimulation
 
         }
 
-        public override bool IsInfected()
-        {
-            return true;
-        }
-
         public override string Type()
         {
              return "Infectious";

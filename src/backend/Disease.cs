@@ -4,7 +4,7 @@ namespace EpidemicSimulation
     {
         public static float Lethality = 0.1f; //  <0.0001 - 0.1>
 
-        public static float Duration = 1000f;// <1500 - 2500>
+        public static float Duration = 2000f;// <1500 - 2500>
 
         public static float Communicability = 0.03f; // <0.001 - 0.1>
 

@@ -30,7 +30,6 @@ namespace EpidemicSimulation
         private bool _goingToPoint = false;
         private int _timeinPoint;
 
-        public abstract bool IsInfected();
         public abstract string Type();
 
         public Person(float? immunity = null, int? repulsionRate = null)

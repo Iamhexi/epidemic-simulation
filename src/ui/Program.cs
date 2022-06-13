@@ -14,7 +14,6 @@ public class Program : Form
     private RadioButton _singleCommunitySimulationButton = new RadioButton();
     private RadioButton _multiCommunitySimulationButton = new RadioButton();
     private RadioButton _shoppingCommunitySimulationButton = new RadioButton();
-    // TODO: set up and make possible chosing a scenario
 
     private TrackBar _populationSlider;
     private TrackBar _lethalitySlider;
@@ -36,37 +35,52 @@ public class Program : Form
         Size = new Size(500, 1000);
         this.FormClosing += new FormClosingEventHandler(Program_FormClosing);
 
-        _radioButtons = new GroupBox();
-        _radioButtons.Width = 500;
-        setUpRadioBox(ref _singleCommunitySimulationButton, "Single Community", 0, _singleCommunitySimulationButton_Click);
-        setUpRadioBox(ref _shoppingCommunitySimulationButton, "Shopping Community", 1, _shoppingCommunitySimulationButton_Click);
-        setUpRadioBox(ref _multiCommunitySimulationButton, "Multi Community", 2, _multiCommunitySimulationButton_Click);
-        Controls.Add(_radioButtons);
-
+        SetUpRadioBoxPanel();
         SetUpSimulationStartingButton();
-        SetUpAdjustmentComponents(ref _lethalitySlider, ref _lethalityLabel, 2, 1, 100, 100, _lethalitySlider_Scroll);
-        SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 4, 3, 30, 100, _diseaseDurationSlider_Scroll);
-        SetUpAdjustmentComponents(ref _communicabilitySlider, ref _communicabilityLabel, 6, 1, 100, 135, _communicabilitySlider_Scroll);
-        SetUpAdjustmentComponents(ref _populationSlider, ref _populationLabel, 8, 1, 50, 150, _populationSlider_Scroll);
+        SetUpParametersLabel();
+
+        SetUpAdjustmentComponents(ref _lethalitySlider, ref _lethalityLabel, 3, 1, 100, 100, _lethalitySlider_Scroll);
+        SetUpAdjustmentComponents(ref _diseaseDurationSlider, ref _diseaseDurationLabel, 5, 3, 30, 100, _diseaseDurationSlider_Scroll);
+        SetUpAdjustmentComponents(ref _communicabilitySlider, ref _communicabilityLabel, 7, 1, 100, 135, _communicabilitySlider_Scroll);
+        SetUpAdjustmentComponents(ref _populationSlider, ref _populationLabel, 9, 1, 50, 150, _populationSlider_Scroll);
     }
 
     private delegate void ScrollMethod(object sender, EventArgs e);
 
     private delegate void RadioButtonClickMethod(object sender, EventArgs e);
 
-    private void setUpRadioBox(
+    private void SetUpRadioBoxPanel()
+    {
+        _radioButtons = new GroupBox();
+        _radioButtons.Width = 500;
+
+        Label label = new Label();
+        label.Width = 150;
+        label.Height = 50;
+        label.Location = new Point(5, 10);
+        label.Text = "Choose the scenario:";
+
+
+        SetUpRadioBox(ref _singleCommunitySimulationButton, "Single Community", 0, _singleCommunitySimulationButton_Click);
+        SetUpRadioBox(ref _shoppingCommunitySimulationButton, "Shopping Community", 1, _shoppingCommunitySimulationButton_Click);
+        SetUpRadioBox(ref _multiCommunitySimulationButton, "Multi Community", 2, _multiCommunitySimulationButton_Click);
+
+        _radioButtons.Controls.Add(label);
+        Controls.Add(_radioButtons);
+    }
+
+    private void SetUpRadioBox(
         ref RadioButton radioButton,
         string label,
         ushort order,
-        RadioButtonClickMethod clickEvent
-        )
+        RadioButtonClickMethod clickEvent)
     {
         radioButton = new RadioButton();
         radioButton.AutoCheck = true;
         radioButton.Text = label;
         radioButton.Height = 50;
         radioButton.Width = 100;
-        radioButton.Location = new Point(order*radioButton.Width, 10);
+        radioButton.Location = new Point( (Simulation.s_SimulationWidth/3) + 50 - (order*radioButton.Width), 25);
 
         if (order == 0u)
             radioButton.Checked = true;
@@ -110,10 +124,22 @@ public class Program : Form
         sliderScrollMethod(null, null);
     }
 
+    private void SetUpParametersLabel()
+    {
+        Label label = new Label();
+        label.Width = 250;
+        label.Height = 20;
+        label.Location = new Point(5, 110);
+        label.Text = "Adjust the simulated epidemic paramters:";
+
+        Controls.Add(label);
+    }
+
+
     private void SetUpSimulationStartingButton()
     {
         _simulationStartingButton = new Button();
-        _simulationStartingButton.Location = new Point(200, 500);
+        _simulationStartingButton.Location = new Point(200, 550);
         _simulationStartingButton.Text = "Run simulation";
 
         _simulationStartingButton.Click += new EventHandler(Button_Click);
@@ -131,8 +157,6 @@ public class Program : Form
 
         if (_simulation == null)
             this._singleCommunitySimulationButton_Click(null, null);
-
-        Console.WriteLine(_simulation);
 
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
@@ -165,9 +189,8 @@ public class Program : Form
 
     private void _multiCommunitySimulationButton_Click(object sender, EventArgs e)
     {
-        Console.WriteLine("MultigroupCommunitySimulation has been chosen.");
+        if (_simulationThread == null)
             _simulation = new MultigroupCommunitySimulation( 4, (uint) _populationSlider.Value);
-        Console.WriteLine(_simulation);
     }
 
     private void _shoppingCommunitySimulationButton_Click(object sender, EventArgs e)
