@@ -51,6 +51,11 @@ namespace EpidemicSimulation
             _InfectiousAmount = Infectious;
             Person.s_MovementSpeed = 2;
             SimulationSpeed = SimulationSpeedValues.x2;
+
+            for (int i = 0; i<_susceptibleAmount; i++)
+                this._people.Add(new Susceptible());
+            for (int i = 0; i<_InfectiousAmount; i++)
+                this._people.Add(new Infectious());
         }
 
         protected override void Initialize()
@@ -59,9 +64,6 @@ namespace EpidemicSimulation
             _graphics.PreferredBackBufferHeight = s_SimulationHeight;
             _graphics.ApplyChanges();
             this.TargetElapsedTime = System.TimeSpan.FromMilliseconds((double)this.SimulationSpeed);
-
-            for (int i = 0; i<_susceptibleAmount; i++) { this._people.Add(new Susceptible());}
-            for (int i = 0; i<_InfectiousAmount; i++) { this._people.Add(new Infectious()); }
 
             base.Initialize();
         }
@@ -216,6 +218,7 @@ namespace EpidemicSimulation
             result_dict.Add("Infectious", 0);
             result_dict.Add("Recovered", 0);
             result_dict.Add("Dead", 0);
+
             foreach (Person person in _people) {
                 switch (person.Type())
                 {
@@ -226,14 +229,10 @@ namespace EpidemicSimulation
                     default: System.Console.WriteLine(" unknown type found "); break;
                 }
             }
+
             return result_dict;
         }
 
         public void Pause() { this._pause = !this._pause; }
-
-        private void logInfection(Person person, Person secondPerson)
-        {
-            System.Console.WriteLine($"\n\nInfected!\n\nPerson1 : {person.Type()}\tHashCode : {person.GetHashCode()}\n\nPerson2 : {secondPerson.Type()}\t{secondPerson.GetHashCode()}");
-        }
     }
 }
