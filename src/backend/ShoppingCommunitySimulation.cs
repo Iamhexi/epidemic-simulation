@@ -11,8 +11,6 @@ namespace EpidemicSimulation
             if (centerPoint.HasValue) _simulation.CenterPoint = centerPoint; 
         }
 
-        //protected override void Update() {}
-
         public void Start()
         {
             _simulation.Run();

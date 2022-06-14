@@ -1,0 +1,34 @@
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\ball.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\healthy radius.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\healthy.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\infected-radius.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\infected.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\removed.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\sick radious.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\sick radius.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\sick.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\suscetible-radius.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\Content\suscetible.xnb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\EpidemicSimulation.exe
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\EpidemicSimulation.deps.json
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\EpidemicSimulation.runtimeconfig.json
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\EpidemicSimulation.runtimeconfig.dev.json
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\EpidemicSimulation.dll
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\EpidemicSimulation.pdb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\MonoGame.Framework.dll
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\linux-x64\native\libopenal.so.1
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\osx\native\libSDL2-2.0.0.dylib
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\osx\native\libopenal.1.dylib
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\win-x64\native\SDL2.dll
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\win-x64\native\soft_oal.dll
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\win-x86\native\SDL2.dll
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\bin\x86\Debug\netcoreapp3.1\runtimes\win-x86\native\soft_oal.dll
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.csproj.AssemblyReference.cache
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.AssemblyInfoInputs.cache
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.AssemblyInfo.cs
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.csproj.CoreCompileInputs.cache
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.dll
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.pdb
+C:\Users\NsJg\Desktop\desktop\EpidemicSimulation\obj\x86\Debug\netcoreapp3.1\EpidemicSimulation.genruntimeconfig.cache

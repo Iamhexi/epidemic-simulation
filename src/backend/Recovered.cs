@@ -4,8 +4,8 @@ namespace EpidemicSimulation
 {
     class Recovered: Person
     {
-        public Recovered(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
-            : base(startPosition, MovementVector, immunity, repulsionRate)
+        public Recovered(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+            : base(SimulationRect, startPosition, MovementVector, immunity, repulsionRate)
         {
 
         }

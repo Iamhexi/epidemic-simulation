@@ -10,7 +10,8 @@ namespace EpidemicSimulation
         public static int _size { get; private set; }
         public Vector2 MovementVector;
         public static float s_MovementSpeed { get; set; }
-        private int _borderMargin = 40;
+        private int _borderMargin = 20; // <=====
+        private Rectangle SimulationRect; // <===
 
         // additional variables
         private const float PI = MathHelper.Pi;
@@ -33,11 +34,12 @@ namespace EpidemicSimulation
         public abstract bool IsInfected();
         public abstract string Type();
 
-        public Person(float? immunity = null, int? repulsionRate = null)
+        public Person(Rectangle SimulationRect, float? immunity = null, int? repulsionRate = null)
         {
+            this.SimulationRect = SimulationRect;
             Person._size = 10;
-            Position = new Point(s_randomizer.Next(_borderMargin, Simulation.s_SimulationWidth-_borderMargin),
-                                        s_randomizer.Next(_borderMargin, Simulation.s_SimulationWidth-_borderMargin));
+            Position = new Point(s_randomizer.Next(SimulationRect.Location.X+_borderMargin, SimulationRect.Location.X+SimulationRect.Width-_borderMargin),
+                                        s_randomizer.Next(SimulationRect.Location.Y+_borderMargin, SimulationRect.Location.Y+SimulationRect.Height-_borderMargin));
             MovementVector = new Vector2((float)System.Math.Sin(s_randomizer.NextDouble())*2*PI,
                                         (float)System.Math.Sin(s_randomizer.NextDouble())*2*PI );
             MovementVector.Normalize();
@@ -49,8 +51,9 @@ namespace EpidemicSimulation
             RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 3*Person._size);
             RepulsionExpand = true;
         }
-        public Person(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+        public Person(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
         {
+            this.SimulationRect = SimulationRect;
             this.Position = startPosition;
             this.MovementVector = MovementVector;
             MovementVector.Normalize();
@@ -73,12 +76,12 @@ namespace EpidemicSimulation
 
         protected virtual void Move()
         {
-            if (this.Position.X < this._borderMargin-30 || this.Position.X > Simulation.s_SimulationWidth-this._borderMargin+30 || this.Position.Y < this._borderMargin-30 || this.Position.Y > Simulation.s_SimulationHeight-this._borderMargin+30)
+            if (this.Position.X < SimulationRect.Location.X+this._borderMargin-30 || this.Position.X > SimulationRect.Location.X+SimulationRect.Width-this._borderMargin+30 || this.Position.Y < SimulationRect.Location.Y+this._borderMargin-30 || this.Position.Y > SimulationRect.Location.Y+SimulationRect.Height-this._borderMargin+30)
             {
-                this.Position = new Point(s_randomizer.Next(this._borderMargin+1, Simulation.s_SimulationWidth-this._borderMargin-1), s_randomizer.Next(this._borderMargin+1, Simulation.s_SimulationHeight-this._borderMargin-1));
+                this.Position = new Point(s_randomizer.Next(SimulationRect.Location.X+this._borderMargin+1, SimulationRect.Location.X+SimulationRect.Width-this._borderMargin-1), s_randomizer.Next(SimulationRect.Location.Y+this._borderMargin+1, SimulationRect.Location.Y+SimulationRect.Height-this._borderMargin-1));
                 System.Console.WriteLine(" Respawned! ");
             }
-            if (this.Position.X < this._borderMargin || Simulation.s_SimulationHeight - this.Position.Y < this._borderMargin  || this.Position.Y < this._borderMargin || Simulation.s_SimulationWidth - this.Position.X < this._borderMargin)
+            if (this.Position.X < SimulationRect.Location.X+this._borderMargin || SimulationRect.Location.Y+SimulationRect.Height - this.Position.Y < this._borderMargin  || this.Position.Y < SimulationRect.Location.Y+this._borderMargin || SimulationRect.Location.X+SimulationRect.Width - this.Position.X < this._borderMargin)
             {
                 if (this._choice == 0 ) this._choice = DrawDirection();
                 if (this._directionChange < 3.6f) ChangeVector(this._choice);

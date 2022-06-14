@@ -3,18 +3,14 @@ namespace EpidemicSimulation
 {
     class Susceptible: Person
     {
-        public Susceptible(float? immunity = null, int? repulsionRate = null)
-            : base(immunity, repulsionRate)
+        public Susceptible(Rectangle SimulationRect, float? immunity = null, int? repulsionRate = null)
+            : base(SimulationRect, immunity, repulsionRate)
         {
 
         }
-        public Susceptible(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
-            : base(startPosition, MovementVector, immunity, repulsionRate)
+        public Susceptible(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+            : base(SimulationRect, startPosition, MovementVector, immunity, repulsionRate)
         {
-
-        }
-        protected override void Move() {
-            base.Move();
 
         }
         public override bool IsInfected()
@@ -27,4 +23,3 @@ namespace EpidemicSimulation
         }
     }
 }
-// immunity parametr + func get infected 
