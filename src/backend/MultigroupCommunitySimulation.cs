@@ -1,61 +1,43 @@
-using System;
-using EpidemicSimulation;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-
-namespace EpidemicSimulation
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+namespace EpidemicSimulation.src.backend
 {
-    class MultigroupCommunitySimulation : ISimulation
+    class MultigroupCommunitySimulation : Simulation, ISimulation
     {
-        private List<Simulation> communities = new List<Simulation>();
+        private List<Point> CentralPoints = new List<Point>();
+        private List<Rectangle> Obsticles = new List<Rectangle>();
+        private int PointCooldown = 400;
 
-        public MultigroupCommunitySimulation(uint numberOfCommuntiesToSimulate, uint peoplePerSimulation)
-        {
-            for (int i = 0; i < numberOfCommuntiesToSimulate; i++)
-                GenerateCommunitiy(peoplePerSimulation);
+        public MultigroupCommunitySimulation(uint population, uint infected) :base(population, infected) { 
+            CentralPoints.Add(new Point(250,250));
+            CentralPoints.Add(new Point(750,250));
+            CentralPoints.Add(new Point(250,750));
+            CentralPoints.Add(new Point(750,750));
+            VisitingProbability = 0.0003f;
+
+            Obsticles.Add(new Rectangle(SimulationRect.Location.X+SimulationRect.Width/2-4, 0, 8, SimulationRect.Height));
+            Obsticles.Add(new Rectangle(0, SimulationRect.Location.Y+SimulationRect.Height/2-4 , SimulationRect.Width, 8));
+            Person.Obsticles = Obsticles;
+            foreach (Person person in this._people) 
+            if (Obsticles[0].Contains(person.Rect.Location) || Obsticles[1].Contains(person.Rect.Location)) person.GoToPoint(new Point(s_randomizer.Next(100,900), s_randomizer.Next(100,900)));
         }
-
-        public Dictionary<string, int> GetSimulationData()
+        protected override void Update(GameTime gameTime)
         {
-            Dictionary<string, int> compoundedData = new Dictionary<string, int>();
-            compoundedData.Add("Susceptible", 0);
-            compoundedData.Add("Infectious", 0);
-            compoundedData.Add("Recovered", 0);
-            compoundedData.Add("Dead", 0);
-
-            foreach (var c in communities)
-            {
-                var dictionary = c.GenerateOutputLists();
-                compoundedData["Susceptible"] += dictionary["Susceptible"];
-                compoundedData["Infectious"] += dictionary["Infectious"];
-                compoundedData["Recovered"] += dictionary["Recovered"];
-                compoundedData["Dead"] += dictionary["Dead"];
-            }
-
-            return compoundedData;
+            base.Update(gameTime);
+            if (PointCooldown < 0) {CenterPoint = this.CentralPoints[Simulation.s_randomizer.Next(0,3)]; PointCooldown = 300; }
+            else PointCooldown -=1;
         }
-
-        public void Start()
+        protected override void Draw(GameTime gameTime)
         {
-            foreach (Simulation simulation in communities)
-                simulation.Run();
+            base.Draw(gameTime);
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(Wall, Obsticles[0], Color.White);
+            _spriteBatch.Draw(Wall, Obsticles[1], Color.White);
+            _spriteBatch.End();
         }
-
-        public void Pause()
-        {
-            foreach (Simulation simulation in communities)
-                simulation.Pause();
-        }
-
-        public void Close()
-        {
-            foreach (Simulation simulation in communities)
-                simulation.Exit();
-        }
-
-        private void GenerateCommunitiy(uint sizeOfCommunity)
-        {
-            communities.Add( new Simulation(sizeOfCommunity) );
-        }
-
+        public void Start(){ Run(); }
+        public void Close() { Exit(); }
      }
     }
