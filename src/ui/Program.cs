@@ -9,6 +9,7 @@ public class Program : Form
     private Thread _simulationThread;
     private ISimulation _simulation;
     private Button _simulationStartingButton;
+    private Button _simulationPausingButton;
 
     private GroupBox _radioButtons;
     private RadioButton _singleCommunitySimulationButton = new RadioButton();
@@ -36,6 +37,7 @@ public class Program : Form
         this.FormClosing += new FormClosingEventHandler(Program_FormClosing);
 
         SetUpRadioBoxPanel();
+        SetUpSimulationPausingButton();
         SetUpSimulationStartingButton();
         SetUpParametersLabel();
 
@@ -135,16 +137,26 @@ public class Program : Form
         Controls.Add(label);
     }
 
-
     private void SetUpSimulationStartingButton()
     {
         _simulationStartingButton = new Button();
-        _simulationStartingButton.Location = new Point(200, 550);
+        _simulationStartingButton.Location = new Point(150, 550);
         _simulationStartingButton.Text = "Run simulation";
 
         _simulationStartingButton.Click += new EventHandler(Button_Click);
 
         Controls.Add(_simulationStartingButton);
+    }
+
+    private void SetUpSimulationPausingButton()
+    {
+        _simulationPausingButton = new Button();
+        _simulationPausingButton.Location = new Point(250, 550);
+        _simulationPausingButton.Text = "Pause";
+
+        _simulationPausingButton.Click += new EventHandler(PauseSimulation);
+
+        Controls.Add(_simulationPausingButton);
     }
 
     private void Button_Click(object sender, EventArgs e)
@@ -161,6 +173,25 @@ public class Program : Form
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
     }
+
+    private void PauseSimulation(object sender, EventArgs e)
+    {
+        if (_simulation != null)
+        {
+            if (_simulationPausingButton.Text == "Pause")
+            {
+                _simulation.Pause();
+                _simulationPausingButton.Text = "Unpause";
+            }
+            else
+            {
+                _simulation.Pause();
+                _simulationPausingButton.Text = "Pause";
+            }
+
+        }
+    }
+
     private void _populationSlider_Scroll(object sender, EventArgs e)
     {
         _populationLabel.Text = "Population: " + _populationSlider.Value.ToString() + " people";
