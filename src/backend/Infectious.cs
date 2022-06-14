@@ -6,13 +6,14 @@ namespace EpidemicSimulation
     {
         public new float InfectionDuration = 0;
 
-        public Infectious(float? immunity = null, int? repulsionRate = null) :base(immunity, repulsionRate)
+        public Infectious(Rectangle simulationRect, float? immunity = null, int? repulsionRate = null) :
+            base(simulationRect, immunity, repulsionRate)
         {
 
         }
 
-        public Infectious(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
-            : base(startPosition, MovementVector, immunity, repulsionRate)
+        public Infectious(Rectangle simulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+            : base(simulationRect, startPosition, MovementVector, immunity, repulsionRate)
         {
 
         }

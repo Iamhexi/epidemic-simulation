@@ -4,13 +4,13 @@ namespace EpidemicSimulation
 {
     class Susceptible: Person
     {
-        public Susceptible(float? immunity = null, int? repulsionRate = null)
-            : base(immunity, repulsionRate)
+        public Susceptible(Rectangle simulationRect, float? immunity = null, int? repulsionRate = null)
+            : base(simulationRect, immunity, repulsionRate)
         {
 
         }
-        public Susceptible(Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
-            : base(startPosition, MovementVector, immunity, repulsionRate)
+        public Susceptible(Rectangle simulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+            : base(simulationRect, startPosition, MovementVector, immunity, repulsionRate)
         {
 
         }

@@ -11,7 +11,7 @@ namespace EpidemicSimulation
         public static int _size { get; private set; }
         public Vector2 MovementVector;
         public static float s_MovementSpeed { get; set; }
-        private int _borderMargin = 20; 
+        private int _borderMargin = 20;
         private Rectangle SimulationRect;
 
         // additional variables
@@ -33,7 +33,6 @@ namespace EpidemicSimulation
         private int _timeinPoint;
         public static List<Rectangle> Obsticles = new List<Rectangle>();
 
-        public abstract bool IsInfected();
         public abstract string Type();
 
         public Person(Rectangle SimulationRect, float? immunity = null, int? repulsionRate = null)
@@ -53,6 +52,7 @@ namespace EpidemicSimulation
             RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 3*Person._size);
             RepulsionExpand = true;
         }
+
         public Person(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
         {
             this.SimulationRect = SimulationRect;
@@ -81,7 +81,7 @@ namespace EpidemicSimulation
             {
                 this.Position = new Point(s_randomizer.Next(SimulationRect.Location.X+this._borderMargin+1, SimulationRect.Location.X+SimulationRect.Width-this._borderMargin-1), s_randomizer.Next(SimulationRect.Location.Y+this._borderMargin+1, SimulationRect.Location.Y+SimulationRect.Height-this._borderMargin-1));
             }
-            foreach(Rectangle obst in Obsticles) 
+            foreach(Rectangle obst in Obsticles)
             {
                 if (obst.Contains(Rect.Location.X+_size/2, Rect.Location.Y) || obst.Contains(Rect.Location.X+_size/2, Rect.Location.Y+_size)) { MovementVector.Y = -1* MovementVector.Y; }
                 else if (obst.Contains(Rect.Location.X, Rect.Location.Y+_size/2) || obst.Contains(Rect.Location.X+_size, Rect.Location.Y+_size/2)) { MovementVector.X = -1* MovementVector.X; }
@@ -150,19 +150,19 @@ namespace EpidemicSimulation
             this._directionChange += amount;
             this.MovementVector.Normalize();
         }
-        public void GoToPoint(Point? centerPoint = null, float probability = 0) 
-        { 
+        public void GoToPoint(Point? centerPoint = null, float probability = 0)
+        {
             if (centerPoint.HasValue)
             {
-            if (probability > s_randomizer.NextDouble() && !this._goingToPoint) 
+            if (probability > s_randomizer.NextDouble() && !this._goingToPoint)
             {
                 this.IgnoreColision = true; this._goingToPoint = true; this._timeinPoint = 200;
             }
-            else if (!Rectangle.Intersect(new Rectangle(centerPoint.Value.X-15, centerPoint.Value.Y-15, 30, 30), this.Rect).IsEmpty) 
+            else if (!Rectangle.Intersect(new Rectangle(centerPoint.Value.X-15, centerPoint.Value.Y-15, 30, 30), this.Rect).IsEmpty)
             {
-                if (this._timeinPoint < 0) 
+                if (this._timeinPoint < 0)
                 {
-                    this.IgnoreColision = false; 
+                    this.IgnoreColision = false;
                     this._goingToPoint = false;
                     this.MovementVector = new Vector2((float)System.Math.Sin(s_randomizer.NextDouble())*2*PI,
                                                     (float)System.Math.Sin(s_randomizer.NextDouble())*2*PI );

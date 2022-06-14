@@ -82,7 +82,7 @@ public class Program : Form
         radioButton.Text = label;
         radioButton.Height = 50;
         radioButton.Width = 100;
-        radioButton.Location = new Point( (Simulation.s_SimulationWidth/3) + 50 - (order*radioButton.Width), 25);
+        radioButton.Location = new Point( (Simulation.s_SimulationWidth/3) - (order*radioButton.Width), 25);
 
         if (order == 0u)
             radioButton.Checked = true;

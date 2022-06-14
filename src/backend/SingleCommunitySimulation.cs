@@ -9,7 +9,7 @@ namespace EpidemicSimulation
 
         public SingleCommunitySimulation(uint population)
         {
-            _simulation = new Simulation(population - 1, 1);
+            _simulation = new Simulation(population - 3, 3);
         }
 
         public Dictionary<string, int> GetSimulationData()
