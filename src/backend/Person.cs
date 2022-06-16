@@ -1,88 +1,195 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
-namespace EpidemicSimulation.src.backend
+namespace EpidemicSimulation
 {
-    class Person
+    abstract class Person
     {
         // variables to set
-        private int position_x;
-        private int position_y;
-        private static int size = 10;
-        public Vector2 moveVector;
-        public static float BaseMoveSpeed = 4;
-        private float actualMoveSpeed;
-        private int border_margin = 100;
-        //float repultion_rate;
-    
- 
+        public Point Position { get; private set; }
+        public static int _size { get; private set; }
+        public Vector2 MovementVector;
+        public static float s_MovementSpeed { get; set; }
+        private int _borderMargin = 20; 
+        private Rectangle SimulationRect;
+
         // additional variables
         private const float PI = MathHelper.Pi;
         private static Random s_randomizer = new Random();
-        private int choice = 0;
+        private int _choice = 0;
+        private float _directionChange = 0f;
+        public Rectangle Rect { get; set; }
+        public bool IsColliding = false;
+        public Rectangle AnticipadedPositon;
+        public float ImmunityRate { get; private set; }
+        public int RepulsionRate { get; private set; }
+        public bool RepulsionExpand { get; private set; }
+        public Rectangle RadiusRect { get; private set; }
+        private float precentegeOfRepulsion = 0;
+        public float InfectionDuration;
+        public bool IgnoreColision = false;
+        private bool _goingToPoint = false;
+        private int _timeinPoint;
+        public static List<Rectangle> Obsticles = new List<Rectangle>();
 
-        public Person()
-        {
-            this.position_x = s_randomizer.Next(100, 700);
-            this.position_y = s_randomizer.Next(100, 700);
-            this.moveVector = new Vector2((float)System.Math.Sin(s_randomizer.NextDouble())*2*PI,
-                                          (float)System.Math.Sin(s_randomizer.NextDouble())*2*PI );
-            this.moveVector.Normalize();
-            //this.repultion_rate = 0.44f ;
-        }
-        
-        public Person(int starting_pos_x, int starting_pos_y)
-        {
-            this.position_x = starting_pos_x;
-            this.position_y = starting_pos_y;
-            this.moveVector = new Vector2(0,1f);
-        }
+        public abstract bool IsInfected();
+        public abstract string Type();
 
-        public void Update_Self()
+        public Person(Rectangle SimulationRect, float? immunity = null, int? repulsionRate = null)
         {
-            Move();
-            //System.Diagnostics.Debug.WriteLine($"pos: {this.position_x} {this.position_y} | wektor ruchu: {this.moveVector.ToString()}");
-        }
-
-        private void Move()
-        {
-        
-            //System.Diagnostics.Debug.WriteLine($"time since last frame : {elapsed}");
-
-            // check borders
-            if (this.position_y < this.border_margin || Simulation.simulation_height - this.position_y < this.border_margin  || this.position_x < this.border_margin || Simulation.simulation_width - this.position_x < this.border_margin)
-            {
-                if (this.choice == 0) this.choice = Draw_Direction();
-                Chage_moveVector(this.choice);
+            this.SimulationRect = SimulationRect;
+            Person._size = 10;
+            Position = new Point(s_randomizer.Next(SimulationRect.Location.X+_borderMargin, SimulationRect.Location.X+SimulationRect.Width-_borderMargin),
+                                        s_randomizer.Next(SimulationRect.Location.Y+_borderMargin, SimulationRect.Location.Y+SimulationRect.Height-_borderMargin));
+            MovementVector = new Vector2((float)System.Math.Sin(s_randomizer.NextDouble())*2*PI,
+                                        (float)System.Math.Sin(s_randomizer.NextDouble())*2*PI );
+            MovementVector.Normalize();
+            Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
+            if (Disease.Lethality > 0 && Disease.Communicability > 0)
+            while(true) {
+                float temp_immunity = immunity ?? (float) s_randomizer.NextDouble();
+                if (temp_immunity < Disease.Lethality) { ImmunityRate = temp_immunity; break; }
             }
-            else { this.choice = 0; }
-            
-            //check others - collisions TO DO
-            //fix endless tourning
-
-            // make a step
-            this.position_x += (int)System.Math.Round(this.moveVector.X * this.actualMoveSpeed, MidpointRounding.AwayFromZero);
-            this.position_y += (int)System.Math.Round(this.moveVector.Y * this.actualMoveSpeed, MidpointRounding.AwayFromZero);
+            RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 3*Person._size);
+            RepulsionExpand = true;
         }
-        public Rectangle Get_Rect() { return new Rectangle(this.position_x, this.position_y, Person.size, Person.size); }
-        public Vector2 Get_Poz() { return new Vector2(this.position_x, this.position_y);  }
-        private void Chage_moveVector(int direction, float amount = 0.05f) {
-            if (direction == 1)
-            { // to right
-                if (this.moveVector.Y < 0 && this.moveVector.X >= 0) { this.moveVector.Y += amount; this.moveVector.X += amount; }// top right
-                if (this.moveVector.Y < 0 && this.moveVector.X < 0) { this.moveVector.Y -= amount; this.moveVector.X += amount; } // top left
-                if (this.moveVector.Y >= 0 && this.moveVector.X >= 0) { this.moveVector.Y += amount; this.moveVector.X -= amount; } // bottom right 
-                if (this.moveVector.Y >= 0 && this.moveVector.X < 0) { this.moveVector.Y -= amount; this.moveVector.X -= amount; } // bottom left
-            } // to left
+        public Person(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+        {
+            this.SimulationRect = SimulationRect;
+            this.Position = startPosition;
+            this.MovementVector = MovementVector;
+            MovementVector.Normalize();
+            Person._size = 10;
+            Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
+            ImmunityRate = immunity ?? (float) s_randomizer.NextDouble();
+            RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 2*Person._size);
+            RepulsionExpand = true;
+        }
+        public virtual void UpdateSelf()
+        {
+            if (this._goingToPoint) { GoToPoint(); MoveRadiusField(); }
+            else { Move(); MoveRadiusField(); }
+
+            this.Rect = new Rectangle((int)this.Position.X, (int)this.Position.Y, Person._size, Person._size);
+            this.AnticipadedPositon = new Rectangle((int)this.Rect.X + 3*(int)System.Math.Round(this.MovementVector.X * s_MovementSpeed, MidpointRounding.AwayFromZero),
+                                                    (int)this.Rect.Y + 3*(int)System.Math.Round(this.MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero),
+                                                    Person._size, Person._size);
+        }
+        protected virtual void Move()
+        {
+            if (this.Position.X < SimulationRect.Location.X+this._borderMargin-30 || this.Position.X > SimulationRect.Location.X+SimulationRect.Width-this._borderMargin+30 || this.Position.Y < SimulationRect.Location.Y+this._borderMargin-30 || this.Position.Y > SimulationRect.Location.Y+SimulationRect.Height-this._borderMargin+30)
+            {
+                this.Position = new Point(s_randomizer.Next(SimulationRect.Location.X+this._borderMargin+1, SimulationRect.Location.X+SimulationRect.Width-this._borderMargin-1), s_randomizer.Next(SimulationRect.Location.Y+this._borderMargin+1, SimulationRect.Location.Y+SimulationRect.Height-this._borderMargin-1));
+            }
+            foreach(Rectangle obst in Obsticles) 
+            {
+                if (obst.Contains(Rect.Location.X+_size/2, Rect.Location.Y) || obst.Contains(Rect.Location.X+_size/2, Rect.Location.Y+_size)) { MovementVector.Y = -1* MovementVector.Y; }
+                else if (obst.Contains(Rect.Location.X, Rect.Location.Y+_size/2) || obst.Contains(Rect.Location.X+_size, Rect.Location.Y+_size/2)) { MovementVector.X = -1* MovementVector.X; }
+            }
+            if (this.Position.X < SimulationRect.Location.X+this._borderMargin || SimulationRect.Location.Y+SimulationRect.Height - this.Position.Y < this._borderMargin  || this.Position.Y < SimulationRect.Location.Y+this._borderMargin || SimulationRect.Location.X+SimulationRect.Width - this.Position.X < this._borderMargin)
+            {
+                if (this._choice == 0 ) this._choice = DrawDirection();
+                if (this._directionChange < 3.6f) ChangeVector(this._choice);
+            }
+            else if(this.IsColliding)
+            {
+                if (this._choice == 0 ) this._choice = DrawDirection();
+                if (this._directionChange < 3f) ChangeVector(this._choice, 0.15f);
+            }
+            else { this._choice = 0; this._directionChange = 0; }
+
+            Point temporaryPosition = new Point(
+                Position.X + (int) System.Math.Round(MovementVector.X * s_MovementSpeed, MidpointRounding.AwayFromZero),
+                Position.Y + (int) System.Math.Round(MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero)
+            );
+            Position = temporaryPosition;
+            this.IsColliding = false;
+        }
+        protected void MoveRadiusField()
+      {
+            this.RadiusRect = new Rectangle(Position.X, Position.Y, Person._size, Person._size);
+            if (this.precentegeOfRepulsion >= 1) this.RepulsionExpand = false;
+            else if (this.precentegeOfRepulsion <= 0)this.RepulsionExpand = true;
+            if (this.RepulsionExpand)
+            {
+                this.RadiusRect = new Rectangle(
+                    this.Position.X-(int)(this.RepulsionRate*this.precentegeOfRepulsion/2),
+                    this.Position.Y-(int)(this.RepulsionRate*this.precentegeOfRepulsion/2),
+                    Person._size+(int)(this.RepulsionRate*this.precentegeOfRepulsion),
+                    Person._size+(int)(this.RepulsionRate*this.precentegeOfRepulsion)
+                );
+                this.precentegeOfRepulsion += 0.01f;
+            }
             else
             {
-                if (this.moveVector.Y < 0 && this.moveVector.X >= 0) { this.moveVector.Y -= amount; this.moveVector.X -= amount; }// top right
-                if (this.moveVector.Y < 0 && this.moveVector.X < 0) { this.moveVector.Y += amount; this.moveVector.X -= amount; } // top left
-                if (this.moveVector.Y >= 0 && this.moveVector.X >= 0) { this.moveVector.Y -= amount; this.moveVector.X += amount; } // bottom right 
-                if (this.moveVector.Y >= 0 && this.moveVector.X < 0) { this.moveVector.Y += amount; this.moveVector.X += amount; } // bottom left
+                this.RadiusRect = new Rectangle(
+                    this.Position.X-(int)(this.RepulsionRate*this.precentegeOfRepulsion/2),
+                    this.Position.Y-(int)(this.RepulsionRate*this.precentegeOfRepulsion/2),
+                    Person._size+(int)(this.RepulsionRate*this.precentegeOfRepulsion),
+                    Person._size+(int)(this.RepulsionRate*this.precentegeOfRepulsion)
+                );
+                this.precentegeOfRepulsion -= 0.01f;
             }
-            this.moveVector.Normalize();
+
         }
-        private int Draw_Direction() { if (s_randomizer.Next(0, 100) >= 50) return 1; return -1; } 
+        private void ChangeVector(int direction, float amount = 0.11f) {
+            if (direction == 1)
+            {
+                if (this.MovementVector.Y < 0 && this.MovementVector.X >= 0) { this.MovementVector.Y += amount; this.MovementVector.X += amount; }// top right
+                if (this.MovementVector.Y < 0 && this.MovementVector.X < 0) { this.MovementVector.Y -= amount; this.MovementVector.X += amount; } // top left
+                if (this.MovementVector.Y >= 0 && this.MovementVector.X >= 0) { this.MovementVector.Y += amount; this.MovementVector.X -= amount; } // bottom right
+                if (this.MovementVector.Y >= 0 && this.MovementVector.X < 0) { this.MovementVector.Y -= amount; this.MovementVector.X -= amount; } // bottom left
+            }
+            else
+            {
+                if (this.MovementVector.Y < 0 && this.MovementVector.X >= 0) { this.MovementVector.Y -= amount; this.MovementVector.X -= amount; }// top right
+                if (this.MovementVector.Y < 0 && this.MovementVector.X < 0) { this.MovementVector.Y += amount; this.MovementVector.X -= amount; } // top left
+                if (this.MovementVector.Y >= 0 && this.MovementVector.X >= 0) { this.MovementVector.Y -= amount; this.MovementVector.X += amount; } // bottom right
+                if (this.MovementVector.Y >= 0 && this.MovementVector.X < 0) { this.MovementVector.Y += amount; this.MovementVector.X += amount; } // bottom left
+            }
+            this._directionChange += amount;
+            this.MovementVector.Normalize();
+        }
+        public void GoToPoint(Point? centerPoint = null, float probability = 0) 
+        { 
+            if (centerPoint.HasValue)
+            {
+            if (probability > s_randomizer.NextDouble() && !this._goingToPoint) 
+            {
+                this.IgnoreColision = true; this._goingToPoint = true; this._timeinPoint = 200;
+            }
+            else if (!Rectangle.Intersect(new Rectangle(centerPoint.Value.X-15, centerPoint.Value.Y-15, 30, 30), this.Rect).IsEmpty) 
+            {
+                if (this._timeinPoint < 0) 
+                {
+                    this.IgnoreColision = false; 
+                    this._goingToPoint = false;
+                    this.MovementVector = new Vector2((float)System.Math.Sin(s_randomizer.NextDouble())*2*PI,
+                                                    (float)System.Math.Sin(s_randomizer.NextDouble())*2*PI );
+                    this.MovementVector.Normalize();
+                }
+                else
+                {
+                    this.MovementVector = new Vector2(0,0);
+                    this._timeinPoint -= 1;
+                }
+            }
+            else if(this._goingToPoint)
+                {
+                    this.MovementVector = new Vector2(centerPoint.Value.X - this.Position.X, centerPoint.Value.Y - this.Position.Y);
+                    this.MovementVector.Normalize();
+                    Point temporaryPosition = new Point(
+                    Position.X + (int) System.Math.Round(this.MovementVector.X * s_MovementSpeed, MidpointRounding.AwayFromZero),
+                    Position.Y + (int) System.Math.Round(this.MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero));
+                    Position = temporaryPosition;
+                }
+            }
+        }
+        public static bool s_CheckCollision(Rectangle obj1, Rectangle obj2) { if (!Rectangle.Intersect(obj1, obj2).IsEmpty && !Rectangle.Equals(obj1, obj2)) return true; return false; }
+        public static float s_FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }
+        public float FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }
+        protected static float RectSurface(Rectangle obj) { return obj.Height * obj.Width; }
+        protected int DrawDirection() { if (s_randomizer.Next(0, 100) >= 50) return 1; return -1; }
      }
 }
