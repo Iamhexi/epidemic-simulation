@@ -1,0 +1,78 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/Ns-JG/Documents/GitHub/epidemic-simulation/EpidemicSimulation.csproj": {}
+  },
+  "projects": {
+    "/Users/Ns-JG/Documents/GitHub/epidemic-simulation/EpidemicSimulation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/Ns-JG/Documents/GitHub/epidemic-simulation/EpidemicSimulation.csproj",
+        "projectName": "EpidemicSimulation",
+        "projectPath": "/Users/Ns-JG/Documents/GitHub/epidemic-simulation/EpidemicSimulation.csproj",
+        "packagesPath": "/Users/Ns-JG/.nuget/packages/",
+        "outputPath": "/Users/Ns-JG/Documents/GitHub/epidemic-simulation/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/Ns-JG/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MonoGame.Extended": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "MonoGame.Framework.DesktopGL": {
+              "target": "Package",
+              "version": "[3.8.0.1641, )"
+            },
+            "MonoGame.Framework.Portable": {
+              "target": "Package",
+              "version": "[3.7.1.189, )"
+            },
+            "System.Windows.Forms": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
