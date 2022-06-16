@@ -8,24 +8,10 @@
     ".NETCoreApp,Version=v3.1": {
       "EpidemicSimulation/1.0.0": {
         "dependencies": {
-          "MonoGame.Extended": "3.8.0",
-          "MonoGame.Framework.DesktopGL": "3.8.0.1641",
-          "MonoGame.Framework.Portable": "3.7.1.189",
-          "System.Windows.Forms": "4.0.0"
+          "MonoGame.Framework.DesktopGL": "3.8.0.1641"
         },
         "runtime": {
           "EpidemicSimulation.dll": {}
-        }
-      },
-      "MonoGame.Extended/3.8.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
-        },
-        "runtime": {
-          "lib/netstandard2.0/MonoGame.Extended.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
         }
       },
       "MonoGame.Framework.DesktopGL/3.8.0.1641": {
@@ -77,23 +63,6 @@
             "fileVersion": "0.0.0.0"
           }
         }
-      },
-      "MonoGame.Framework.Portable/3.7.1.189": {},
-      "Newtonsoft.Json/12.0.3": {
-        "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.3.23909"
-          }
-        }
-      },
-      "System.Windows.Forms/4.0.0": {
-        "runtime": {
-          "lib/System.Windows.Forms.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.6.1055.0"
-          }
-        }
       }
     }
   },
@@ -103,40 +72,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "MonoGame.Extended/3.8.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-FDPoUOFtslGNHCWSqjKD0C67RYN6Stb6NWnn+rkCmtkPBZlE6LvwuGyQBkHUkAMANO3LzO/Wsz9etMhwZLInqg==",
-      "path": "monogame.extended/3.8.0",
-      "hashPath": "monogame.extended.3.8.0.nupkg.sha512"
-    },
     "MonoGame.Framework.DesktopGL/3.8.0.1641": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-rJQlrlHQbnOECYV6EcQ8GlGRQ2lzPTroXQcyyOZ0ki+BQRSJEN2zVBm9skqLiXya348aGAfTSSGTaSKjAy9NaA==",
       "path": "monogame.framework.desktopgl/3.8.0.1641",
       "hashPath": "monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
-    },
-    "MonoGame.Framework.Portable/3.7.1.189": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Q5ARWZtCtJa8aD5zeeMmEkAwnguEq6aZqeIh9RdAi9RhaYJxoGc0lYka4sZaq2hGQAP7KFsPe4U9uhK/6c37vg==",
-      "path": "monogame.framework.portable/3.7.1.189",
-      "hashPath": "monogame.framework.portable.3.7.1.189.nupkg.sha512"
-    },
-    "Newtonsoft.Json/12.0.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
-      "path": "newtonsoft.json/12.0.3",
-      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
-    },
-    "System.Windows.Forms/4.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-WL3QPG1q88aIWO0JPOlkCeyNE+FK4ufSKY5j6J6qAFQyfCFiiOYxi8RAhev9H0CS/wmKbIK8qr8xZBod85oWKw==",
-      "path": "system.windows.forms/4.0.0",
-      "hashPath": "system.windows.forms.4.0.0.nupkg.sha512"
     }
   }
 }

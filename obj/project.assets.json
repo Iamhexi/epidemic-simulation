@@ -2,80 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "MonoGame.Extended/3.8.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
-        },
-        "compile": {
-          "lib/netstandard2.0/MonoGame.Extended.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/MonoGame.Extended.dll": {}
-        },
-        "contentFiles": {
-          "contentFiles/any/netstandard2.0/CppNet.dll": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/SharpDX.D3DCompiler.dll": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/SharpDX.D3DCompiler.xml": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/SharpDX.dll": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/SharpDX.xml": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/libmojoshader_64.dll": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/mgfxc.deps.json": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/mgfxc.dll": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/mgfxc.exe": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/mgfxc.pdb": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/mgfxc.runtimeconfig.dev.json": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          },
-          "contentFiles/any/netstandard2.0/mgfxc.runtimeconfig.json": {
-            "buildAction": "Content",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          }
-        }
-      },
       "MonoGame.Framework.DesktopGL/3.8.0.1641": {
         "type": "package",
         "compile": {
@@ -121,73 +47,10 @@
             "rid": "win-x86"
           }
         }
-      },
-      "MonoGame.Framework.Portable/3.7.1.189": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+win8+wpa81/MonoGame.Framework.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+win8+wpa81/MonoGame.Framework.dll": {}
-        }
-      },
-      "Newtonsoft.Json/12.0.3": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
-        }
-      },
-      "System.Windows.Forms/4.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/System.Windows.Forms.dll": {}
-        },
-        "runtime": {
-          "lib/System.Windows.Forms.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "MonoGame.Extended/3.8.0": {
-      "sha512": "FDPoUOFtslGNHCWSqjKD0C67RYN6Stb6NWnn+rkCmtkPBZlE6LvwuGyQBkHUkAMANO3LzO/Wsz9etMhwZLInqg==",
-      "type": "package",
-      "path": "monogame.extended/3.8.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "content/CppNet.dll",
-        "content/SharpDX.D3DCompiler.dll",
-        "content/SharpDX.D3DCompiler.xml",
-        "content/SharpDX.dll",
-        "content/SharpDX.xml",
-        "content/libmojoshader_64.dll",
-        "content/mgfxc.deps.json",
-        "content/mgfxc.dll",
-        "content/mgfxc.exe",
-        "content/mgfxc.pdb",
-        "content/mgfxc.runtimeconfig.dev.json",
-        "content/mgfxc.runtimeconfig.json",
-        "contentFiles/any/netstandard2.0/CppNet.dll",
-        "contentFiles/any/netstandard2.0/SharpDX.D3DCompiler.dll",
-        "contentFiles/any/netstandard2.0/SharpDX.D3DCompiler.xml",
-        "contentFiles/any/netstandard2.0/SharpDX.dll",
-        "contentFiles/any/netstandard2.0/SharpDX.xml",
-        "contentFiles/any/netstandard2.0/libmojoshader_64.dll",
-        "contentFiles/any/netstandard2.0/mgfxc.deps.json",
-        "contentFiles/any/netstandard2.0/mgfxc.dll",
-        "contentFiles/any/netstandard2.0/mgfxc.exe",
-        "contentFiles/any/netstandard2.0/mgfxc.pdb",
-        "contentFiles/any/netstandard2.0/mgfxc.runtimeconfig.dev.json",
-        "contentFiles/any/netstandard2.0/mgfxc.runtimeconfig.json",
-        "lib/netstandard2.0/MonoGame.Extended.dll",
-        "monogame.extended.3.8.0.nupkg.sha512",
-        "monogame.extended.nuspec"
-      ]
-    },
     "MonoGame.Framework.DesktopGL/3.8.0.1641": {
       "sha512": "rJQlrlHQbnOECYV6EcQ8GlGRQ2lzPTroXQcyyOZ0ki+BQRSJEN2zVBm9skqLiXya348aGAfTSSGTaSKjAy9NaA==",
       "type": "package",
@@ -212,70 +75,11 @@
         "runtimes/win-x86/native/SDL2.dll",
         "runtimes/win-x86/native/soft_oal.dll"
       ]
-    },
-    "MonoGame.Framework.Portable/3.7.1.189": {
-      "sha512": "Q5ARWZtCtJa8aD5zeeMmEkAwnguEq6aZqeIh9RdAi9RhaYJxoGc0lYka4sZaq2hGQAP7KFsPe4U9uhK/6c37vg==",
-      "type": "package",
-      "path": "monogame.framework.portable/3.7.1.189",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/portable-net45+win8+wpa81/MonoGame.Framework.dll",
-        "lib/portable-net45+win8+wpa81/MonoGame.Framework.xml",
-        "monogame.framework.portable.3.7.1.189.nupkg.sha512",
-        "monogame.framework.portable.nuspec"
-      ]
-    },
-    "Newtonsoft.Json/12.0.3": {
-      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
-      "type": "package",
-      "path": "newtonsoft.json/12.0.3",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.md",
-        "lib/net20/Newtonsoft.Json.dll",
-        "lib/net20/Newtonsoft.Json.xml",
-        "lib/net35/Newtonsoft.Json.dll",
-        "lib/net35/Newtonsoft.Json.xml",
-        "lib/net40/Newtonsoft.Json.dll",
-        "lib/net40/Newtonsoft.Json.xml",
-        "lib/net45/Newtonsoft.Json.dll",
-        "lib/net45/Newtonsoft.Json.xml",
-        "lib/netstandard1.0/Newtonsoft.Json.dll",
-        "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/netstandard1.3/Newtonsoft.Json.dll",
-        "lib/netstandard1.3/Newtonsoft.Json.xml",
-        "lib/netstandard2.0/Newtonsoft.Json.dll",
-        "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.3.nupkg.sha512",
-        "newtonsoft.json.nuspec",
-        "packageIcon.png"
-      ]
-    },
-    "System.Windows.Forms/4.0.0": {
-      "sha512": "WL3QPG1q88aIWO0JPOlkCeyNE+FK4ufSKY5j6J6qAFQyfCFiiOYxi8RAhev9H0CS/wmKbIK8qr8xZBod85oWKw==",
-      "type": "package",
-      "path": "system.windows.forms/4.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/System.Windows.Forms.dll",
-        "system.windows.forms.4.0.0.nupkg.sha512",
-        "system.windows.forms.nuspec"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "MonoGame.Extended >= 3.8.0",
-      "MonoGame.Framework.DesktopGL >= 3.8.0.1641",
-      "MonoGame.Framework.Portable >= 3.7.1.189",
-      "System.Windows.Forms >= 4.0.0"
+      "MonoGame.Framework.DesktopGL >= 3.8.0.1641"
     ]
   },
   "packageFolders": {
@@ -315,21 +119,9 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
-          "MonoGame.Extended": {
-            "target": "Package",
-            "version": "[3.8.0, )"
-          },
           "MonoGame.Framework.DesktopGL": {
             "target": "Package",
             "version": "[3.8.0.1641, )"
-          },
-          "MonoGame.Framework.Portable": {
-            "target": "Package",
-            "version": "[3.7.1.189, )"
-          },
-          "System.Windows.Forms": {
-            "target": "Package",
-            "version": "[4.0.0, )"
           }
         },
         "imports": [
@@ -350,27 +142,5 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'MonoGame.Framework.Portable 3.7.1.189' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "MonoGame.Framework.Portable",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Windows.Forms 4.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "System.Windows.Forms",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }

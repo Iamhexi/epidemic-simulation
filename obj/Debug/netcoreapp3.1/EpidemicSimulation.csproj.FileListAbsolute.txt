@@ -39,10 +39,7 @@ C:/Users/NsJg/Desktop/desktop/EpidemicSimulation/bin/Debug/netcoreapp3.1/System.
 /Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/EpidemicSimulation.runtimeconfig.dev.json
 /Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/EpidemicSimulation.dll
 /Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/EpidemicSimulation.pdb
-/Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/MonoGame.Extended.dll
 /Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/MonoGame.Framework.dll
-/Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
-/Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/System.Windows.Forms.dll
 /Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libSDL2-2.0.so.0
 /Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libopenal.so.1
 /Users/Ns-JG/Documents/GitHub/epidemic-simulation/bin/Debug/netcoreapp3.1/runtimes/osx/native/libSDL2-2.0.0.dylib

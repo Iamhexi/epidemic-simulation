@@ -22,6 +22,7 @@ namespace EpidemicSimulation
         protected static System.Random s_randomizer = new System.Random();
         protected float VisitingProbability = 0.003f;
         private bool _Pause = false;
+        private bool _ignoreInput = false;
         public Point? CenterPoint;
         private ChartManager _chartManager;
 
@@ -29,13 +30,16 @@ namespace EpidemicSimulation
         public Rectangle SimulationRect;
         public static int s_SimulationWidth = 1000;
         public static int s_SimulationHeight = 1000;
-        public enum SimulationSpeedValues: ushort {
+        public enum SimulationSpeedValues: uint {
             half = 32,
             x1 = 16,
             x2 = 8,
             x4 = 4,
-            x8 = 2
+            x8 = 2,
+            x16 = 1,
         };
+        private List<int> _speedValues = new List<int>() {32,16,8,4,2,1};
+        private int _currentSpeedIndex = 2;
         public SimulationSpeedValues SimulationSpeed;
         protected uint _susceptibleAmount;
         protected uint _infectiousAmount;
@@ -43,6 +47,7 @@ namespace EpidemicSimulation
 
         public Simulation(uint susceptible = 20, uint infectious = 2, Rectangle? frame = null)
         {
+            System.Console.Clear();
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -58,7 +63,7 @@ namespace EpidemicSimulation
             _susceptibleAmount = susceptible;
             _infectiousAmount = infectious;
             Person.s_MovementSpeed = 2;
-            SimulationSpeed = SimulationSpeedValues.x4;
+            SimulationSpeed = SimulationSpeedValues.x2; // default speed
             for (int i = 0; i<_susceptibleAmount; i++) { this._people.Add(new Susceptible(SimulationRect));}
             for (int i = 0; i<_infectiousAmount; i++) { this._people.Add(new Infectious(SimulationRect)); }
         }
@@ -83,8 +88,8 @@ namespace EpidemicSimulation
             Dead = Content.Load<Texture2D>("dead");
             Wall = new Texture2D(GraphicsDevice, 1, 1); Wall.SetData(new Color[] {Color.Cyan});
             _chartManager = new ChartManager(
-                new Vector2(10f, 100f),
-                new Point(250, 250),
+                new Vector2(10f, 200f),
+                new Point(250, 200),
                 this,
                 GraphicsDevice
                 );
@@ -96,6 +101,21 @@ namespace EpidemicSimulation
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape) 
                 || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) ) Exit();
+
+            if (Keyboard.GetState().GetPressedKeyCount() == 0) _ignoreInput = false;
+
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Right) && !_ignoreInput) { 
+                _ignoreInput = true;
+                this._currentSpeedIndex += 1; 
+                this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6]);
+                System.Console.WriteLine($"current speed: {(int)(1.0f/(((float)this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6])/1000f))} FPS "); }
+            else if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left) && !_ignoreInput) { 
+                _ignoreInput = true;
+                this._currentSpeedIndex -= 1; 
+                this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6]); 
+                System.Console.WriteLine($"current speed: {(int)(1.0f/(((float)this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6])/1000f))} FPS "); }
+            else if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space) && !_ignoreInput) {Pause(); _ignoreInput = true; };
+
             if (!this._Pause)
             {
                 foreach(Person person in this._people)
@@ -148,7 +168,6 @@ namespace EpidemicSimulation
                         _spriteBatch.Draw(SusceptibleRadius, person.RadiusRect, Microsoft.Xna.Framework.Color.White);
                         _spriteBatch.Draw(Susceptible, person.Rect, Microsoft.Xna.Framework.Color.White);
                         break;
-
                     case "Infectious":
                         _spriteBatch.Draw(InfectiousRadius, person.RadiusRect, Color.White);
                         _spriteBatch.Draw(Infectious, person.Rect, Color.White);
@@ -168,7 +187,6 @@ namespace EpidemicSimulation
             _spriteBatch.Draw(Wall, new Rectangle(SimulationRect.Location.X+SimulationRect.Width-1, SimulationRect.Location.Y , 1, SimulationRect.Height), Color.White);
             _chartManager.Draw();
             _spriteBatch.End();
-
             base.Draw(gameTime);
         }
 
@@ -182,8 +200,8 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == susceptible.GetHashCode())
                 {
-                this._people[i] = new Infectious(SimulationRect, susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 35);
-                return;
+                    this._people[i] = new Infectious(SimulationRect, susceptible.Position, susceptible.MovementVector, susceptible.ImmunityRate, 35);
+                    return;
                 }
             }
         }
@@ -194,9 +212,8 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == infectious.GetHashCode())
                 {
-                    //System.Console.WriteLine($"new immunity level : was {infectious.ImmunityRate}, is {infectious.ImmunityRate*100} check { Disease.Communicability-infectious.ImmunityRate*100} ");
-                this._people[i] = new Recovered(SimulationRect, infectious.Position, infectious.MovementVector, infectious.ImmunityRate*100, 35);
-                return;
+                    this._people[i] = new Recovered(SimulationRect, infectious.Position, infectious.MovementVector, infectious.ImmunityRate*100, 35);
+                    return;
                 }
             }
         }
@@ -207,8 +224,8 @@ namespace EpidemicSimulation
             {
                 if (this._people[i].GetHashCode() == infectious.GetHashCode())
                 {
-                this._people[i] = new Dead(SimulationRect, infectious.Position, new Vector2(0,0), 0, 0);
-                return;
+                    this._people[i] = new Dead(SimulationRect, infectious.Position, new Vector2(0,0), 0, 0);
+                    return;
                 }
             }
         }

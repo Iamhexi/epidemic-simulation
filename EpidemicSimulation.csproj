@@ -18,9 +18,6 @@
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" />
-    <PackageReference Include="System.Windows.Forms" Version="4.0.0" />
   </ItemGroup>
 </Project>

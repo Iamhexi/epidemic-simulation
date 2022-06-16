@@ -38,21 +38,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "MonoGame.Extended": {
-              "target": "Package",
-              "version": "[3.8.0, )"
-            },
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.0.1641, )"
-            },
-            "MonoGame.Framework.Portable": {
-              "target": "Package",
-              "version": "[3.7.1.189, )"
-            },
-            "System.Windows.Forms": {
-              "target": "Package",
-              "version": "[4.0.0, )"
             }
           },
           "imports": [
