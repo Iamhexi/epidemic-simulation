@@ -4,15 +4,35 @@ using System.IO;
 
 namespace EpidemicSimulation
 {
+
+    /**
+        Class saves statistics to an external text file.
+    */
+
     class StatisticsPrinter
     {
         private const string OUTPUT_FILENAME_PATH = "log/statistics.txt";
         private ISimulation _simulation;
 
+        /**
+            Constructor takes an instance of ISimulation and assigns its reference
+            to class's private property.
+
+            @param simulation An instance of ISimulation where the data will be culled from.
+        */
+
         public StatisticsPrinter(ISimulation simulation)
         {
             _simulation = simulation;
         }
+
+        /**
+            Creates a new file if none exists, otherwise, doesn't create or override
+            anything. Saves information including date, time, chosen lethality,
+            disease duration, communicability, overall population and the final
+            number of infected, uninfected, recovered and dead people to the file.
+            Closes that file.
+        */
 
         public void Print()
         {

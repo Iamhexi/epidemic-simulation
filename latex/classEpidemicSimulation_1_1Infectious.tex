@@ -9,14 +9,9 @@ Inheritance diagram for Epidemic\+Simulation.\+Infectious\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Infectious_ab22b2aab53c9fc7b8042a34350e10bf1}\label{classEpidemicSimulation_1_1Infectious_ab22b2aab53c9fc7b8042a34350e10bf1}} 
-{\bfseries Infectious} (Rectangle simulation\+Rect, float? immunity=null, int? repulsion\+Rate=null)
+\mbox{\hyperlink{classEpidemicSimulation_1_1Infectious_ab22b2aab53c9fc7b8042a34350e10bf1}{Infectious}} (Rectangle simulation\+Rect, float? immunity=null, int? repulsion\+Rate=null)
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Infectious_a796a3b619bae3dbf99fe5510ad1402e4}\label{classEpidemicSimulation_1_1Infectious_a796a3b619bae3dbf99fe5510ad1402e4}} 
-{\bfseries Infectious} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
-\item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Infectious_ae0cb4b0f6a83dccbc95fcaf8b3a7278f}\label{classEpidemicSimulation_1_1Infectious_ae0cb4b0f6a83dccbc95fcaf8b3a7278f}} 
-void {\bfseries Infect} (\mbox{\hyperlink{classEpidemicSimulation_1_1Susceptible}{Susceptible}} susceptible)
+\mbox{\hyperlink{classEpidemicSimulation_1_1Infectious_a796a3b619bae3dbf99fe5510ad1402e4}{Infectious}} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
 \item 
 override string \mbox{\hyperlink{classEpidemicSimulation_1_1Infectious_a5eb2d6c1074352e73fa764d696971718}{Type}} ()
 \end{DoxyCompactItemize}
@@ -29,6 +24,50 @@ new float {\bfseries Infection\+Duration} = 0
 \doxysubsection*{Additional Inherited Members}
 
 
+\doxysubsection{Detailed Description}
+Class representing a person that got infected and spreads the germs. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1Infectious_ab22b2aab53c9fc7b8042a34350e10bf1}\label{classEpidemicSimulation_1_1Infectious_ab22b2aab53c9fc7b8042a34350e10bf1}} 
+\index{EpidemicSimulation.Infectious@{EpidemicSimulation.Infectious}!Infectious@{Infectious}}
+\index{Infectious@{Infectious}!EpidemicSimulation.Infectious@{EpidemicSimulation.Infectious}}
+\doxysubsubsection{\texorpdfstring{Infectious()}{Infectious()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Infectious.\+Infectious (\begin{DoxyParamCaption}\item[{Rectangle}]{simulation\+Rect,  }\item[{float?}]{immunity = {\ttfamily null},  }\item[{int?}]{repulsion\+Rate = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor creating a concrete instance of a infectious person.
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation\+Rect} & Rectangle determining an area where this person can move \\
+\hline
+{\em immunity} & Number representing personal immunity \\
+\hline
+{\em repulsion\+Rate} & Rate at which a person is repulsed from other. It hinders a risk of getting infected. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1Infectious_a796a3b619bae3dbf99fe5510ad1402e4}\label{classEpidemicSimulation_1_1Infectious_a796a3b619bae3dbf99fe5510ad1402e4}} 
+\index{EpidemicSimulation.Infectious@{EpidemicSimulation.Infectious}!Infectious@{Infectious}}
+\index{Infectious@{Infectious}!EpidemicSimulation.Infectious@{EpidemicSimulation.Infectious}}
+\doxysubsubsection{\texorpdfstring{Infectious()}{Infectious()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Infectious.\+Infectious (\begin{DoxyParamCaption}\item[{Rectangle}]{simulation\+Rect,  }\item[{Point}]{start\+Position,  }\item[{Vector2}]{Movement\+Vector,  }\item[{float?}]{immunity = {\ttfamily null},  }\item[{int?}]{repulsion\+Rate = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor creating a concrete instance of a infectious person.
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation\+Rect} & Rectangle determining an area where this person can move \\
+\hline
+{\em start\+Position} & Position where the person is located at the very beginning of the simulation or after being added to the simulation \\
+\hline
+{\em Movement\+Vector} & Vector defining movement of this person \\
+\hline
+{\em immunity} & Number representing personal immunity \\
+\hline
+{\em repulsion\+Rate} & Rate at which a person is repulsed from other. It hinders a risk of getting infected. \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classEpidemicSimulation_1_1Infectious_a5eb2d6c1074352e73fa764d696971718}\label{classEpidemicSimulation_1_1Infectious_a5eb2d6c1074352e73fa764d696971718}} 
 \index{EpidemicSimulation.Infectious@{EpidemicSimulation.Infectious}!Type@{Type}}
@@ -36,7 +75,7 @@ new float {\bfseries Infection\+Duration} = 0
 \doxysubsubsection{\texorpdfstring{Type()}{Type()}}
 {\footnotesize\ttfamily override string Epidemic\+Simulation.\+Infectious.\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
+Returns a type of person as a text label. 
 
 Implements \mbox{\hyperlink{classEpidemicSimulation_1_1Person}{Epidemic\+Simulation.\+Person}}.
 

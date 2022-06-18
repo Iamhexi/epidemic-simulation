@@ -9,12 +9,38 @@ Inheritance diagram for Epidemic\+Simulation.\+Dead\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Dead_adacfe97c3617d4802c2a8e0aae5c54c2}\label{classEpidemicSimulation_1_1Dead_adacfe97c3617d4802c2a8e0aae5c54c2}} 
-{\bfseries Dead} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
+\mbox{\hyperlink{classEpidemicSimulation_1_1Dead_adacfe97c3617d4802c2a8e0aae5c54c2}{Dead}} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
 \item 
 override string \mbox{\hyperlink{classEpidemicSimulation_1_1Dead_a9f4ed95b6db3afdbac8fa784ebde7788}{Type}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class representing a person that have died due to the simulated epidemic. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1Dead_adacfe97c3617d4802c2a8e0aae5c54c2}\label{classEpidemicSimulation_1_1Dead_adacfe97c3617d4802c2a8e0aae5c54c2}} 
+\index{EpidemicSimulation.Dead@{EpidemicSimulation.Dead}!Dead@{Dead}}
+\index{Dead@{Dead}!EpidemicSimulation.Dead@{EpidemicSimulation.Dead}}
+\doxysubsubsection{\texorpdfstring{Dead()}{Dead()}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Dead.\+Dead (\begin{DoxyParamCaption}\item[{Rectangle}]{simulation\+Rect,  }\item[{Point}]{start\+Position,  }\item[{Vector2}]{Movement\+Vector,  }\item[{float?}]{immunity = {\ttfamily null},  }\item[{int?}]{repulsion\+Rate = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor invoked during creation an instance of a concrete class representing a dead person.
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation\+Rect} & Rectangle determining an area where this person can move \\
+\hline
+{\em start\+Position} & Position where the person is located at the very beginning of the simulation or after being added to the simulation \\
+\hline
+{\em Movement\+Vector} & Vector defining movement of this person \\
+\hline
+{\em immunity} & Number representing personal immunity \\
+\hline
+{\em repulsion\+Rate} & Rate at which a person is repulsed from other. It hinders a risk of getting infected. \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -24,7 +50,7 @@ override string \mbox{\hyperlink{classEpidemicSimulation_1_1Dead_a9f4ed95b6db3af
 \doxysubsubsection{\texorpdfstring{Type()}{Type()}}
 {\footnotesize\ttfamily override string Epidemic\+Simulation.\+Dead.\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
+Returns a type of person as a text label. 
 
 Implements \mbox{\hyperlink{classEpidemicSimulation_1_1Person}{Epidemic\+Simulation.\+Person}}.
 

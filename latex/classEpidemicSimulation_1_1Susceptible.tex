@@ -9,15 +9,57 @@ Inheritance diagram for Epidemic\+Simulation.\+Susceptible\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Susceptible_a33f48842698db38bba917ef58f440996}\label{classEpidemicSimulation_1_1Susceptible_a33f48842698db38bba917ef58f440996}} 
-{\bfseries Susceptible} (Rectangle simulation\+Rect, float? immunity=null, int? repulsion\+Rate=null)
+\mbox{\hyperlink{classEpidemicSimulation_1_1Susceptible_a33f48842698db38bba917ef58f440996}{Susceptible}} (Rectangle simulation\+Rect, float? immunity=null, int? repulsion\+Rate=null)
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Susceptible_a17fc11e4867921158b8dec9ac4cfc9b1}\label{classEpidemicSimulation_1_1Susceptible_a17fc11e4867921158b8dec9ac4cfc9b1}} 
-{\bfseries Susceptible} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
+\mbox{\hyperlink{classEpidemicSimulation_1_1Susceptible_a17fc11e4867921158b8dec9ac4cfc9b1}{Susceptible}} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
 \item 
 override string \mbox{\hyperlink{classEpidemicSimulation_1_1Susceptible_aabc3338d6f63a613a46b311ccf20ae69}{Type}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class representing a person that is still healthy but prone to get infected. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1Susceptible_a33f48842698db38bba917ef58f440996}\label{classEpidemicSimulation_1_1Susceptible_a33f48842698db38bba917ef58f440996}} 
+\index{EpidemicSimulation.Susceptible@{EpidemicSimulation.Susceptible}!Susceptible@{Susceptible}}
+\index{Susceptible@{Susceptible}!EpidemicSimulation.Susceptible@{EpidemicSimulation.Susceptible}}
+\doxysubsubsection{\texorpdfstring{Susceptible()}{Susceptible()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Susceptible.\+Susceptible (\begin{DoxyParamCaption}\item[{Rectangle}]{simulation\+Rect,  }\item[{float?}]{immunity = {\ttfamily null},  }\item[{int?}]{repulsion\+Rate = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor invoked during creation an instance of a concrete class representing a healthy but suscetible person.
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation\+Rect} & Rectangle determining an area where this person can move \\
+\hline
+{\em start\+Position} & Position where the person is located at the very beginning of the simulation or after being added to the simulation \\
+\hline
+{\em Movement\+Vector} & Vector defining movement of this person \\
+\hline
+{\em immunity} & Number representing personal immunity \\
+\hline
+{\em repulsion\+Rate} & Rate at which a person is repulsed from other. It hinders a risk of getting infected. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1Susceptible_a17fc11e4867921158b8dec9ac4cfc9b1}\label{classEpidemicSimulation_1_1Susceptible_a17fc11e4867921158b8dec9ac4cfc9b1}} 
+\index{EpidemicSimulation.Susceptible@{EpidemicSimulation.Susceptible}!Susceptible@{Susceptible}}
+\index{Susceptible@{Susceptible}!EpidemicSimulation.Susceptible@{EpidemicSimulation.Susceptible}}
+\doxysubsubsection{\texorpdfstring{Susceptible()}{Susceptible()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Susceptible.\+Susceptible (\begin{DoxyParamCaption}\item[{Rectangle}]{simulation\+Rect,  }\item[{Point}]{start\+Position,  }\item[{Vector2}]{Movement\+Vector,  }\item[{float?}]{immunity = {\ttfamily null},  }\item[{int?}]{repulsion\+Rate = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor invoked during creation an instance of a concrete class representing a healthy but suscetible person.
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation\+Rect} & Rectangle determining an area where this person can move \\
+\hline
+{\em immunity} & Number representing personal immunity. If it\textquotesingle{}s null, a random value will be assigned \\
+\hline
+{\em repulsion\+Rate} & Rate at which a person is repulsed from other. It hinders a risk of getting infected. If it\textquotesingle{}s null, a random value will be assigned \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -27,7 +69,7 @@ override string \mbox{\hyperlink{classEpidemicSimulation_1_1Susceptible_aabc3338
 \doxysubsubsection{\texorpdfstring{Type()}{Type()}}
 {\footnotesize\ttfamily override string Epidemic\+Simulation.\+Susceptible.\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
+Returns a type of person as a text label. 
 
 Implements \mbox{\hyperlink{classEpidemicSimulation_1_1Person}{Epidemic\+Simulation.\+Person}}.
 

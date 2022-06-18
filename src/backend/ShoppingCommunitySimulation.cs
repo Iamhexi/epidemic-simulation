@@ -8,6 +8,7 @@ namespace EpidemicSimulation
          events of simulation such as pausing, closing, starting a simulation,
          providing data and providing a simplified constructor.
      */
+
      class ShoppingCommunitySimulation : ISimulation
      {
          private Simulation _simulation;
@@ -24,15 +25,27 @@ namespace EpidemicSimulation
              return _simulation.GenerateOutputLists();
          }
 
+         /**
+            Starts the simulation.
+         */
+
          public void Start()
          {
              _simulation.Run();
          }
 
+         /**
+            Pauses and unpauses the simulation.
+         */
+
          public void Pause()
          {
              _simulation.Pause();
          }
+
+         /**
+            Closes the simulation.
+         */
 
          public void Close()
          {

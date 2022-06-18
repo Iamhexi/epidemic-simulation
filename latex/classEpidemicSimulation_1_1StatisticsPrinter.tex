@@ -3,13 +3,39 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1StatisticsPrinter_a62530017fe2a7b1c4d9836a3670ded50}\label{classEpidemicSimulation_1_1StatisticsPrinter_a62530017fe2a7b1c4d9836a3670ded50}} 
-{\bfseries Statistics\+Printer} (\mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{ISimulation}} simulation)
+\mbox{\hyperlink{classEpidemicSimulation_1_1StatisticsPrinter_a62530017fe2a7b1c4d9836a3670ded50}{Statistics\+Printer}} (\mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{ISimulation}} simulation)
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1StatisticsPrinter_a85e5448d9ebd1eaadb67d92a1e633be2}\label{classEpidemicSimulation_1_1StatisticsPrinter_a85e5448d9ebd1eaadb67d92a1e633be2}} 
-void {\bfseries Print} ()
+void \mbox{\hyperlink{classEpidemicSimulation_1_1StatisticsPrinter_a85e5448d9ebd1eaadb67d92a1e633be2}{Print}} ()
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Class saves statistics to an external text file. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1StatisticsPrinter_a62530017fe2a7b1c4d9836a3670ded50}\label{classEpidemicSimulation_1_1StatisticsPrinter_a62530017fe2a7b1c4d9836a3670ded50}} 
+\index{EpidemicSimulation.StatisticsPrinter@{EpidemicSimulation.StatisticsPrinter}!StatisticsPrinter@{StatisticsPrinter}}
+\index{StatisticsPrinter@{StatisticsPrinter}!EpidemicSimulation.StatisticsPrinter@{EpidemicSimulation.StatisticsPrinter}}
+\doxysubsubsection{\texorpdfstring{StatisticsPrinter()}{StatisticsPrinter()}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Statistics\+Printer.\+Statistics\+Printer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{ISimulation}}}]{simulation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor takes an instance of \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{ISimulation}} and assigns its reference to class\textquotesingle{}s private property.
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation} & An instance of \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{ISimulation}} where the data will be culled from. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1StatisticsPrinter_a85e5448d9ebd1eaadb67d92a1e633be2}\label{classEpidemicSimulation_1_1StatisticsPrinter_a85e5448d9ebd1eaadb67d92a1e633be2}} 
+\index{EpidemicSimulation.StatisticsPrinter@{EpidemicSimulation.StatisticsPrinter}!Print@{Print}}
+\index{Print@{Print}!EpidemicSimulation.StatisticsPrinter@{EpidemicSimulation.StatisticsPrinter}}
+\doxysubsubsection{\texorpdfstring{Print()}{Print()}}
+{\footnotesize\ttfamily void Epidemic\+Simulation.\+Statistics\+Printer.\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a new file if none exists, otherwise, doesn\textquotesingle{}t create or override anything. Saves information including date, time, chosen lethality, disease duration, communicability, overall population and the final number of infected, uninfected, recovered and dead people to the file. Closes that file. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

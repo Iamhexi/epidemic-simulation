@@ -9,8 +9,7 @@ Inheritance diagram for Epidemic\+Simulation.\+Single\+Community\+Simulation\+:\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1SingleCommunitySimulation_a7652843e0bb3ee540f2179e51ae99bf4}\label{classEpidemicSimulation_1_1SingleCommunitySimulation_a7652843e0bb3ee540f2179e51ae99bf4}} 
-{\bfseries Single\+Community\+Simulation} (uint population)
+\mbox{\hyperlink{classEpidemicSimulation_1_1SingleCommunitySimulation_a7652843e0bb3ee540f2179e51ae99bf4}{Single\+Community\+Simulation}} (uint population)
 \item 
 Dictionary$<$ string, int $>$ \mbox{\hyperlink{classEpidemicSimulation_1_1SingleCommunitySimulation_ab91a87487112f7167ec2f2a3759e1aaa}{Get\+Simulation\+Data}} ()
 \item 
@@ -22,6 +21,25 @@ void \mbox{\hyperlink{classEpidemicSimulation_1_1SingleCommunitySimulation_aaefc
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+This class constitues the single community scenario, handling high-\/level events of simulation such as pausing, closing, starting a simulation, providing data and providing a simplified constructor. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1SingleCommunitySimulation_a7652843e0bb3ee540f2179e51ae99bf4}\label{classEpidemicSimulation_1_1SingleCommunitySimulation_a7652843e0bb3ee540f2179e51ae99bf4}} 
+\index{EpidemicSimulation.SingleCommunitySimulation@{EpidemicSimulation.SingleCommunitySimulation}!SingleCommunitySimulation@{SingleCommunitySimulation}}
+\index{SingleCommunitySimulation@{SingleCommunitySimulation}!EpidemicSimulation.SingleCommunitySimulation@{EpidemicSimulation.SingleCommunitySimulation}}
+\doxysubsubsection{\texorpdfstring{SingleCommunitySimulation()}{SingleCommunitySimulation()}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Single\+Community\+Simulation.\+Single\+Community\+Simulation (\begin{DoxyParamCaption}\item[{uint}]{population }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor creating an instance of Simulation class taking as a parameter the desired population size.
+
+
+\begin{DoxyParams}{Parameters}
+{\em population} & The desired population size expressed in the number of people. \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classEpidemicSimulation_1_1SingleCommunitySimulation_aaefc3135ca7229b1ffb3ac7b6e39089c}\label{classEpidemicSimulation_1_1SingleCommunitySimulation_aaefc3135ca7229b1ffb3ac7b6e39089c}} 
 \index{EpidemicSimulation.SingleCommunitySimulation@{EpidemicSimulation.SingleCommunitySimulation}!Close@{Close}}
@@ -29,7 +47,7 @@ void \mbox{\hyperlink{classEpidemicSimulation_1_1SingleCommunitySimulation_aaefc
 \doxysubsubsection{\texorpdfstring{Close()}{Close()}}
 {\footnotesize\ttfamily void Epidemic\+Simulation.\+Single\+Community\+Simulation.\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
+Closes the simulation. 
 
 Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic\+Simulation.\+ISimulation}}.
 
@@ -39,7 +57,7 @@ Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic
 \doxysubsubsection{\texorpdfstring{GetSimulationData()}{GetSimulationData()}}
 {\footnotesize\ttfamily Dictionary$<$ string, int $>$ Epidemic\+Simulation.\+Single\+Community\+Simulation.\+Get\+Simulation\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
+Returns numbers of infected, susceptible, recovered and dead people. 
 
 Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic\+Simulation.\+ISimulation}}.
 
@@ -49,7 +67,7 @@ Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic
 \doxysubsubsection{\texorpdfstring{Pause()}{Pause()}}
 {\footnotesize\ttfamily void Epidemic\+Simulation.\+Single\+Community\+Simulation.\+Pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
+Pauses and unpauses the simulation. 
 
 Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic\+Simulation.\+ISimulation}}.
 
@@ -59,7 +77,7 @@ Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic
 \doxysubsubsection{\texorpdfstring{Start()}{Start()}}
 {\footnotesize\ttfamily void Epidemic\+Simulation.\+Single\+Community\+Simulation.\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
+Starts the simulation. 
 
 Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic\+Simulation.\+ISimulation}}.
 

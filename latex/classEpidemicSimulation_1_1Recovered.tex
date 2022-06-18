@@ -9,12 +9,38 @@ Inheritance diagram for Epidemic\+Simulation.\+Recovered\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Recovered_a39815db10a5617ce9147b46ba9aeb864}\label{classEpidemicSimulation_1_1Recovered_a39815db10a5617ce9147b46ba9aeb864}} 
-{\bfseries Recovered} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
+\mbox{\hyperlink{classEpidemicSimulation_1_1Recovered_a39815db10a5617ce9147b46ba9aeb864}{Recovered}} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
 \item 
 override string \mbox{\hyperlink{classEpidemicSimulation_1_1Recovered_af619643a38830cf8e3ab108783d6a065}{Type}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class representing a person that had been ill due to the simulated epidemic but has managed to recover. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1Recovered_a39815db10a5617ce9147b46ba9aeb864}\label{classEpidemicSimulation_1_1Recovered_a39815db10a5617ce9147b46ba9aeb864}} 
+\index{EpidemicSimulation.Recovered@{EpidemicSimulation.Recovered}!Recovered@{Recovered}}
+\index{Recovered@{Recovered}!EpidemicSimulation.Recovered@{EpidemicSimulation.Recovered}}
+\doxysubsubsection{\texorpdfstring{Recovered()}{Recovered()}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Recovered.\+Recovered (\begin{DoxyParamCaption}\item[{Rectangle}]{simulation\+Rect,  }\item[{Point}]{start\+Position,  }\item[{Vector2}]{Movement\+Vector,  }\item[{float?}]{immunity = {\ttfamily null},  }\item[{int?}]{repulsion\+Rate = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor creating a concrete instance of a recovered person.
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation\+Rect} & Rectangle determining an area where this person can move \\
+\hline
+{\em start\+Position} & Position where the person is located at the very beginning of the simulation or after being added to the simulation \\
+\hline
+{\em Movement\+Vector} & Vector defining movement of this person \\
+\hline
+{\em immunity} & Number representing personal immunity \\
+\hline
+{\em repulsion\+Rate} & Rate at which a person is repulsed from other. It hinders a risk of getting infected. \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -24,7 +50,7 @@ override string \mbox{\hyperlink{classEpidemicSimulation_1_1Recovered_af619643a3
 \doxysubsubsection{\texorpdfstring{Type()}{Type()}}
 {\footnotesize\ttfamily override string Epidemic\+Simulation.\+Recovered.\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-
+Returns a type of person as a text label. 
 
 Implements \mbox{\hyperlink{classEpidemicSimulation_1_1Person}{Epidemic\+Simulation.\+Person}}.
 

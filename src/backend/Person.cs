@@ -65,6 +65,7 @@ namespace EpidemicSimulation
             RepulsionRate = repulsionRate ?? s_randomizer.Next(Person._size, 2*Person._size);
             RepulsionExpand = true;
         }
+
         public virtual void UpdateSelf()
         {
             if (this._goingToPoint) { GoToPoint(); MoveRadiusField(); }
@@ -75,6 +76,7 @@ namespace EpidemicSimulation
                                                     (int)this.Rect.Y + 3*(int)System.Math.Round(this.MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero),
                                                     Person._size, Person._size);
         }
+
         protected virtual void Move()
         {
             if (this.Position.X < SimulationRect.Location.X+this._borderMargin-30 || this.Position.X > SimulationRect.Location.X+SimulationRect.Width-this._borderMargin+30 || this.Position.Y < SimulationRect.Location.Y+this._borderMargin-30 || this.Position.Y > SimulationRect.Location.Y+SimulationRect.Height-this._borderMargin+30)
@@ -105,8 +107,9 @@ namespace EpidemicSimulation
             Position = temporaryPosition;
             this.IsColliding = false;
         }
+
         protected void MoveRadiusField()
-      {
+        {
             this.RadiusRect = new Rectangle(Position.X, Position.Y, Person._size, Person._size);
             if (this.precentegeOfRepulsion >= 1) this.RepulsionExpand = false;
             else if (this.precentegeOfRepulsion <= 0)this.RepulsionExpand = true;
@@ -132,6 +135,7 @@ namespace EpidemicSimulation
             }
 
         }
+
         private void ChangeVector(int direction, float amount = 0.11f) {
             if (direction == 1)
             {
@@ -150,6 +154,7 @@ namespace EpidemicSimulation
             this._directionChange += amount;
             this.MovementVector.Normalize();
         }
+
         public void GoToPoint(Point? centerPoint = null, float probability = 0)
         {
             if (centerPoint.HasValue)
@@ -185,6 +190,7 @@ namespace EpidemicSimulation
                 }
             }
         }
+
         public static bool s_CheckCollision(Rectangle obj1, Rectangle obj2) { if (!Rectangle.Intersect(obj1, obj2).IsEmpty && !Rectangle.Equals(obj1, obj2)) return true; return false; }
         public static float s_FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }
         public float FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }

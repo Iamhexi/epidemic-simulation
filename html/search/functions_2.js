@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_0',['Update',['../classEpidemicSimulation_1_1ChartManager.html#a5b352978762fc627a19448d8b3a35343',1,'EpidemicSimulation::ChartManager']]]
+  ['getsimulationdata_0',['GetSimulationData',['../classEpidemicSimulation_1_1SingleCommunitySimulation.html#ab91a87487112f7167ec2f2a3759e1aaa',1,'EpidemicSimulation::SingleCommunitySimulation']]]
 ];

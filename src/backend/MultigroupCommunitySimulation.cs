@@ -10,6 +10,7 @@ namespace EpidemicSimulation
         events of simulation such as pausing, closing, starting a simulation,
         providing data and providing a simplified constructor.
     */
+    
     class MultigroupCommunitySimulation : Simulation, ISimulation
     {
         private List<Point> CentralPoints = new List<Point>();

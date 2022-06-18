@@ -9,10 +9,36 @@ Inheritance diagram for Epidemic\+Simulation.\+Removed\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1Removed_a8e8bf87e9fe740c2e59121db77d4f51b}\label{classEpidemicSimulation_1_1Removed_a8e8bf87e9fe740c2e59121db77d4f51b}} 
-{\bfseries Removed} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
+\mbox{\hyperlink{classEpidemicSimulation_1_1Removed_a8e8bf87e9fe740c2e59121db77d4f51b}{Removed}} (Rectangle simulation\+Rect, Point start\+Position, Vector2 Movement\+Vector, float? immunity=null, int? repulsion\+Rate=null)
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Abstract class representing a person that have either died or recovered. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1Removed_a8e8bf87e9fe740c2e59121db77d4f51b}\label{classEpidemicSimulation_1_1Removed_a8e8bf87e9fe740c2e59121db77d4f51b}} 
+\index{EpidemicSimulation.Removed@{EpidemicSimulation.Removed}!Removed@{Removed}}
+\index{Removed@{Removed}!EpidemicSimulation.Removed@{EpidemicSimulation.Removed}}
+\doxysubsubsection{\texorpdfstring{Removed()}{Removed()}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Removed.\+Removed (\begin{DoxyParamCaption}\item[{Rectangle}]{simulation\+Rect,  }\item[{Point}]{start\+Position,  }\item[{Vector2}]{Movement\+Vector,  }\item[{float?}]{immunity = {\ttfamily null},  }\item[{int?}]{repulsion\+Rate = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor delegating assigning parameters to higher-\/level abstract constructor (\mbox{\hyperlink{classEpidemicSimulation_1_1Person}{Person}}).
+
+
+\begin{DoxyParams}{Parameters}
+{\em simulation\+Rect} & Rectangle determining an area where this person can move \\
+\hline
+{\em start\+Position} & Position where the person is located at the very beginning of the simulation or after being added to the simulation \\
+\hline
+{\em Movement\+Vector} & Vector defining movement of this person \\
+\hline
+{\em immunity} & Number representing personal immunity \\
+\hline
+{\em repulsion\+Rate} & Rate at which a person is repulsed from other. It hinders a risk of getting infected. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
