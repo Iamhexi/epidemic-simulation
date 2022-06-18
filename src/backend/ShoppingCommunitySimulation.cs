@@ -3,6 +3,11 @@ using Microsoft.Xna.Framework;
 
 namespace EpidemicSimulation
  {
+     /**
+         This class constitues the shopping community scenario, handling high-level
+         events of simulation such as pausing, closing, starting a simulation,
+         providing data and providing a simplified constructor.
+     */
      class ShoppingCommunitySimulation : ISimulation
      {
          private Simulation _simulation;

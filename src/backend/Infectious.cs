@@ -18,11 +18,6 @@ namespace EpidemicSimulation
 
         }
 
-        public void Infect(Susceptible susceptible)
-        {
-
-        }
-
         public override string Type()
         {
              return "Infectious";

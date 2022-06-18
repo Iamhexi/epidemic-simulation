@@ -31,6 +31,11 @@ public class Program : Form
         Application.Run( new Program() );
     }
 
+    /**
+        Constructor setting up the postions of all user interface components such
+        as buttons, radio boxes, sliders, and the size of the main window.
+    */
+
     public Program()
     {
         Size = new Size(500, 1000);
@@ -50,6 +55,12 @@ public class Program : Form
     private delegate void ScrollMethod(object sender, EventArgs e);
 
     private delegate void RadioButtonClickMethod(object sender, EventArgs e);
+
+    /**
+        Sets up a panel of radio boxes which allows the user to choose a desired
+        simulation scenario: the single community, the multigroup community or
+        the shopping community scenario.
+    */
 
     private void SetUpRadioBoxPanel()
     {
@@ -71,6 +82,16 @@ public class Program : Form
         Controls.Add(_radioButtons);
     }
 
+    /**
+        Sets up a single radio box giving it a proper label, size, width, position
+        and giving it a proper action - chaning a scenario to the given one.
+
+        @param radioButton A reference to RadioButton object which will be configured
+        @param label A text label for the radio box
+        @param order Integer determining the order among the radio boxes
+        @param clickEvent Instance of RadioButtonClickMethod which is action that will happen after chosing this radio box
+    */
+
     private void SetUpRadioBox(
         ref RadioButton radioButton,
         string label,
@@ -91,6 +112,19 @@ public class Program : Form
 
         _radioButtons.Controls.Add(radioButton);
     }
+
+    /**
+        Sets up a pair of a slider and a text label displaying current slider's value.
+
+        @param slider A reference to the slider
+        @param text A text label for the slider
+        @param order Integer determining the order among the paris of sliders and theirs text labels
+        @param sliderMinValue A minimal value which a slider is able to take
+        @param sliderMaxValue A maximal value which a slider is able to take
+        @param textLabelWidth A width of the slider's text label in pixels.
+        @param sliderScrollMethod A method that will be invoked after using the slider.
+
+    */
 
     private void SetUpAdjustmentComponents(
         ref TrackBar slider,
@@ -126,6 +160,10 @@ public class Program : Form
         sliderScrollMethod(null, null);
     }
 
+    /**
+        Sets up the heading for epidemic parameters.
+    */
+
     private void SetUpParametersLabel()
     {
         Label label = new Label();
@@ -136,6 +174,10 @@ public class Program : Form
 
         Controls.Add(label);
     }
+
+    /**
+        Sets up the button starting the entire simulation.
+    */
 
     private void SetUpSimulationStartingButton()
     {
@@ -148,6 +190,10 @@ public class Program : Form
         Controls.Add(_simulationStartingButton);
     }
 
+    /**
+        Sets up the button pausing the entire simulation.
+    */
+
     private void SetUpSimulationPausingButton()
     {
         _simulationPausingButton = new Button();
@@ -158,6 +204,12 @@ public class Program : Form
 
         Controls.Add(_simulationPausingButton);
     }
+
+    /**
+        Defines an action that will happen after clicking 'Start' button including
+        configuring parameters of disease to these given by the user, and starting
+        a simulation window in a new thread in order not to block user interface.
+    */
 
     private void Button_Click(object sender, EventArgs e)
     {
@@ -173,6 +225,10 @@ public class Program : Form
         _simulationThread = new Thread(_simulation.Start);
         _simulationThread.Start();
     }
+
+    /**
+        Handles pausing and unpausing the simulation through a button.
+    */
 
     private void PauseSimulation(object sender, EventArgs e)
     {
@@ -192,25 +248,45 @@ public class Program : Form
         }
     }
 
+    /**
+        Defines an action that will happen after scrolling the population slider.
+    */
+
     private void _populationSlider_Scroll(object sender, EventArgs e)
     {
         _populationLabel.Text = "Population: " + _populationSlider.Value.ToString() + " people";
     }
+
+    /**
+        Defines an action that will happen after scrolling the disease lethality slider.
+    */
 
     private void _lethalitySlider_Scroll(object sender, EventArgs e)
     {
         _lethalityLabel.Text = "Lethality: " + _lethalitySlider.Value.ToString() + "%";
     }
 
+    /**
+        Defines an action that will happen after scrolling the disease duration slider.
+    */
+
     private void _diseaseDurationSlider_Scroll(object sender, EventArgs e)
     {
         _diseaseDurationLabel.Text = "Duration: " + _diseaseDurationSlider.Value.ToString() + " days";
     }
 
+    /**
+        Defines an action that will happen after scrolling the diease communicability slider.
+    */
+
     private void _communicabilitySlider_Scroll(object sender, EventArgs e)
     {
         _communicabilityLabel.Text = "Communicability: " + (float) _communicabilitySlider.Value / 4 + "%";
     }
+
+    /**
+        Assigns an instance of single community simulation as the current simulation after clicking a radio box.
+    */
 
     private void _singleCommunitySimulationButton_Click(object sender, EventArgs e)
     {
@@ -218,17 +294,31 @@ public class Program : Form
             _simulation = new SingleCommunitySimulation( (uint) _populationSlider.Value);
     }
 
+    /**
+        Assigns an instance of multigroup community simulation as the current simulation after clicking a radio box.
+    */
+
     private void _multiCommunitySimulationButton_Click(object sender, EventArgs e)
     {
         if (_simulationThread == null)
             _simulation = new MultigroupCommunitySimulation( 4, (uint) _populationSlider.Value);
     }
 
+    /**
+        Assigns an instance of shopping community simulation as the current simulation after clicking a radio box.
+    */
+
     private void _shoppingCommunitySimulationButton_Click(object sender, EventArgs e)
     {
         Microsoft.Xna.Framework.Point centerPoint = new Microsoft.Xna.Framework.Point(Simulation.s_SimulationWidth/2, Simulation.s_SimulationWidth/2);
         _simulation = new ShoppingCommunitySimulation( (uint) _populationSlider.Value, centerPoint);
     }
+
+    /**
+        Handles closing the entire application. A method is reponsible for saving
+        the simulation's statistics to the external file, closing the simulation
+        thread and closing the user interface.
+    */
 
     private void Program_FormClosing(Object sender, FormClosingEventArgs e)
     {

@@ -1,0 +1,75 @@
+\hypertarget{classCharting_1_1Graph}{}\doxysection{Charting.\+Graph Class Reference}
+\label{classCharting_1_1Graph}\index{Charting.Graph@{Charting.Graph}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCharting_1_1Graph_ae16fea51d8254bad38b5081375bc9a3f}\label{classCharting_1_1Graph_ae16fea51d8254bad38b5081375bc9a3f}} 
+enum {\bfseries Graph\+Type} \{ {\bfseries Line}
+, {\bfseries Fill}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCharting_1_1Graph_a80e08b0150d4797fe1c2434e910efe9c}\label{classCharting_1_1Graph_a80e08b0150d4797fe1c2434e910efe9c}} 
+{\bfseries Graph} (Graphics\+Device graphics\+Device, Point size)
+\item 
+void \mbox{\hyperlink{classCharting_1_1Graph_a11a9f08f52113d0dae48778d1b893d77}{Draw}} (List$<$ Tuple$<$ float, Color $>$ $>$ values)
+\begin{DoxyCompactList}\small\item\em Draws the values in given order, with specific color for each value \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCharting_1_1Graph_ab8cc483f65f3a5c0a8a9c459761e65c2}{Draw}} (List$<$ float $>$ values, Color color)
+\begin{DoxyCompactList}\small\item\em Draws the values in given order, in specified color \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCharting_1_1Graph_aa81ef94c53412cc19d1efccc80fabc3c}\label{classCharting_1_1Graph_aa81ef94c53412cc19d1efccc80fabc3c}} 
+Graph\+Type {\bfseries Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Determines whether the drawn graph will be line only, or filled \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCharting_1_1Graph_a574e19a25c14e38ab2fe2b94e8e55cd7}\label{classCharting_1_1Graph_a574e19a25c14e38ab2fe2b94e8e55cd7}} 
+Vector2 {\bfseries Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The bottom left position of the graph \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCharting_1_1Graph_a2b13cd05d89f3e3ebf460e59d4b0aeba}\label{classCharting_1_1Graph_a2b13cd05d89f3e3ebf460e59d4b0aeba}} 
+Point {\bfseries Size}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The size of the graph. The graph values will be scaled horizontally to fill width (Size.\+X) Vertically, the values will be scaled based on Max\+Value property, where the position of the value that is equal to Max\+Value will be Size.\+Y \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCharting_1_1Graph_a7bdb6185a6977c68926bc566a0c245e5}\label{classCharting_1_1Graph_a7bdb6185a6977c68926bc566a0c245e5}} 
+float {\bfseries Max\+Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Determines the vertical scaling of the graph. The value that is equal to Max\+Value will be displayed at the top of the graph (at point Size.\+Y) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCharting_1_1Graph_ab8cc483f65f3a5c0a8a9c459761e65c2}\label{classCharting_1_1Graph_ab8cc483f65f3a5c0a8a9c459761e65c2}} 
+\index{Charting.Graph@{Charting.Graph}!Draw@{Draw}}
+\index{Draw@{Draw}!Charting.Graph@{Charting.Graph}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Charting.\+Graph.\+Draw (\begin{DoxyParamCaption}\item[{List$<$ float $>$}]{values,  }\item[{Color}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Draws the values in given order, in specified color 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & Values to draw, in order from left to right\\
+\hline
+{\em color} & Color of the entire graph\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCharting_1_1Graph_a11a9f08f52113d0dae48778d1b893d77}\label{classCharting_1_1Graph_a11a9f08f52113d0dae48778d1b893d77}} 
+\index{Charting.Graph@{Charting.Graph}!Draw@{Draw}}
+\index{Draw@{Draw}!Charting.Graph@{Charting.Graph}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Charting.\+Graph.\+Draw (\begin{DoxyParamCaption}\item[{List$<$ Tuple$<$ float, Color $>$ $>$}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Draws the values in given order, with specific color for each value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & Value/color pairs to draw, in order from left to right\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+vendor/Graph.\+cs\end{DoxyCompactItemize}

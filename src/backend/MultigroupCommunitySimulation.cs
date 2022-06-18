@@ -5,6 +5,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace EpidemicSimulation
 {
+    /**
+        This class constitues the multigroup community scenario, handling high-level
+        events of simulation such as pausing, closing, starting a simulation,
+        providing data and providing a simplified constructor.
+    */
     class MultigroupCommunitySimulation : Simulation, ISimulation
     {
         private List<Point> CentralPoints = new List<Point>();
