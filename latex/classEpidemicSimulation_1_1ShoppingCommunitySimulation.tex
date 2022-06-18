@@ -9,8 +9,7 @@ Inheritance diagram for Epidemic\+Simulation.\+Shopping\+Community\+Simulation\+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEpidemicSimulation_1_1ShoppingCommunitySimulation_a1aa52442a8bd22daf98868d3b90945a3}\label{classEpidemicSimulation_1_1ShoppingCommunitySimulation_a1aa52442a8bd22daf98868d3b90945a3}} 
-{\bfseries Shopping\+Community\+Simulation} (uint population, Point? center\+Point=null)
+\mbox{\hyperlink{classEpidemicSimulation_1_1ShoppingCommunitySimulation_a1aa52442a8bd22daf98868d3b90945a3}{Shopping\+Community\+Simulation}} (uint population, Point? center\+Point=null)
 \item 
 Dictionary$<$ string, int $>$ \mbox{\hyperlink{classEpidemicSimulation_1_1ShoppingCommunitySimulation_aa5085207873b2c1551913e10f3d21098}{Get\+Simulation\+Data}} ()
 \item 
@@ -24,6 +23,24 @@ void \mbox{\hyperlink{classEpidemicSimulation_1_1ShoppingCommunitySimulation_aef
 
 \doxysubsection{Detailed Description}
 This class constitues the shopping community scenario, handling high-\/level events of simulation such as pausing, closing, starting a simulation, providing data and providing a simplified constructor. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEpidemicSimulation_1_1ShoppingCommunitySimulation_a1aa52442a8bd22daf98868d3b90945a3}\label{classEpidemicSimulation_1_1ShoppingCommunitySimulation_a1aa52442a8bd22daf98868d3b90945a3}} 
+\index{EpidemicSimulation.ShoppingCommunitySimulation@{EpidemicSimulation.ShoppingCommunitySimulation}!ShoppingCommunitySimulation@{ShoppingCommunitySimulation}}
+\index{ShoppingCommunitySimulation@{ShoppingCommunitySimulation}!EpidemicSimulation.ShoppingCommunitySimulation@{EpidemicSimulation.ShoppingCommunitySimulation}}
+\doxysubsubsection{\texorpdfstring{ShoppingCommunitySimulation()}{ShoppingCommunitySimulation()}}
+{\footnotesize\ttfamily Epidemic\+Simulation.\+Shopping\+Community\+Simulation.\+Shopping\+Community\+Simulation (\begin{DoxyParamCaption}\item[{uint}]{population,  }\item[{Point?}]{center\+Point = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor sets the population and center point.
+
+
+\begin{DoxyParams}{Parameters}
+{\em population} & Number of people to be simulated \\
+\hline
+{\em center\+Point} & Location of the central point (like shopping mal). It can be null \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classEpidemicSimulation_1_1ShoppingCommunitySimulation_aef4a6270869bc40ccc8b028aae3d507c}\label{classEpidemicSimulation_1_1ShoppingCommunitySimulation_aef4a6270869bc40ccc8b028aae3d507c}} 
@@ -42,7 +59,7 @@ Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic
 \doxysubsubsection{\texorpdfstring{GetSimulationData()}{GetSimulationData()}}
 {\footnotesize\ttfamily Dictionary$<$ string, int $>$ Epidemic\+Simulation.\+Shopping\+Community\+Simulation.\+Get\+Simulation\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
+Returns numbers of infected, susceptible, recovered and dead people. 
 
 Implements \mbox{\hyperlink{interfaceEpidemicSimulation_1_1ISimulation}{Epidemic\+Simulation.\+ISimulation}}.
 

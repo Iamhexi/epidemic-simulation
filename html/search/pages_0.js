@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['epidemic_2dsimulation_0',['epidemic-simulation',['../md_README.html',1,'']]]
+  ['epidemic_2dsimulation_0',['epidemic-simulation',['../index.html',1,'']]]
 ];

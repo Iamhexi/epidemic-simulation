@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['shoppingcommunitysimulation_0',['ShoppingCommunitySimulation',['../classEpidemicSimulation_1_1ShoppingCommunitySimulation.html',1,'EpidemicSimulation']]],
+  ['shoppingcommunitysimulation_0',['ShoppingCommunitySimulation',['../classEpidemicSimulation_1_1ShoppingCommunitySimulation.html',1,'EpidemicSimulation.ShoppingCommunitySimulation'],['../classEpidemicSimulation_1_1ShoppingCommunitySimulation.html#a1aa52442a8bd22daf98868d3b90945a3',1,'EpidemicSimulation.ShoppingCommunitySimulation.ShoppingCommunitySimulation()']]],
   ['simulationtest_1',['SimulationTest',['../classTestSuite_1_1SimulationTest.html',1,'TestSuite']]],
   ['singlecommunitysimulation_2',['SingleCommunitySimulation',['../classEpidemicSimulation_1_1SingleCommunitySimulation.html',1,'EpidemicSimulation.SingleCommunitySimulation'],['../classEpidemicSimulation_1_1SingleCommunitySimulation.html#a7652843e0bb3ee540f2179e51ae99bf4',1,'EpidemicSimulation.SingleCommunitySimulation.SingleCommunitySimulation()']]],
   ['size_3',['Size',['../classCharting_1_1Graph.html#a2b13cd05d89f3e3ebf460e59d4b0aeba',1,'Charting::Graph']]],

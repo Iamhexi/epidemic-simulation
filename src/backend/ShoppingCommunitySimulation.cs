@@ -13,12 +13,23 @@ namespace EpidemicSimulation
      {
          private Simulation _simulation;
 
+         /**
+            Constructor sets the population and center point.
+
+            @param population Number of people to be simulated
+            @param centerPoint Location of the central point (like shopping mal). It can be null
+         */
+
          public ShoppingCommunitySimulation(uint population, Point? centerPoint = null)
          {
             _simulation = new Simulation(population - 1, 1);
             if (centerPoint.HasValue)
                 _simulation.CenterPoint = centerPoint;
          }
+
+         /**
+             Returns numbers of infected, susceptible, recovered and dead people.
+         */
 
          public Dictionary<string, int> GetSimulationData()
          {

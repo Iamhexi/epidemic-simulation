@@ -84,8 +84,7 @@ Inheritance diagram for EpidemicSimulation.ShoppingCommunitySimulation:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1aa52442a8bd22daf98868d3b90945a3"><td class="memItemLeft" align="right" valign="top"><a id="a1aa52442a8bd22daf98868d3b90945a3" name="a1aa52442a8bd22daf98868d3b90945a3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ShoppingCommunitySimulation</b> (uint population, Point? centerPoint=null)</td></tr>
+<tr class="memitem:a1aa52442a8bd22daf98868d3b90945a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEpidemicSimulation_1_1ShoppingCommunitySimulation.html#a1aa52442a8bd22daf98868d3b90945a3">ShoppingCommunitySimulation</a> (uint population, Point? centerPoint=null)</td></tr>
 <tr class="separator:a1aa52442a8bd22daf98868d3b90945a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5085207873b2c1551913e10f3d21098"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEpidemicSimulation_1_1ShoppingCommunitySimulation.html#aa5085207873b2c1551913e10f3d21098">GetSimulationData</a> ()</td></tr>
 <tr class="separator:aa5085207873b2c1551913e10f3d21098"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,7 +105,52 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >This class constitues the shopping community scenario, handling high-level events of simulation such as pausing, closing, starting a simulation, providing data and providing a simplified constructor. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1aa52442a8bd22daf98868d3b90945a3" name="a1aa52442a8bd22daf98868d3b90945a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aa52442a8bd22daf98868d3b90945a3">&#9670;&nbsp;</a></span>ShoppingCommunitySimulation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EpidemicSimulation.ShoppingCommunitySimulation.ShoppingCommunitySimulation </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>population</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Point?&#160;</td>
+          <td class="paramname"><em>centerPoint</em> = <code>null</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Constructor sets the population and center point.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">population</td><td>Number of people to be simulated </td></tr>
+    <tr><td class="paramname">centerPoint</td><td>Location of the central point (like shopping mal). It can be null </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aef4a6270869bc40ccc8b028aae3d507c" name="aef4a6270869bc40ccc8b028aae3d507c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef4a6270869bc40ccc8b028aae3d507c">&#9670;&nbsp;</a></span>Close()</h2>
 
@@ -157,6 +201,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Returns numbers of infected, susceptible, recovered and dead people. </p>
 
 <p>Implements <a class="el" href="interfaceEpidemicSimulation_1_1ISimulation.html">EpidemicSimulation.ISimulation</a>.</p>
 
