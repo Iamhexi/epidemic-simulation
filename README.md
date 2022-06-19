@@ -4,10 +4,12 @@ The application is C# object-oritented implementation of the epidemic simulation
 
 ## Available commands
 - `make` - builds the entire project (application, tests and documentation)
+- `make compile` - builds only the application
 - `make run` - runs the application
 - `make test` - compiles and runs unit tests
 - `make compile_tests` - compiles only unit tests
 - `make documentation` - updates the project documentation
+- `make clean` - cleans the project's auxiliary and temporary files
 
 ## Requirements:
 - C# implementation - dotnet or mono
