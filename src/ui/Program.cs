@@ -8,7 +8,7 @@ namespace EpidemicSimulation.src.backend
         [STAThread]
         static void Main()
         {
-            Disease.s_SetUpParams(0.0001f, 2000, 0.012f, 0.3f);
+            Disease.s_SetUpParams(0.0001f, 2000, 0.021f, 0.3f);
 
             var game1 = new SingleCommunitySimulation(40, 5); game1.Start();
 
