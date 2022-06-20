@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace EpidemicSimulation
 {
+    /** 
+    The base class of person instance in simulation. As abstract unites all types of forseen states. Implements all moving and updating logic, 
+    generates and handles parametes used for every individual.
+    */
     abstract class Person
     {
         // variables to set
@@ -32,8 +36,14 @@ namespace EpidemicSimulation
         private bool _goingToPoint = false;
         private int _timeinPoint;
         public static List<Rectangle> Obsticles = new List<Rectangle>();
-
         public abstract string Type();
+
+        /** 
+        Elementary constructor generates all features of an individual wrapped in certain borders. Sets up initial vector of direction, speed and position.
+        @param SimulationRect as adjustment of relative position, restricts the accesible field .
+        @param immunity as resistivity of getting infected and as counter factor to Diseases lethality.
+        @param repulsionRate as the furthest reach of outhger field.
+        */
 
         public Person(Rectangle SimulationRect, float? immunity = null, int? repulsionRate = null)
         {
@@ -53,6 +63,15 @@ namespace EpidemicSimulation
             RepulsionExpand = true;
         }
 
+        /** 
+        Secondary constructor constructing an instace of Person with predefinied position and direction vector.
+        @param SimulationRect as adjustment of relative position, restricts the accesible field .
+        @param startPosition as initial point of spawn.
+        @ MovementVector as initial set direction.
+        @param immunity as resistivity of getting infected and as counter factor to Diseases lethality.
+        @param repulsionRate as the furthest reach of outhger field.
+        */
+
         public Person(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
         {
             this.SimulationRect = SimulationRect;
@@ -66,6 +85,10 @@ namespace EpidemicSimulation
             RepulsionExpand = true;
         }
 
+        /** 
+        Main method of every change made to Person instance, contains partial logic of changing position, 
+        animating the outhger field and controlling the forced move to certain point action.
+        */
         public virtual void UpdateSelf()
         {
             if (this._goingToPoint) { GoToPoint(); MoveRadiusField(); }
@@ -76,7 +99,9 @@ namespace EpidemicSimulation
                                                     (int)this.Rect.Y + 3*(int)System.Math.Round(this.MovementVector.Y * s_MovementSpeed, MidpointRounding.AwayFromZero),
                                                     Person._size, Person._size);
         }
-
+        /** 
+        Method that handles boundries detection, off desired field position, detection of walls, colliding with others and setting up a direction of turn.
+        */
         protected virtual void Move()
         {
             if (this.Position.X < SimulationRect.Location.X+this._borderMargin-30 || this.Position.X > SimulationRect.Location.X+SimulationRect.Width-this._borderMargin+30 || this.Position.Y < SimulationRect.Location.Y+this._borderMargin-30 || this.Position.Y > SimulationRect.Location.Y+SimulationRect.Height-this._borderMargin+30)
@@ -108,6 +133,9 @@ namespace EpidemicSimulation
             this.IsColliding = false;
         }
 
+        /** 
+        Method containg logic of outhger field grown and shrinkage.
+        */
         protected void MoveRadiusField()
         {
             this.RadiusRect = new Rectangle(Position.X, Position.Y, Person._size, Person._size);
@@ -135,7 +163,12 @@ namespace EpidemicSimulation
             }
 
         }
+        /** 
+        Method controls every change action of moving direction when faced any bounder.
 
+        @param direction as decision of turning left or right.
+        @param amount as predefined quantity of change to the direction vector, used in range ( 0.05 for wide turn,  0.2 for rapid bounce ).
+        */
         private void ChangeVector(int direction, float amount = 0.11f) {
             if (direction == 1)
             {
@@ -154,7 +187,12 @@ namespace EpidemicSimulation
             this._directionChange += amount;
             this.MovementVector.Normalize();
         }
+        /** 
+        Method forsing Peron instance to immidiately follow to the set point.
 
+        @param centerPoint as the pointed point to arrive at.
+        @param probability as rate of executing
+        */
         public void GoToPoint(Point? centerPoint = null, float probability = 0)
         {
             if (centerPoint.HasValue)
@@ -190,11 +228,21 @@ namespace EpidemicSimulation
                 }
             }
         }
-
+        /** 
+        Static method checks if collision is true by calculating overlapping area of two Person instances rectangles.
+        */
         public static bool s_CheckCollision(Rectangle obj1, Rectangle obj2) { if (!Rectangle.Intersect(obj1, obj2).IsEmpty && !Rectangle.Equals(obj1, obj2)) return true; return false; }
+        /** 
+        Static method calculating value of overlapping area of two Person instances rectangles.
+        */
         public static float s_FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }
-        public float FieldIntersectionPrecentege(Rectangle obj1, Rectangle obj2) { return Person.RectSurface(Rectangle.Intersect(obj1, obj2))/Person.RectSurface(obj1); }
+        /** 
+        Static method returning area of the Rectangle.
+        */
         protected static float RectSurface(Rectangle obj) { return obj.Height * obj.Width; }
+        /** 
+        Method that returns the chosen direction of turn.
+        */
         protected int DrawDirection() { if (s_randomizer.Next(0, 100) >= 50) return 1; return -1; }
      }
 }

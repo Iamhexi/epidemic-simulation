@@ -7,7 +7,7 @@ namespace EpidemicSimulation {
     */
 
 
-    class Dead: Removed
+    class Dead: Person
     {
         /**
             Constructor invoked during creation an instance of a concrete class representing a dead person.
@@ -19,10 +19,17 @@ namespace EpidemicSimulation {
             @param repulsionRate Rate at which a person is repulsed from other. It hinders a risk of getting infected.
         */
 
-        public Dead(Rectangle simulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
-            : base(simulationRect, startPosition, MovementVector, 0, repulsionRate)
+        public Dead(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+            : base(SimulationRect, startPosition, MovementVector, 0, repulsionRate)
         {
 
+        }
+        /**
+            Overrides base person UpdateSelf() method to prevent dead person from any action
+        */
+        public override void UpdateSelf()
+        {
+            
         }
 
         /**

@@ -6,7 +6,7 @@ namespace EpidemicSimulation
         Class representing a person that had been ill due to the simulated epidemic but has managed to recover.
     */
 
-    class Recovered: Removed
+    class Recovered: Person
     {
         /**
             Constructor creating a concrete instance of a recovered person.
@@ -18,8 +18,8 @@ namespace EpidemicSimulation
             @param repulsionRate Rate at which a person is repulsed from other. It hinders a risk of getting infected.
         */
 
-        public Recovered(Rectangle simulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
-            : base(simulationRect, startPosition, MovementVector, 0, repulsionRate)
+         public Recovered(Rectangle SimulationRect, Point startPosition, Vector2 MovementVector, float? immunity = null, int? repulsionRate = null)
+            : base(SimulationRect, startPosition, MovementVector, immunity, repulsionRate)
         {
 
         }
