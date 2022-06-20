@@ -311,7 +311,7 @@ public class Program : Form
     private void _shoppingCommunitySimulationButton_Click(object sender, EventArgs e)
     {
         Microsoft.Xna.Framework.Point centerPoint = new Microsoft.Xna.Framework.Point(Simulation.s_SimulationWidth/2, Simulation.s_SimulationWidth/2);
-        _simulation = new ShoppingCommunitySimulation( (uint) _populationSlider.Value, centerPoint);
+        _simulation = new ShoppingCommunitySimulation(centerPoint, (uint) _populationSlider.Value);
     }
 
     /**

@@ -1,4 +1,5 @@
 using EpidemicSimulation;
+using System.Collections.Generic;
 
 namespace EpidemicSimulation
 {
@@ -15,7 +16,8 @@ namespace EpidemicSimulation
 
             @param population The desired population size expressed in the number of people.
         */
-        public SingleCommunitySimulation(uint population = 20, uint infected = 2):base(population, infected) 
+        public SingleCommunitySimulation(uint population = 20, uint infected = 2):
+            base(population, infected)
         {
 
         }
@@ -26,12 +28,21 @@ namespace EpidemicSimulation
         {
             Run();
         }
-       /**
+        /**
             Closes the simulation.
         */
         public void Close()
         {
             Exit();
+        }
+
+        /**
+            Returns numbers of dead, infected, healthy and recovered people.
+        */
+
+        public Dictionary<string, int> GetSimulationData()
+        {
+            return GenerateOutputLists();
         }
     }
 }

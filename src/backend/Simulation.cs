@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using static Microsoft.Xna.Framework.Input.KeyboardState;
 using static System.Random;
 
 namespace EpidemicSimulation
@@ -10,7 +11,7 @@ namespace EpidemicSimulation
 
     /**
     Simulation class is an overlaying extendion of base class game provided by Xna framework. It implements funcionality of graphic reprezentation,
-    delegates to window instace via GraphicsDeviceManager, loades textures and draws all of the content on windows screen. Contains behavior logic of 
+    delegates to window instace via GraphicsDeviceManager, loades textures and draws all of the content on windows screen. Contains behavior logic of
     People class instances and child classes, time management and input detection. Keeps track of all the statics during simulation process.
     */
     internal class Simulation : Game
@@ -45,7 +46,8 @@ namespace EpidemicSimulation
             x8 = 2
         };
         private List<int> _speedValues = new List<int>() {32,16,8,4,2,1};
-        private int _currentSpeedIndex = 2;
+        private int _currentSpeedIndex = 5;
+        private bool _ignoreInput = false;
         protected SimulationSpeedValues SimulationSpeed;
         protected uint _susceptibleAmount;
         protected uint _infeciousAmount;
@@ -113,26 +115,27 @@ namespace EpidemicSimulation
             _chartManager.LoadContent();
         }
         /**
-        Overridden Game class method contains all logic of input, contagion process logic, controls all Person UpdateSelf() methods accorigly to 
-        ongoing situation. 
+        Overridden Game class method contains all logic of input, contagion process logic, controls all Person UpdateSelf() methods accorigly to
+        ongoing situation.
         */
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape) 
+                || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape)
                 || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) ) Exit();
 
-            if (Keyboard.GetState().GetPressedKeyCount() == 0) _ignoreInput = false;
+            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().GetPressedKeys().Length == 0)
+                _ignoreInput = false;
 
-            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Right) && !_ignoreInput) { 
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Right) && !_ignoreInput) {
                 _ignoreInput = true;
-                this._currentSpeedIndex += 1; 
+                this._currentSpeedIndex += 1;
                 this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6]);
                 System.Console.WriteLine($"current speed: {(int)(1.0f/(((float)this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6])/1000f))} FPS "); }
-            else if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left) && !_ignoreInput) { 
+            else if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left) && !_ignoreInput) {
                 _ignoreInput = true;
-                this._currentSpeedIndex -= 1; 
-                this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6]); 
+                this._currentSpeedIndex -= 1;
+                this.TargetElapsedTime = System.TimeSpan.FromMilliseconds(this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6]);
                 System.Console.WriteLine($"current speed: {(int)(1.0f/(((float)this._speedValues[System.Math.Abs(this._currentSpeedIndex)%6])/1000f))} FPS "); }
             else if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space) && !_ignoreInput) {Pause(); _ignoreInput = true; };
 
@@ -150,9 +153,9 @@ namespace EpidemicSimulation
                                 double temp_random = s_randomizer.NextDouble();
                                 if (overlappingArea > Disease.RequiredFieldIntersetion)
                                 {
-                                        if ((person.Type() == "Susceptible" || person.Type() == "Recovered") && overlappingArea * Disease.Communicability - person.ImmunityRate > temp_random) 
+                                        if ((person.Type() == "Susceptible" || person.Type() == "Recovered") && overlappingArea * Disease.Communicability - person.ImmunityRate > temp_random)
                                         { this.SusceptibleToInfectious(person); return; }
-                                        else if ((secondPerson.Type() == "Susceptible" || person.Type() == "Recovered") && overlappingArea * Disease.Communicability - secondPerson.ImmunityRate > temp_random) 
+                                        else if ((secondPerson.Type() == "Susceptible" || person.Type() == "Recovered") && overlappingArea * Disease.Communicability - secondPerson.ImmunityRate > temp_random)
                                         { this.SusceptibleToInfectious(secondPerson); return; }
                                 }
                             }
@@ -173,10 +176,10 @@ namespace EpidemicSimulation
                 _chartManager.Update();
                 if (GenerateOutputLists()["Infectious"] == 0)  {  System.Console.WriteLine("all done!"); Pause(); }
             }
-            base.Update(gameTime);  
+            base.Update(gameTime);
         }
         /**
-        Overridden Game class method handles all drawing of game state. Using loaded textures and determined Rectangles of each in-game insntace draws 
+        Overridden Game class method handles all drawing of game state. Using loaded textures and determined Rectangles of each in-game insntace draws
         adequate texture in specified place.
         */
         protected override void Draw(GameTime gameTime)
@@ -268,7 +271,7 @@ namespace EpidemicSimulation
             }
         }
         /**
-        Method that returns Dictionary Generic Collection of current in-game statictics.
+            Method that returns Dictionary Generic Collection of current in-game statictics.
         */
         public Dictionary<string, int> GenerateOutputLists()
         {

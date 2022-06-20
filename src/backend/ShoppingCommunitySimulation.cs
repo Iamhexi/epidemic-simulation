@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace EpidemicSimulation
 {
@@ -12,12 +13,13 @@ namespace EpidemicSimulation
          /**
             Constructor sets the population and center point.
 
-            @param population Number of people to be simulated
             @param centerPoint Location of the central point (like shopping mal). It can be null
+            @param population Number of people to be simulated
          */
-        public ShoppingCommunitySimulation(Point? centerPoint = null, uint population = 20, uint infected = 2): base(population, infected)
+        public ShoppingCommunitySimulation(Point? centerPoint = null, uint population = 20, uint infected = 2):
+         base(population, infected)
         {
-            if (centerPoint.HasValue) this.CenterPoint = centerPoint; 
+            if (centerPoint.HasValue) this.CenterPoint = centerPoint;
         }
         /**
             Starts the simulation.
@@ -32,6 +34,15 @@ namespace EpidemicSimulation
         public void Close()
         {
             Exit();
+        }
+
+        /**
+            Returns numbers of dead, infected, healthy and recovered people.
+        */
+
+        public Dictionary<string, int> GetSimulationData()
+        {
+            return GenerateOutputLists();
         }
     }
 }

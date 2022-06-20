@@ -16,3 +16,7 @@ The application is C# object-oritented implementation of the epidemic simulation
 - XNA or FNA framework
 - make command
 - doxygen command
+
+## Information for lecturer
+Project's github page is available at: https://github.com/Iamhexi/epidemic-simulation
+Unit tests are present.

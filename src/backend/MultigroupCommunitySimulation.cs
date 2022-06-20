@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace EpidemicSimulation
 {
@@ -64,5 +64,13 @@ namespace EpidemicSimulation
             Closes the simulation.
          */
         public void Close() { Exit(); }
+
+        /**
+            Returns numbers of dead, infected, healthy and recovered people.
+        */
+        public Dictionary<string, int> GetSimulationData()
+        {
+            return GenerateOutputLists();
+        }
      }
     }
